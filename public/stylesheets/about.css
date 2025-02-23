@@ -7,8 +7,31 @@
 .sec1{
     height: 100%;
     width: 100%;
-    position: relative;
+    position: absolute;
     display: flex;
-    background-color: #4a3e3e;
+    flex-direction: column;
 
 }
+
+.title{
+    position: relative;
+    left: 40%;
+    top:30%;
+}
+.title h1{
+    font-size:130px;
+    font-family: ivymode, serif;
+    font-weight: 100;
+    font-style: normal;
+
+
+}
+
+.image1{
+    margin-top: 20vh;
+}
+.image1 img{
+    height: 95vh;
+    width: 180vh;
+}
+
