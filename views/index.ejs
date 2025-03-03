@@ -1,15 +1,99 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../public/stylesheets/style.css">
-    <title>Document</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title><%= title %></title>
+  <!-- GSAP CDN -->
+  
+  <link rel="stylesheet" href="/stylesheets/style.css">
 </head>
 <body>
-    
-    
+  <!-- Award Section -->
+  <section id="award">
+    <div class="container">
+      <h1><%= awardTitle %></h1>
+      <p><%= awardSubtitle %></p>
+    </div>
+  </section>
 
-    <script src="../public/javascripts/script.js"></script>
+  <!-- Featured Projects Section -->
+  <section id="projects">
+    <div class="container">
+      <h2>Featured Projects</h2>
+      <div class="project-grid">
+        <% projects.forEach(function(project) { %>
+          <div class="project">
+            <img src="<%= project.image %>" alt="<%= project.name %>">
+            <div class="project-info">
+              <h3><%= project.name %></h3>
+              <p><%= project.category %>, <%= project.year %></p>
+            </div>
+          </div>
+        <% }); %>
+      </div>
+    </div>
+  </section>
+      <!-- About Section -->
+<!-- About Section -->
+<section id="about">
+  <div class="container about-container">
+    <div class="about-image">
+      <img src="<%= about.image %>" alt="About Us">
+    </div>
+    <div class="about-text">
+      <h2>About Us</h2>
+      <p><%= about.description %></p>
+      <a href="/about" class="btn">KNOW MORE</a>
+    </div>
+  </div>
+</section>
+
+
+  <!-- Our Process Section -->
+  <section id="process">
+    <div class="container">
+      <h2>Our Process</h2>
+      <div class="process-steps">
+        <% processSteps.forEach(function(step, index){ %>
+          <div class="step">
+            <h3>0<%= index + 1 %>. <%= step.title %></h3>
+            <p><%= step.description %></p>
+          </div>
+        <% }); %>
+      </div>
+    </div>
+  </section>
+
+  <!-- Testimonials Section -->
+  <section id="testimonials">
+    <div class="container">
+      <h2>Testimonials</h2>
+      <div class="testimonial-container">
+        <% testimonials.forEach(function(testimonial, index) { %>
+          <div class="testimonial <%= index === 0 ? 'active' : '' %>">
+            <p>"<%= testimonial.quote %>"</p>
+            <h3>- <%= testimonial.author %></h3>
+          </div>
+        <% }); %>
+      </div>
+    </div>
+  </section>
+
+  <!-- Call To Action Section -->
+  <section id="cta">
+    <div class="container">
+      <h2>Looking to elevate the aesthetic of your space?</h2>
+      <p>Have a question or a project in mind? Let's talk and create something extraordinary.</p>
+      <a href="mailto:<%= contact.email %>?subject=New%20Project">CONTACT US</a>
+    </div>
+  </section>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.5/ScrollTrigger.min.js"></script>
+
+  <script src="/javascripts/script.js">
+  </script>
 </body>
 </html>
