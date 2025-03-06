@@ -24,11 +24,15 @@ app.get("/" ,(req,res)=>{
           image: "https://www.essajeesatelier.com/wp-content/uploads/2023/07/Sarah-Sham.jpg",
           description: "We are a global design company offering end-to-end services in luxury interiors. Our signature style is defined by unmatched aesthetics and an obsessive attention to detail."
         },
+        seamless: {
+          before: "https://www.essajeesatelier.com/wp-content/uploads/2023/07/Before-.jpg",
+          after: "https://www.essajeesatelier.com/wp-content/uploads/2023/07/After-.jpg"
+        },
         processSteps: [
-          { title: "Briefing", description: "Understanding client needs." },
-          { title: "Design", description: "Translating vision into blueprints." },
-          { title: "Execution", description: "Building and crafting the space." },
-          { title: "Handover", description: "Delivering a move-in ready masterpiece." }
+          { title: "Briefing", description: "Understanding client needs." , icon: "fa-regular fa-comments" },
+          { title: "Design", description: "Translating vision into blueprints.", icon: "fa-solid fa-pencil-ruler" },
+          { title: "Execution", description: "Building and crafting the space." , icon: "fa-solid fa-cogs"},
+          { title: "Handover", description: "Delivering a move-in ready masterpiece." , icon: "fa-regular fa-handshake"},
         ],
         testimonials: [
           { quote: "The team’s attention to detail transformed our space into something truly special. Their creativity and dedication are unmatched.", author: "Client One" },

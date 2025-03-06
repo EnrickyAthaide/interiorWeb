@@ -1,68 +1,94 @@
  /* Reset & Base Styles */
- * { margin: 0; padding: 0; box-sizing: border-box; }
+ * { margin: 0; padding: 0; box-sizing: border-box; overflow-x: hidden;}
  body { font-family: Arial, sans-serif; line-height: 1.6; color: #333; }
- .container { width: 90%; max-width: 1200px; margin: 0 auto; }
- section { padding: 60px 0; }
+ .container { width: 100%; max-width: 1200px; margin: 0 auto; }
+ section { padding: 60px 0; border-bottom:2px solid #baa1707a ; }
+ section h1 {
+  color: #BAA170;
+ }
+ section h2 {
+  color: #BAA170;
+ }
 
  /* Award Section */
- #award {
+ .heading {
    background: #f7f7f7;
    text-align: center;
    padding: 100px 0;
    line-height: 2.9rem;
  }
- #award h1 {
+ .heading h1 {
    font-size: 2.5em;
    margin-bottom: 20px;
  }
- #award p {
+ .heading p {
    font-size: 1.2em;
    color: #666;
-   letter-spacing: 0.5rem;
+   letter-spacing: 0.3rem;
 
  }
 
  /* Featured Projects */
- #projects { 
+#projects { 
   background: #fff; 
   gap: 2vh;
+  padding: 60px 0;
 }
- #projects h2 { 
-   text-align: center;
-   margin-bottom: 40px;
-   font-size: 2em;
- }
- .project-grid {
-  
-   display: grid;
-   grid-template-columns: repeat(2, 1fr);
-   gap: 20px;
+#projects h2 { 
+  text-align: center;
+  margin-bottom: 40px;
+  font-size: 3em;
+}
+.project-grid {
+  overflow: hidden;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 40px;
+}
+/* Set a fixed width and height for each project container */
+.project {
+  position: relative;
+  overflow: hidden;
+  width: 35vw;
+  height: 80vh; /* fixed height to keep container size constant */
+  margin-top: 5vh;
+}
+/* Absolutely position the image so scaling doesn't affect layout */
+.project img {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: auto;
+  height: auto;
+  max-width: none;
+  /* Scale image so it fills the container initially */
+  transform: translate(-50%, -50%);
+  transition: transform 0.3s ease;
+}
 
- }
- .project {
-   position: relative;
-   overflow: hidden;
- }
- .project img {
-  
-   width: 85%;
-   max-height: 80vh;
-   display: block;
-   transition: transform 0.3s ease;
- }
- .project:hover img { transform: scale(1.1); }
- .project-info {
-   position: absolute;
-   bottom: 0;
-   background: rgba(0, 0, 0, 0.6);
-   color: #fff;
-   width: 89%;
-   padding: 10px;
-   text-align: center;
-   opacity: 0;
-   transition: opacity 0.3s ease;
- }
- .project:hover .project-info { opacity: 1; }
+/* On hover, the image scales up but its container stays fixed */
+.project:hover img { 
+  transform: translate(-50%, -50%) scale(1.1); 
+}
+
+/* Project info overlay */
+.project-info {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(0, 0, 0, 0.6);
+  color: #fff;
+  width: 100%;
+  padding: 10px;
+  text-align: center;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+.project:hover .project-info { 
+  opacity: 1; 
+}
+
 
  /* Base Styles */
 * {
@@ -84,59 +110,130 @@ body {
 }
 
 /* About Section */
-#about {
-  padding: 80px 0;
-  background: #f7f7f7;
+.about-section {
+  padding: 8rem 0;
+  background: #fff;
 }
 
-.about-container {
-  display: flex;
+.about-content {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4rem;
   align-items: center;
-  gap: 40px;
-  flex-wrap: wrap;
 }
 
-.about-image {
-  flex: 1;
+.about-text {
+  max-width: 600px;
+}
+
+.about-description {
+  font-size: 1.1rem;
+  line-height: 1.8;
+  color: #666;
+  margin: 2rem 0 3rem;
+}
+
+.about-stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2rem;
+}
+
+.stat-item {
+  text-align: center;
+  padding: 1.5rem;
+  background: #f9f7f3;
+  border-radius: 4px;
+}
+
+.stat-number {
+  font-size: 2.5rem;
+  font-weight: 300;
+  color: #1a1a1a;
+  display: block;
+}
+
+.stat-label {
+  font-size: 0.9rem;
+  color: #666;
+  text-transform: uppercase;
+  letter-spacing: 1px;
 }
 
 .about-image img {
   width: 100%;
-  border-radius: 8px;
-  /* Optionally add a subtle box-shadow */
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  height: 600px;
+  object-fit: cover;
+  border-radius: 4px;
+}
+/* Seamless Experience Section */
+/* Seamless Experience Section */
+#seamless {
+  background: #f7f7f7;
+  padding: 80px 0;
+  text-align: center;
 }
 
-.about-text {
-  flex: 1;
-}
-
-.about-text h2 {
+#seamless h2 {
   font-size: 2.5em;
+  margin-bottom: 40px;
+}
+
+.seamless-images {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  flex-wrap: wrap;
   margin-bottom: 20px;
 }
 
-.about-text p {
-  font-size: 1.1em;
-  line-height: 1.5;
-  margin-bottom: 30px;
+.seamless-image {
+  position: relative;
+  overflow: hidden;
+  width: 45%;  /* Adjust width as needed */
 }
 
-.about-text .btn {
-  display: inline-block;
-  padding: 12px 25px;
-  background: #e67e22;
+.seamless-image img {
+  width: 100%;
+  display: block;
+  transition: opacity 0.3s ease;
+}
+
+/* Overlay is positioned over the image */
+.seamless-image .overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0); /* transparent initially */
   color: #fff;
-  text-decoration: none;
-  border-radius: 4px;
-  transition: background 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2em;
+  opacity: 0;
+  transition: opacity 0.3s ease, background 0.3s ease;
 }
 
-.about-text .btn:hover {
-  background: #cf711f;
+.seamless-image:hover .overlay {
+  opacity: 1;
+  background: rgba(0, 0, 0, 0.4);
 }
 
- /* Process */
+.seamless-text {
+  font-size: 1.2em;
+  color: #666;
+}
+
+
+/* GSAP Initial States */
+.about-content > * {
+  opacity: 0;
+  y: 30px;
+}
+
+ /* Process
  #process { background: #fff; text-align: center; }
  #process h2 { margin-bottom: 40px; }
  .process-steps {
@@ -151,7 +248,100 @@ body {
    background: #f7f7f7;
    border-radius: 8px;
  }
- .step h3 { margin-bottom: 10px; }
+ .step h3 { margin-bottom: 10px; } */
+ /* Our Process Section */
+.our-process {
+  padding: 8rem 0;
+  background: #f9f7f3;
+}
+
+.process-steps {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 4rem;
+  position: relative;
+}
+
+.process-step {
+  text-align: center;
+  padding: 2rem;
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction:column ;
+  flex-wrap: wrap;
+  
+}
+
+.process-icon {
+  font-size: 2.5rem;
+  color: #1a1a1a;
+  margin-bottom: 1.5rem;
+  transition: color 0.3s ease;
+  padding-top: 2vh;
+}
+
+.process-icon i {
+  display: inline-block;
+  transition: transform 0.3s ease;
+  
+}
+
+.process-number {
+  position: absolute;
+  top: -20px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 4rem;
+  font-weight: 300;
+  color: rgba(26, 26, 26, 0.1);
+  z-index: -1;
+}
+
+.process-step h3 {
+  font-size: 1.25rem;
+  margin: 1rem 0;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.process-step p {
+  font-size: 0.95rem;
+  color: #666;
+  line-height: 1.6;
+}
+
+/* Process Connector Line */
+.process-steps::before {
+  content: '';
+  position: absolute;
+  top: 13%;
+  left: 50%;
+  transform: translateY(-50%);
+  height: 2px;
+  width: 70%;
+  background: #1a1a1a;
+  opacity: 0.1;
+  z-index: 0;
+}
+
+@media (min-width: 768px) {
+  .process-steps {
+      grid-template-columns: repeat(4, 1fr);
+  }
+  
+  .process-steps::before {
+      top: 50%;
+      width: 100%;
+      height: 1px;
+  }
+}
+
+/* GSAP Initial States */
+.process-step {
+  opacity: 0;
+  y: 30px;
+}
 
  /* Testimonials */
  #testimonials {
@@ -179,7 +369,7 @@ body {
 
  /* Call To Action */
  #cta {
-   background: #333;
+   background: #BAA170;
    color: #fff;
    text-align: center;
    padding: 80px 20px;
@@ -189,7 +379,7 @@ body {
  #cta a {
    display: inline-block;
    padding: 15px 30px;
-   background: #e67e22;
+   background: #A1B6B6;
    color: #fff;
    border-radius: 4px;
    transition: background 0.3s ease;
