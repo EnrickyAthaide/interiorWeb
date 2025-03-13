@@ -1,47 +1,416 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Elite Design Studio - Projects</title>
-    <link rel="stylesheet" href="/stylesheets/projects.css">
-</head>
-<body>
-    <!-- <div class="header">
-        <div class="logo">ELITE DESIGN STUDIO</div>
-        <div class="navigation">
-            <div class="nav-item">HOME</div>
-            <div class="nav-item">PROJECTS</div>
-            <div class="nav-item">ABOUT</div>
-            <div class="nav-item">CONTACT</div>
-        </div> -->
-    </div>
-    
-    <div class="project-container">
-        <div class="project-images">
-            <% projects.forEach((project, index) => { %>
-                <div class="project-image <%= index === 0 ? 'active' : '' %>" style="background-image:url('https://www.datocms-assets.com/53023/1692274530-entrance-hall-1.jpg')"></div>
-            <% }) %>
-            <div class="overlay"></div>
-        </div>
-        
-        <div class="project-titles">
-            <% projects.forEach((project, index) => { %>
-                <div class="project-title <%= index === 0 ? 'active' : '' %>"><%= project.name.toUpperCase() %></div>
-            <% }) %>
-        </div>
-    </div>
-    
-    <div class="project-counter">
-        <span class="counter-current">01</span> / <span class="counter-total">06</span>
-    </div>
-    
-    <div class="scroll-reference">
-        <div class="scroll-indicator"></div>
-    </div>
+    <title>Interior Design & Architecture Studio</title>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/gsap.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/ScrollTrigger.min.js"></script>
-    <script src="/javascripts/projects.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background-color: #121212;
+            color: #ffffff;
+            overflow-x: hidden;
+        }
+
+        .container {
+            position: relative;
+            width: 100vw;
+            height: 100vh;
+        }
+
+        .header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            padding: 40px;
+            display: flex;
+            justify-content: space-between;
+            z-index: 100;
+        }
+
+        .logo-area {
+            display: flex;
+            align-items: center;
+        }
+
+        .studio-title {
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: #7d7d7d;
+            font-weight: 400;
+        }
+
+        .logo {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 50px;
+            height: 50px;
+        }
+
+        .logo img {
+            width: 100%;
+            height: 100%;
+        }
+
+        .navigation {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+        }
+
+        .nav-item {
+            margin: 5px 0;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-size: 14px;
+        }
+
+        .content {
+            position: relative;
+            height: 100vh;
+            width: 100vw;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        .titles-container {
+            position: relative;
+            width: 100%;
+            height: 120px;
+            overflow: hidden;
+            white-space: nowrap;
+            cursor: pointer;
+        }
+
+        .titles-slider {
+            position: absolute;
+            display: flex;
+        }
+
+        .title {
+            font-size: 100px;
+            font-weight: 300;
+            padding: 0 20px;
+            color: rgba(255, 255, 255, 0.3);
+        }
+
+        .title.active {
+            color: rgba(255, 255, 255, 1);
+        }
+
+        .image-container {
+            position: absolute;
+            width: 400px;
+            height: 450px;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: -1;
+            overflow: hidden;
+            cursor: pointer;
+        }
+
+        .project-image {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            visibility: hidden;
+            transition: transform 0.1s ease;
+        }
+
+        /* Add smooth scaling transition */
+        .project-image {
+            transition: transform 0.3s ease-out;
+        }
+
+        .project-image.active {
+            visibility: visible;
+        }
+
+        .project-info {
+            position: absolute;
+            bottom: 2vh;
+            width: 100%;
+            text-align: center;
+        }
+
+        .project-description {
+            font-size: 18px;
+            margin-bottom: 20px;
+            visibility: hidden;
+            position: absolute;
+            width: 100%;
+            left: 0;
+            bottom: 30px;
+            /* Fixed position above the counter */
+            text-align: center;
+        }
+
+        .project-description.active {
+            visibility: visible;
+        }
+
+        .slide-counter {
+            font-size: 14px;
+            color: #7d7d7d;
+            position: relative;
+            bottom: 2vh;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <header class="header">
+            <div class="logo-area">
+                <div class="studio-title"> 
+                    INTERIOR DESIGN &<br>
+                    ARCHITECTURE STUDIO
+                </div>
+            </div>
+
+            <div class="logo">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" fill="white">
+                    <path
+                        d="M50,10 C27.91,10 10,27.91 10,50 C10,72.09 27.91,90 50,90 C72.09,90 90,72.09 90,50 C90,27.91 72.09,10 50,10 Z M50,80 C33.43,80 20,66.57 20,50 C20,33.43 33.43,20 50,20 C66.57,20 80,33.43 80,50 C80,66.57 66.57,80 50,80 Z">
+                    </path>
+                    <text x="50" y="55" text-anchor="middle" font-family="Arial" font-size="30"
+                        font-weight="bold">S</text>
+                </svg>
+            </div>
+
+            <nav class="navigation">
+                <div class="nav-item">Home</div>
+                <div class="nav-item">About</div>
+                <div class="nav-item">Projects</div>
+                <div class="nav-item">Contact</div>
+                <div class="nav-item">Press</div>
+            </nav>
+        </header>
+
+        <div class="content">
+            <div class="titles-container">
+                <div class="titles-slider">
+                    <div class="title">TERRY</div>
+                    <div class="title active">CLARENDON HOUSE</div>
+                    <div class="title">LANE</div>
+                    <div class="title">PROJECT FOUR</div>
+                    <div class="title">PROJECT FIVE</div>
+                    <div class="title">PROJECT SIX</div>
+                </div>
+            </div>
+
+            <div class="image-container">
+                <img src="https://www.datocms-assets.com/53023/1667208114-65468701-2-1.jpg" alt="Project 1"
+                    class="project-image" id="image1">
+                <img src="https://www.datocms-assets.com/53023/1667208127-65468709-3.jpg" alt="Project 2"
+                    class="project-image" id="image2">
+                <img src="https://www.datocms-assets.com/53023/1667208114-65468701-2-1.jpg" alt="Project 3"
+                    class="project-image" id="image3">
+                <img src="https://www.datocms-assets.com/53023/1667208127-65468709-3.jpg" alt="Project 4"
+                    class="project-image" id="image4">
+                <img src="https://www.datocms-assets.com/53023/1667208114-65468701-2-1.jpg" alt="Project 5"
+                    class="project-image" id="image5">
+                <img src="https://www.datocms-assets.com/53023/1667208127-65468709-3.jpg" alt="Project 6"
+                    class="project-image" id="image6">
+            </div>
+
+            <div class="project-info">
+                <div class="project-description" id="desc1">A timeless family home</div>
+                <div class="project-description" id="desc2">Modern architectural marvel</div>
+                <div class="project-description" id="desc3">Minimalist urban design</div>
+                <div class="project-description" id="desc4">Luxurious countryside retreat</div>
+                <div class="project-description" id="desc5">Coastal contemporary living</div>
+                <div class="project-description" id="desc6">Industrial loft conversion</div>
+                <div class="slide-counter">1 / 6</div>
+            </div>
+        </div>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const titles = document.querySelectorAll('.title');
+            const images = document.querySelectorAll('.project-image');
+            const titlesSlider = document.querySelector('.titles-slider');
+            const imageContainer = document.querySelector('.image-container');
+            const descriptions = document.querySelectorAll('.project-description');
+            const slideCounter = document.querySelector('.slide-counter');
+
+            let currentIndex = 1; // Start with Clarendon House active
+            let isAnimating = false;
+            let isFirstLoad = true;
+
+            // Initial setup
+            gsap.set(descriptions[currentIndex], { autoAlpha: 1 });
+            gsap.set(images[currentIndex], { autoAlpha: 1 });
+            images[currentIndex].classList.add('active'); // Ensure active class is set initially
+            updateSliderPosition(true);
+
+            
+
+            titles.forEach((title, index) => {
+                title.addEventListener('mouseenter', function () {
+                    const activeImage = images[index]; // Get the image at the same index
+                    if (activeImage) {
+                        gsap.to(activeImage, {
+                            duration: 0.3,
+                            scale: 1.3,
+                            ease: "power1.out"
+                        });
+                    }
+                });
+
+                title.addEventListener('mouseleave', function () {
+                    const activeImage = images[index]; // Get the image at the same index
+                    if (activeImage) {
+                        gsap.to(activeImage, {
+                            duration: 0.2,
+                            scale: 1,
+                            ease: "power1.out"
+                        });
+                    }
+                });
+            });
+
+            // Animation sequence function
+            function animateToSlide(newIndex) {
+                if (isAnimating || newIndex === currentIndex) return;
+                isAnimating = true;
+
+                const prevIndex = currentIndex;
+                currentIndex = newIndex;
+
+                // Update slide counter first
+                slideCounter.textContent = `${currentIndex + 1} / ${titles.length}`;
+
+                // Remove active class from previous image
+                images[prevIndex].classList.remove('active');
+
+                // 1. First animate the titles - text scrolls first
+                const titleTimeline = gsap.timeline({
+                    onComplete: () => {
+                        // 2. Animate the image
+                        const imageTimeline = gsap.timeline({
+                            onComplete: () => {
+                                // 3. Finally animate the description
+                                const descTimeline = gsap.timeline({
+                                    onComplete: () => {
+                                        isAnimating = false;
+                                    }
+                                });
+
+                                // Hide previous description
+                                descTimeline.to(descriptions[prevIndex], {
+                                    duration: 0.3,
+                                    autoAlpha: 0,
+                                    y: 20
+                                });
+
+                                // Show new description
+                                descTimeline.fromTo(descriptions[currentIndex],
+                                    { autoAlpha: 0, y: 20 },
+                                    { duration: 0.4, autoAlpha: 1, y: 0 }
+                                );
+                            }
+                        });
+
+                        // Hide current image with slide up
+                        imageTimeline.to(images[prevIndex], {
+                            duration: 0.5,
+                            y: "-100%",
+                            autoAlpha: 0
+                        });
+
+                        // Show new image with slide up from bottom
+                        imageTimeline.fromTo(images[currentIndex],
+                            { y: "100%", autoAlpha: 0 },
+                            { duration: 1.3, y: "0%", autoAlpha: 1 },
+                            "-=0.3"
+                        );
+
+                        // Add active class to new image
+                        images[currentIndex].classList.add('active');
+                    }
+                });
+
+                // Update title active states and position
+                titles.forEach((title, index) => {
+                    if (index === currentIndex) {
+                        gsap.to(title, {
+                            duration: 0.5,
+                            color: "rgba(255, 255, 255, 1)"
+                        });
+                    } else {
+                        gsap.to(title, {
+                            duration: 0.5,
+                            color: "rgba(255, 255, 255, 0.3)"
+                        });
+                    }
+                });
+
+                // Move the slider to center the active title
+                updateSliderPosition();
+            }
+
+            function updateSliderPosition(immediate = false) {
+                const windowWidth = window.innerWidth;
+                const activeTitle = titles[currentIndex];
+                const titleWidth = activeTitle.offsetWidth;
+                const titleOffset = activeTitle.offsetLeft;
+                const newPosition = (windowWidth / 2) - titleOffset - (titleWidth / 2);
+
+                if (immediate || isFirstLoad) {
+                    gsap.set(titlesSlider, { x: newPosition });
+                    isFirstLoad = false;
+                } else {
+                    gsap.to(titlesSlider, {
+                        duration: 0.8,
+                        x: newPosition,
+                        ease: "power2.out"
+                    });
+                }
+            }
+
+            // Handle scroll events
+            let lastScrollTime = 0;
+            window.addEventListener('wheel', function (e) {
+                const now = Date.now();
+                if (now - lastScrollTime < 1000 || isAnimating) return; // Debounce scrolling
+
+                lastScrollTime = now;
+
+                if (e.deltaY > 0) {
+                    // Scroll down (move right)
+                    if (currentIndex < titles.length - 1) {
+                        animateToSlide(currentIndex + 1);
+                    }
+                } else {
+                    // Scroll up (move left)
+                    if (currentIndex > 0) {
+                        animateToSlide(currentIndex - 1);
+                    }
+                }
+            });
+
+            // Handle window resize to keep title centered
+            window.addEventListener('resize', () => updateSliderPosition(true));
+        });
+
+    </script>
 </body>
+
 </html>
