@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Elite Design Studio - Projects</title>
+    <link rel="stylesheet" href="/stylesheets/projects.css">
+</head>
+<body>
+    <!-- <div class="header">
+        <div class="logo">ELITE DESIGN STUDIO</div>
+        <div class="navigation">
+            <div class="nav-item">HOME</div>
+            <div class="nav-item">PROJECTS</div>
+            <div class="nav-item">ABOUT</div>
+            <div class="nav-item">CONTACT</div>
+        </div> -->
+    </div>
+    
+    <div class="project-container">
+        <div class="project-images">
+            <% projects.forEach((project, index) => { %>
+                <div class="project-image <%= index === 0 ? 'active' : '' %>" style="background-image:url('https://www.datocms-assets.com/53023/1692274530-entrance-hall-1.jpg')"></div>
+            <% }) %>
+            <div class="overlay"></div>
+        </div>
+        
+        <div class="project-titles">
+            <% projects.forEach((project, index) => { %>
+                <div class="project-title <%= index === 0 ? 'active' : '' %>"><%= project.name.toUpperCase() %></div>
+            <% }) %>
+        </div>
+    </div>
+    
+    <div class="project-counter">
+        <span class="counter-current">01</span> / <span class="counter-total">06</span>
+    </div>
+    
+    <div class="scroll-reference">
+        <div class="scroll-indicator"></div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/ScrollTrigger.min.js"></script>
+    <script src="/javascripts/projects.js"></script>
+</body>
+</html>

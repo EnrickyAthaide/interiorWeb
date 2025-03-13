@@ -42,11 +42,22 @@ app.get("/" ,(req,res)=>{
         contact: { email: "info@example.com" }
       });
       
+     
 })
 app.get("/about" , (req , res)=>{
     res.render("about")
 })
+app.get("/projects", (req, res) => {
+  res.render("projects", {
+    projects : [
+      { name: "Clarendon House", image: "/images/projects/complex.jpg" },
+      { name: "Lancaster", image: "/images/projects/hotel.jpg" },
+      { name: "High View", image: "/images/projects/landscape.jpg" },
+      { name: "Park Wood", image: "/images/projects/office.jpg" },
+      { name: "Portlands", image: "/images/projects/villa.jpg" },
+      { name: "Mulberry", image: "/images/projects/hotel.jpg" }
+  ],
+  });
+});
 
-
-
-app.listen(3000)
+app.listen(5000)
