@@ -2,6 +2,7 @@ const express = require("express")
 const app = express()
 const path = require("path")
 const cookieParser = require("cookie-parser")
+require('dotenv').config()
 
 app.set("view engine" ,"ejs")
 
@@ -35,7 +36,7 @@ app.get("/" ,(req,res)=>{
           { title: "Handover", description: "Delivering a move-in ready masterpiece." , icon: "fa-regular fa-handshake"},
         ],
         testimonials: [
-          { quote: "The team’s attention to detail transformed our space into something truly special. Their creativity and dedication are unmatched.", author: "Client One" },
+          { quote: "The team's attention to detail transformed our space into something truly special. Their creativity and dedication are unmatched.", author: "Client One" },
           { quote: "From the first call, we knew we were in good hands. The process was seamless and the final result was breathtaking.", author: "Client Two" },
           { quote: "A personalized design journey that exceeded all expectations. The project not only looks amazing, but feels like home.", author: "Client Three" }
         ],
@@ -60,4 +61,35 @@ app.get("/projects", (req, res) => {
   });
 });
 
-app.listen(3000)
+// New route for Clarendon House project
+app.get("/projects/clarendon-house", (req, res) => {
+  res.render("projects/building", {
+    projectName: "Clarendon House",
+    projectSubtitle: "A Unique and Impressive Family home",
+    projectDescription: "This distinctive and utterly captivating new-build family home was completed in the late summer of 2022. A stunning compilation of classic, contemporary detailing has formed the bones of our clients forever home.",
+    projectImages: [
+      "/images/projects/complex.jpg",
+      "/images/projects/hotel.jpg",
+      "/images/projects/landscape.jpg",
+      "/images/projects/office.jpg",
+      "/images/projects/villa.jpg",
+      "/images/projects/hotel.jpg"
+    ],
+    nextProject: {
+      name: "Lancaster",
+      description: "A luxurious and elegant home",
+      link: "/projects/lancaster"
+    }
+  });
+});
+
+// app.get("/project-building",(req , res)=>{
+//   res.render("building", {
+//     image1: "/images/projects/building.jpg"
+//   })
+// })
+
+const PORT = process.env.PORT || 3000
+app.listen(PORT, () => {
+  console.log(`Server running on port ${PORT}`)
+})
