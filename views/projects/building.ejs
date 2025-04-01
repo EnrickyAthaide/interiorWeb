@@ -1,14 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><%= projectName %> | Luxury Interior Design</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <title>Luxury Interior Design Project</title>
     <link rel="stylesheet" href="/stylesheets/project-detail.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.5/gsap.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.5/ScrollTrigger.min.js"></script>
 </head>
+
 <body>
     <!-- Header -->
     <header class="site-header">
@@ -42,28 +41,44 @@
             </h1>
         </div>
         <div class="hero-background">
-            <div class="parallax-image" style="background-image: url('/images/projects/complex.jpg')"></div>
+            <div class="parallax-image" style="background-image: url('/images/projects/complex.jpg');"></div>
         </div>
     </section>
+    
+    <!-- Project Overview Section (like the image) -->
+    <section class="project-overview">
+        <div class="project-overview-content">
+            <div class="large-title">
+                <p class="title-prefix">A</p>
+                <h2>UNIQUE<br>AND<br>IMPRESSIVE<br>FAMILY HOME</h2>
+            </div>
+            <div class="project-description">
+                <p>This distinctive and utterly captivating new-build family home was completed in the late summer of 2022. A stunning compilation of classic, contemporary detailing has formed the bones of our clients forever home.</p>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Dual Image Section -->
+    <section class="dual-image-section">
+        <div class="image-container left">
+            <!-- Replace with your actual image path when available -->
+            <img src="https://images.unsplash.com/photo-1591088398332-8a7791972843?q=80&w=1000" alt="Elegant staircase design">
+        </div>
+        <div class="image-container right">
+            <!-- Replace with your actual image path when available -->
+            <img src="https://images.unsplash.com/photo-1584622650111-993a426fbf0a?q=80&w=1000" alt="Luxury spa pool area">
+        </div>
+    </section>
+    
+    <!-- Gallery Section -->
+    <section class="gallery-section">
+        <h2>Gallery</h2>
+    </section>
 
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            // Register ScrollTrigger plugin
-            gsap.registerPlugin(ScrollTrigger);
-            
-            // Smoother parallax effect for hero image
-            gsap.to('.parallax-image', {
-                yPercent: -25,
-                ease: "power1.inOut",
-                scrollTrigger: {
-                    trigger: '.hero-section',
-                    start: 'top top',
-                    end: 'bottom top',
-                    scrub: 0.3, // Smoother scrubbing effect
-                    invalidateOnRefresh: true
-                }
-            });
-        });
-    </script>
+    <!-- Scripts at bottom -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.5/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.5/ScrollTrigger.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/studio-freight/lenis@1.0.19/bundled/lenis.min.js"></script>
+    <script src="/javascripts/project-details.js"></script>
 </body>
 </html>

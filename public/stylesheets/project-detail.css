@@ -5,13 +5,70 @@
     box-sizing: border-box;
 }
 
+html, body {
+    overflow-x: hidden;
+}
+
 body {
     font-family: 'Helvetica Neue', Arial, sans-serif;
     color: #333;
     background-color: #111;
     line-height: 1.6;
-    overflow-x: hidden;
     -webkit-font-smoothing: antialiased;
+    /* Lenis will handle the smoothness */
+}
+
+/* Hide default scrollbar for cleaner look */
+body::-webkit-scrollbar {
+    display: none;
+}
+
+/* Hero Section */
+.hero-section {
+    position: relative;
+    height: 100vh;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #111;
+}
+
+.hero-content {
+    position: relative;
+    z-index: 2;
+    text-align: center;
+    padding: 0 2rem;
+    width: 100%;
+    transform: translateY(-10%);
+}
+
+.project-title {
+    font-size: 7rem;
+    font-weight: 200;
+    line-height: 1;
+    color: #fff;
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
+    font-family: 'Times New Roman', Times, serif;
+}
+
+.hero-background {
+    position: absolute;
+    top: 60%;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+}
+
+.parallax-image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-position: center top;
 }
 
 /* Header Styles */
@@ -71,83 +128,140 @@ body {
     opacity: 0.7;
 }
 
-/* Hero Section */
-.hero-section {
-    position: relative;
-    height: 100vh;
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    overflow: hidden;
+/* Project Overview Section (like the image) */
+.project-overview {
+    min-height: 130vh;
     background-color: #111;
-}
-
-.hero-content {
-    position: relative;
-    z-index: 2;
-    text-align: center;
-    padding: 0 2rem;
-    width: 100%;
-    /* Move text slightly up to make room for image below */
-    transform: translateY(-10%);
-}
-
-.project-title {
-    font-size: 7rem;
-    font-weight: 200;
-    line-height: 1;
     color: #fff;
-    letter-spacing: 0.02em;
-    text-transform: uppercase;
+    padding: 6rem 2rem;
+    display: flex;
+    align-items: center;
+}
+
+.project-overview-content {
+    display: flex;
+    max-width: 1400px;
+    margin: 0 auto;
+    width: 100%;
+}
+
+.large-title {
+    flex: 0 0 60%;
     font-family: 'Times New Roman', Times, serif;
+    font-weight: 200;
 }
 
-.project-subtitle {
-    margin-bottom: 2rem;
+.title-prefix {
+    font-size: 8rem;
+    line-height: 1;
+    margin-bottom: 1rem;
 }
 
-.subtitle-line {
-    font-size: 2.8rem;
+.large-title h2 {
+    font-size: 3rem;
+    line-height: 1.3;
     font-weight: 300;
-    line-height: 1.2;
-    display: block;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
 }
 
 .project-description {
-    max-width: 550px;
+    flex: 0 0 40%;
+    padding-left: 4rem;
+    display: flex;
+    align-items: center;
 }
 
 .project-description p {
-    font-size: 1.2rem;
+    font-size: 1.1rem;
     line-height: 1.6;
-    opacity: 0.9;
+    max-width: 480px;
 }
 
-.hero-background {
-    position: absolute;
-    top: 50%;  /* Start from middle of screen */
-    left: 0;
-    width: 100%;
-    height: 50%;  /* Take up bottom half */
-    z-index: 1;
+/* Gallery Section */
+.gallery-section {
+    min-height: 100vh;
+    background-color: #222;
+    color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.gallery-section h2 {
+    font-size: 4rem;
+}
+
+/* Dual Image Section */
+.dual-image-section {
+    display: flex;
+    justify-content: space-around;
+    width: 100vw;
+    height: 100vh;
+    background-color: #111;
+}
+
+.image-container {
+    width:50%;
+    height: 100vh;
+    display: flex;
+    justify-content: space-around;
     overflow: hidden;
+    position: relative;
 }
 
-.parallax-image {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 200%;  /* Extra height for parallax effect */
-    background-size: cover;
-    background-position: center top;  /* Position from top */
+ .image-container img {
+    object-fit: cover;
+    display: block;
+} 
+
+
+
+/* Add a slight gap between images */
+.image-container.left {
+    max-height: 60vh;
+    max-width: 18vw;
 }
 
-/* Responsive adjustments */
+.image-container.right {
+    max-height: 100vh;
+    max-width: 100vw;
+}
+/* Media query for mobile devices */
+@media (max-width: 768px) {
+    .dual-image-section {
+        flex-direction: column;
+        height: auto;
+    }
+    
+    .image-container {
+        height: 50vh;
+    }
+    
+    .image-container.left {
+        padding-right: 0;
+        padding-bottom: 5px;
+    }
+    
+    .image-container.right {
+        padding-left: 0;
+        padding-top: 5px;
+    }
+}
+
+/* Keep your existing responsive styles */
 @media (max-width: 1200px) {
     .project-title {
         font-size: 6rem;
+    }
+    .parallax-image {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 80%;  /* Extra height for parallax effect */
+        background-size: cover;
+        background-position: center top;  /* Position from top */
     }
 }
 
@@ -158,6 +272,15 @@ body {
     
     .project-title {
         font-size: 5rem;
+    }
+    .parallax-image {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 70%;  /* Extra height for parallax effect */
+        background-size: cover;
+        background-position: center top;  /* Position from top */
     }
 }
 
@@ -174,16 +297,21 @@ body {
         font-size: 0.7rem;
     }
     
-    .logo-img {
-        height: 35px;
-    }
-    
     .hero-content {
         transform: translateY(-5%);
     }
     
     .hero-background {
         opacity: 0.7;
+    }
+    .parallax-image {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 50%;  /* Extra height for parallax effect */
+        background-size: cover;
+        background-position: center top;  /* Position from top */
     }
 }
 
@@ -213,5 +341,54 @@ body {
     
     .project-title {
         font-size: 3rem;
+    }
+    .parallax-image {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 50%;  /* Extra height for parallax effect */
+        background-size: cover;
+        background-position: center top;  /* Position from top */
+    }
+}
+
+/* Responsive styles for project overview */
+@media (max-width: 1200px) {
+    .large-title h2 {
+        font-size: 4rem;
+    }
+    
+    .title-prefix {
+        font-size: 6rem;
+    }
+}
+
+@media (max-width: 992px) {
+    .project-overview-content {
+        flex-direction: column;
+    }
+    
+    .project-description {
+        padding-left: 0;
+        padding-top: 3rem;
+    }
+    
+    .large-title h2 {
+        font-size: 3.5rem;
+    }
+}
+
+@media (max-width: 576px) {
+    .large-title h2 {
+        font-size: 2.8rem;
+    }
+    
+    .title-prefix {
+        font-size: 4rem;
+    }
+    
+    .project-description p {
+        font-size: 1rem;
     }
 }
