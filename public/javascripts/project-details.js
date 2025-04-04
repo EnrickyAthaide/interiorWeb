@@ -44,12 +44,54 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     });
 
+    //text animation for second section
+    gsap.from("#headAni1 h2", {
+        duration: 0.6,
+        opacity: 0,
+        y: 20,
+        stagger: 0.1,
+        ease: "power2.out",
+        scrollTrigger: {
+            trigger: "#content1",
+            start: "top 70%",
+            end:"bottom 30%",
+            toggleActions: "play reverse play reverse",
+            markers:false
+        }
+    });
+    gsap.from("#parAni1 p", {
+        duration: 0.6,
+        opacity: 0,
+        y: 20,
+        stagger: 0.1,
+        ease: "power2.out",
+        scrollTrigger: {
+            trigger: "#content1",
+            start: "top 70%",
+            end:"bottom 30%",
+            toggleActions: "play reverse play reverse",
+            markers:false
+        }
+    });
+
     //parallax animation for big image
-    gsap.to(".right", {
-        y: -380,
+    gsap.to("#right1", {
+        y: -280,
         ease: "none",
         scrollTrigger: {
-            trigger: ".dual-image-section",
+            trigger: "#ani1",
+            start: "top 80%",
+            end: "bottom 20%",
+            scrub: 1,
+            markers: false
+        }
+    });
+    //reverse parallax for small image
+    gsap.to("#left1", {
+        y: 180,
+        ease: "none",
+        scrollTrigger: {
+            trigger: "#ani1",
             start: "top 80%",
             end: "bottom 20%",
             scrub: 1,
@@ -69,4 +111,84 @@ document.addEventListener('DOMContentLoaded', function () {
 //         toggleActions: "play none none reverse"
 //     }
 // });
+
+//photo zoom animation
+gsap.to(".gallery-image",{
+    width:"100vw", 
+    height:"100vh",
+    scrollTrigger:{
+        trigger:".gallery-section", 
+        scrub:2,
+        start:"top 0%", 
+        end:"top -100%",
+        markers:false,
+        pin:true
+    }
+})
+gsap.to(".gallery-image img",{
+    scale:1.3,
+    scrollTrigger:{
+        trigger:".gallery-section", 
+        scrub:2,
+        start:"top 0%", 
+        end:"top -100%",
+        markers:false,
+    }
+})
+
+ //parallax animation for big image
+ gsap.to("#right2", {
+    y: -280,
+    ease: "none",
+    scrollTrigger: {
+        trigger: "#ani2",
+        start: "top 80%",
+        end: "bottom 20%",
+        scrub: 1,
+        markers: false
+    }
+});
+//reverse parallax for small image
+gsap.to("#left2", {
+    y: 180,
+    ease: "none",
+    scrollTrigger: {
+        trigger: "#ani2",
+        start: "top 80%",
+        end: "bottom 20%",
+        scrub: 1,
+        markers: false
+    }
+});
+
+//text animation like the previous one
+gsap.from("#headAni2 h2", {
+    duration: 0.6,
+    opacity: 0,
+    y: 20,
+    stagger: 0.1,
+    ease: "power2.out",
+    scrollTrigger: {
+        trigger: "#content2",
+        start: "top 70%",
+        end:"bottom 30%",
+        toggleActions: "play reverse play reverse",
+        markers:false
+    }
+});
+gsap.from("#parAni2 p", {
+    duration: 0.6,
+    opacity: 0,
+    y: 20,
+    stagger: 0.1,
+    ease: "power2.out",
+    scrollTrigger: {
+        trigger: "#content2",
+        start: "top 70%",
+        end:"bottom 30%",
+        toggleActions: "play reverse play reverse",
+        markers:false
+    }
+});
+
 });
