@@ -68,6 +68,49 @@ app.get("/blogs", (req, res) => {
   });
 });
 
+// Blog detail page route
+app.get("/blogs/timeless-spaces", (req, res) => {
+  res.render("blog-detail", {
+    title: "The Art of Creating Timeless Spaces | Interior Design & Architecture Studio",
+    blog: {
+      category: "INTERIOR DESIGN",
+      date: "MARCH 15, 2024",
+      title: "The Art of Creating Timeless Spaces",
+      subtitle: "Exploring the delicate balance between contemporary design and enduring elegance",
+      author: {
+        name: "Sarah Anderson",
+        role: "Principal Designer",
+        image: "https://images.unsplash.com/photo-1580489944761-15a19d654956?q=80&w=1000"
+      },
+      heroImage: "https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?q=80&w=1000",
+      contentImages: [
+        "https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?q=80&w=1000",
+        "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=1000",
+        "https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?q=80&w=1000"
+      ],
+      relatedPosts: [
+        {
+          title: "The Psychology of Space: How Design Affects Mood",
+          link: "/blogs/psychology-of-space"
+        },
+        {
+          title: "Sustainable Luxury: The New Standard",
+          link: "/blogs/sustainable-luxury"
+        },
+        {
+          title: "Color Theory in Interior Design",
+          link: "/blogs/color-theory"
+        }
+      ],
+      nextArticle: {
+        title: "Sustainable Luxury: The New Standard",
+        link: "/blogs/sustainable-luxury",
+        image: "https://images.unsplash.com/photo-1598928506311-c55ded91a20c?q=80&w=1000"
+      }
+    }
+  });
+});
+
 // New route for Clarendon House project
 app.get("/projects/clarendon-house", (req, res) => {
   res.render("projects/building", {
