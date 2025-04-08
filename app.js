@@ -61,6 +61,13 @@ app.get("/projects", (req, res) => {
   });
 });
 
+// Blogs page route
+app.get("/blogs", (req, res) => {
+  res.render("blogs", {
+    title: "Design Journal | Interior Design & Architecture Studio"
+  });
+});
+
 // New route for Clarendon House project
 app.get("/projects/clarendon-house", (req, res) => {
   res.render("projects/building", {
