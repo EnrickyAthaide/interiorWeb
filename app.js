@@ -46,7 +46,57 @@ app.get("/" ,(req,res)=>{
      
 })
 app.get("/about" , (req , res)=>{
-    res.render("about")
+    res.render("about", {
+      title: "About | Ultra Interiors",
+      vision: {
+        foundingYear: 2015,
+        description: "Our vision is to redefine spatial experiences through avant-garde design, sustainable practices, and technological innovation."
+      },
+      philosophy: [
+        {
+          title: "Avant-Garde Design",
+          description: "We push boundaries by challenging conventional design norms and exploring new aesthetics and spatial concepts.",
+          icon: "brush"
+        },
+        {
+          title: "Sustainable Luxury",
+          description: "Our commitment to luxury design is matched by our dedication to environmental responsibility and sustainable practices.",
+          icon: "leaf"
+        },
+        {
+          title: "Technological Integration",
+          description: "We seamlessly incorporate cutting-edge technology to create intelligent spaces that respond to human needs.",
+          icon: "microchip"
+        }
+      ],
+      team: [
+        {
+          name: "Alexandra Chen",
+          role: "Founder & Design Director",
+          bio: "With a background in architecture and fine arts, Alexandra brings a unique perspective to spatial design, combining structural precision with artistic vision.",
+          image: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?ixlib=rb-4.0.3&auto=format&fit=crop&w=776&q=80"
+        },
+        {
+          name: "Marcus Reed",
+          role: "Technical Director",
+          bio: "Marcus combines his expertise in sustainable materials and smart home technology to create environments that are both environmentally conscious and technologically advanced.",
+          image: "https://images.unsplash.com/photo-1560250097-0b93528c311a?ixlib=rb-4.0.3&auto=format&fit=crop&w=774&q=80"
+        }
+      ],
+      timeline: [
+        { year: "2015", title: "Foundation", description: "Established with a vision to revolutionize interior design through innovative approaches and sustainable practices." },
+        { year: "2018", title: "International Expansion", description: "Opened our first international studio, bringing our distinctive design philosophy to global projects." },
+        { year: "2020", title: "Digital Transformation", description: "Launched our proprietary virtual reality design platform, allowing clients to experience their spaces before construction." },
+        { year: "2023", title: "Design Innovation Award", description: "Recognized for our commitment to sustainable luxury and innovative spatial concepts." },
+        { year: "2025", title: "Future Vision", description: "Our ongoing mission to pioneer integrations of biophilic design with cutting-edge smart living technology." }
+      ],
+      expertise: [
+        { number: "01", title: "Residential Sanctuaries", description: "Creating homes that reflect personal narratives while embracing innovative design principles." },
+        { number: "02", title: "Commercial Environments", description: "Designing workspaces that inspire productivity while expressing brand identity." },
+        { number: "03", title: "Hospitality Experiences", description: "Crafting immersive environments that evoke emotional responses and memorable experiences." },
+        { number: "04", title: "Virtual Spatial Design", description: "Pioneering digital environments and metaverse spatial concepts for forward-thinking clients." }
+      ]
+    })
 })
 app.get("/projects", (req, res) => {
   res.render("projects", {
@@ -89,7 +139,7 @@ app.get("/projects/clarendon-house", (req, res) => {
 //   })
 // })
 
-const PORT = process.env.PORT || 3000
+const PORT = 4000
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`)
 })

@@ -3,19 +3,551 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>About | Ultra Interiors</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="/stylesheets/about.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.5/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.5/ScrollTrigger.min.js"></script>
+    <script src="/javascripts/about.js" defer></script>
 </head>
 <body>
-    <div class="sec1">
-        <div class="title">
-            <h1>ABOUT</h1>
+    <!-- Cursor Follow Effect -->
+    <div class="cursor-follow"></div>
+    
+    <!-- Scroll Progress Indicator -->
+    <div class="scroll-progress"></div>
+
+    <!-- Hero Section - Modern Full Width Design -->
+    <section class="hero">
+        <div class="hero-background">
+            <img src="https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?ixlib=rb-4.0.3&auto=format&fit=crop&w=2400&q=80" alt="Interior Design Showcase">
         </div>
-    <div class="image1">
-        <img src="https://www.datocms-assets.com/53023/1712136271-large-format-duo.jpg" alt="Image not found">
+        <div class="hero-content">
+            <div class="brand-mark">
+                <span class="diamond"></span>
+                <span class="line"></span>
+            </div>
+            <h1>About <span class="accent-text">Us</span></h1>
+            <div class="hero-tagline">Redefining Luxury Through Space</div>
+            <div class="hero-description">
+                An award-winning interior design studio crafting exceptional spaces since 2015. We bring together creativity, technical expertise, and a deep understanding of human-centered design.
+            </div>
+            <a href="#vision" class="hero-cta">
+                <span>Discover our vision</span>
+                <i class="fas fa-arrow-right"></i>
+            </a>
+        </div>
+        <div class="scroll-indicator">
+            <div class="mouse"></div>
+            <span>Scroll to explore</span>
+        </div>
+    </section>
+
+    <!-- Luxury Showcase Section -->
+    <section class="luxury-showcase">
+        <div class="showcase-grid">
+            <div class="showcase-text">
+                <div class="section-label">Crafting Elegance</div>
+                <h2>Redefining <br><span class="highlight">Luxury Living</span></h2>
+                <p class="showcase-description">With over two decades of excellence, we transform spaces into timeless masterpieces. Our signature approach combines avant-garde design with unparalleled craftsmanship, creating environments that transcend ordinary luxury.</p>
+                <div class="achievements">
+                    <div class="achievement-item">
+                        <span class="number">350+</span>
+                        <span class="label">Projects Completed</span>
+                    </div>
+                    <div class="achievement-item">
+                        <span class="number">15+</span>
+                        <span class="label">Design Awards</span>
+                    </div>
+                    <div class="achievement-item">
+                        <span class="number">98%</span>
+                        <span class="label">Client Satisfaction</span>
+                    </div>
+                </div>
+            </div>
+            <div class="showcase-gallery">
+                <div class="gallery-item main">
+                    <img src="https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80" alt="Luxury Interior">
+                    <div class="gallery-overlay"></div>
+                </div>
+                <div class="gallery-item secondary">
+                    <img src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Modern Design">
+                    <div class="gallery-overlay"></div>
+                </div>
+                <div class="gallery-item accent">
+                    <div class="accent-content">
+                        <span class="accent-year">EST. 2015</span>
+                        <span class="accent-text">Luxury Interior Design Studio</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Philosophy Section with 3D Cards -->
+    <section class="philosophy-section">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-number">02</span>
+                <h2>Our Philosophy</h2>
+            </div>
+            <div class="philosophy-cards">
+                <div class="philosophy-card" data-rotation="5">
+                    <div class="card-inner">
+                        <div class="card-front">
+                            <div class="card-icon"><i class="fas fa-pencil-ruler"></i></div>
+                            <h3>Avant-Garde Design</h3>
+                        </div>
+                        <div class="card-back">
+                            <p>We push the boundaries of conventional design, embracing innovative approaches that challenge the status quo while maintaining functional elegance.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="philosophy-card" data-rotation="-5">
+                    <div class="card-inner">
+                        <div class="card-front">
+                            <div class="card-icon"><i class="fas fa-leaf"></i></div>
+                            <h3>Sustainable Luxury</h3>
+                        </div>
+                        <div class="card-back">
+                            <p>Our commitment to environmental responsibility drives us to source ethical materials and implement energy-efficient solutions without compromising on luxury.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="philosophy-card" data-rotation="5">
+                    <div class="card-inner">
+                        <div class="card-front">
+                            <div class="card-icon"><i class="fas fa-microchip"></i></div>
+                            <h3>Technological Integration</h3>
+                        </div>
+                        <div class="card-back">
+                            <p>We seamlessly blend cutting-edge technology with timeless design, creating intelligent spaces that adapt to our clients' lifestyles.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Founder Sections -->
+    <section class="founder-section">
+        <!-- CEO Section -->
+        <div class="founder-container">
+            <div class="founder-image-wrapper">
+                <div class="founder-image">
+                    <img src="https://images.unsplash.com/photo-1607990281513-2c110a25bd8c?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80" alt="Alexander Bennett">
+                </div>
+            </div>
+            <div class="founder-content">
+                <h2 class="founder-name">ALEXANDER BENNETT</h2>
+                <div class="founder-title">Chief Executive Officer</div>
+                <div class="founder-credentials">NCIDQ, ASID, IIDA</div>
+                
+                <p class="founder-bio">
+                    With over two decades of experience in luxury interior design, I've dedicated my career to creating spaces that transcend conventional aesthetics. My journey began at the prestigious Parsons School of Design, followed by collaborations with renowned design houses in Paris and London.
+                </p>
+
+                <div class="founder-quote">
+                    "Interior design is not just about creating beautiful spaces – it's about crafting environments that tell stories, inspire emotions, and elevate the human experience."
+                </div>
+
+                <div class="founder-achievements">
+                    <div class="achievement">
+                        <div class="achievement-number">25+</div>
+                        <div class="achievement-label">Years Experience</div>
+                    </div>
+                    <div class="achievement">
+                        <div class="achievement-number">180</div>
+                        <div class="achievement-label">Luxury Projects</div>
+                    </div>
+                    <div class="achievement">
+                        <div class="achievement-number">12</div>
+                        <div class="achievement-label">Design Awards</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- CMO Section -->
+        <div class="founder-container reverse">
+            <div class="founder-image-wrapper">
+                <div class="founder-image">
+                    <img src="https://images.unsplash.com/photo-1594799990731-c3f58d99a975?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80" alt="Sophia Anderson">
+                </div>
+            </div>
+            <div class="founder-content">
+                <h2 class="founder-name">SOPHIA ANDERSON</h2>
+                <div class="founder-title">Chief Marketing Officer</div>
+                <div class="founder-credentials">MBA, Digital Innovation</div>
+                
+                <p class="founder-bio">
+                    Leading our brand's creative vision and global marketing initiatives, I bring a unique blend of strategic thinking and creative innovation. My background in luxury brand management and digital transformation has helped position our studio at the forefront of the industry.
+                </p>
+
+                <div class="founder-quote">
+                    "In the world of luxury design, every touchpoint matters. We're not just designing spaces; we're crafting experiences that resonate with the most discerning clientele."
+                </div>
+
+                <div class="founder-achievements">
+                    <div class="achievement">
+                        <div class="achievement-number">15+</div>
+                        <div class="achievement-label">Brand Campaigns</div>
+                    </div>
+                    <div class="achievement">
+                        <div class="achievement-number">40+</div>
+                        <div class="achievement-label">Global Partners</div>
+                    </div>
+                    <div class="achievement">
+                        <div class="achievement-number">8</div>
+                        <div class="achievement-label">Industry Awards</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Interactive Timeline Section -->
+    <section class="timeline-section">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-number">04</span>
+                <h2>Our Journey</h2>
+            </div>
+            <div class="timeline">
+                <div class="timeline-item" data-year="2015">
+                    <div class="timeline-content">
+                        <h3>Foundation</h3>
+                        <p>Established with a vision to revolutionize interior design through innovative approaches and sustainable practices.</p>
+                    </div>
+                </div>
+                <div class="timeline-item" data-year="2018">
+                    <div class="timeline-content">
+                        <h3>International Expansion</h3>
+                        <p>Opened our first international studio, bringing our distinctive design philosophy to global projects.</p>
+                    </div>
+                </div>
+                <div class="timeline-item" data-year="2020">
+                    <div class="timeline-content">
+                        <h3>Digital Transformation</h3>
+                        <p>Launched our proprietary virtual reality design platform, allowing clients to experience their spaces before construction.</p>
+                    </div>
+                </div>
+                <div class="timeline-item" data-year="2023">
+                    <div class="timeline-content">
+                        <h3>Design Innovation Award</h3>
+                        <p>Recognized for our commitment to sustainable luxury and innovative spatial concepts.</p>
+                    </div>
+                </div>
+                <div class="timeline-item" data-year="2025">
+                    <div class="timeline-content">
+                        <h3>Future Vision</h3>
+                        <p>Our ongoing mission to pioneer integrations of biophilic design with cutting-edge smart living technology.</p>
+                    </div>
+                </div>
+                <div class="timeline-progress"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Expertise Section with Parallax Layers -->
+    <section class="expertise-section">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-number">05</span>
+                <h2>Our Expertise</h2>
+            </div>
+            <div class="expertise-content">
+                <div class="expertise-list">
+                    <div class="expertise-item" data-depth="0.1">
+                        <span class="expertise-number">01</span>
+                        <div class="expertise-details">
+                            <h3>Residential Sanctuaries</h3>
+                            <p>Creating homes that reflect personal narratives while embracing innovative design principles.</p>
+                        </div>
+                    </div>
+                    <div class="expertise-item" data-depth="0.2">
+                        <span class="expertise-number">02</span>
+                        <div class="expertise-details">
+                            <h3>Commercial Environments</h3>
+                            <p>Designing workspaces that inspire productivity while expressing brand identity.</p>
+                        </div>
+                    </div>
+                    <div class="expertise-item" data-depth="0.3">
+                        <span class="expertise-number">03</span>
+                        <div class="expertise-details">
+                            <h3>Hospitality Experiences</h3>
+                            <p>Crafting immersive environments that evoke emotional responses and memorable experiences.</p>
+                        </div>
+                    </div>
+                    <div class="expertise-item" data-depth="0.4">
+                        <span class="expertise-number">04</span>
+                        <div class="expertise-details">
+                            <h3>Virtual Spatial Design</h3>
+                            <p>Pioneering digital environments and metaverse spatial concepts for forward-thinking clients.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="parallax-layers">
+            <div class="layer" data-depth="0.1"></div>
+            <div class="layer" data-depth="0.2"></div>
+            <div class="layer" data-depth="0.3"></div>
+        </div>
+    </section>
+
+    <!-- Interactive Quote Section -->
+    <section class="quote-section">
+        <div class="quote-container">
+            <blockquote class="reveal-quote">
+                <p>"Design is not just what it looks like and feels like.<br>Design is how it works."</p>
+                <cite>— Our Design Philosophy</cite>
+            </blockquote>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="site-footer">
+        <div class="footer-content">
+            <div class="footer-brand">
+                <div class="footer-logo">
+                    <div class="brand-mark">
+                        <div class="diamond"></div>
+                        <div class="mark-line"></div>
+                    </div>
+                    <h3>LUXE LIVING INTERIORS</h3>
+                </div>
+                <div class="footer-tagline">Redefining Luxury Through Space</div>
+                <p>Award-winning interior design studio creating extraordinary spaces that inspire and elevate the human experience.</p>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-pinterest"></i></a>
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                </div>
+            </div>
+            <div class="footer-links">
+                <div class="footer-column">
+                    <h4>Navigation</h4>
+                    <ul>
+                        <li><a href="/">Home</a></li>
+                        <li><a href="/about" class="active">About</a></li>
+                        <li><a href="/services">Services</a></li>
+                        <li><a href="/projects">Projects</a></li>
+                        <li><a href="/contact">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h4>Services</h4>
+                    <ul>
+                        <li><a href="#">Residential Design</a></li>
+                        <li><a href="#">Commercial Spaces</a></li>
+                        <li><a href="#">Hospitality Design</a></li>
+                        <li><a href="#">Concept Development</a></li>
+                        <li><a href="#">Design Consultation</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h4>Contact</h4>
+                    <ul class="contact-info">
+                        <li><i class="fas fa-map-marker-alt"></i> 123 Design Avenue, London</li>
+                        <li><i class="fas fa-phone"></i> +44 (0) 123 456 7890</li>
+                        <li><i class="fas fa-envelope"></i> info@luxelivinginteriors.com</li>
+                        <li><i class="fas fa-clock"></i> Mon-Fri: 9am - 6pm</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <div class="container">
+                <p>&copy; 2023 Luxe Living Interiors. All rights reserved.</p>
+                <div class="footer-legal">
+                    <a href="#">Privacy Policy</a>
+                    <a href="#">Terms of Service</a>
+                    <a href="#">Cookies</a>
+                </div>
     </div>
-    <div class="image2"><img src="https://www.datocms-assets.com/53023/1712139517-bedroom-woodbrook.jpg" alt="Image not found"></div>
-    <div class="image3"><img src="https://www.datocms-assets.com/53023/1694519086-awards.jpg" alt="Image not found"></div>
     </div>
+    </footer>
+
+    <!-- Script -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Register ScrollTrigger plugin
+            gsap.registerPlugin(ScrollTrigger);
+            
+            // Remove cursor follow effect from inline script as it's handled in about.js
+            
+            // Hero parallax effect
+            gsap.to('.parallax-bg', {
+                yPercent: 30,
+                ease: "none",
+                scrollTrigger: {
+                    trigger: '.hero',
+                    start: 'top top',
+                    end: 'bottom top',
+                    scrub: 1
+                }
+            });
+            
+            // Scroll progress indicator
+            gsap.to('.scroll-progress', {
+                width: '100%',
+                ease: 'none',
+                scrollTrigger: {
+                    trigger: 'body',
+                    start: 'top top',
+                    end: 'bottom bottom',
+                    scrub: 0.3
+                }
+            });
+            
+            // Section header animations
+            gsap.utils.toArray('.section-header').forEach(header => {
+                gsap.from(header.children, {
+                    y: 50,
+                    opacity: 0,
+                    duration: 1,
+                    stagger: 0.2,
+                    scrollTrigger: {
+                        trigger: header,
+                        start: 'top 80%'
+                    }
+                });
+            });
+            
+            // Image reveal animations
+            gsap.utils.toArray('.image-reveal').forEach(reveal => {
+                gsap.from(reveal, {
+                    clipPath: 'inset(0 100% 0 0)',
+                    duration: 1,
+                    scrollTrigger: {
+                        trigger: reveal,
+                        start: 'top 80%'
+                    }
+                });
+            });
+            
+            // Philosophy cards 3D effect
+            document.querySelectorAll('.philosophy-card').forEach(card => {
+                card.addEventListener('mousemove', (e) => {
+                    const rect = card.getBoundingClientRect();
+                    const x = e.clientX - rect.left;
+                    const y = e.clientY - rect.top;
+                    const centerX = rect.width / 2;
+                    const centerY = rect.height / 2;
+                    const rotationY = ((x - centerX) / centerX) * 10;
+                    const rotationX = ((centerY - y) / centerY) * 10;
+                    
+                    gsap.to(card, {
+                        rotationX: rotationX,
+                        rotationY: rotationY,
+                        duration: 0.5,
+                        ease: 'power2.out',
+                        transformPerspective: 1000
+                    });
+                });
+                
+                card.addEventListener('mouseleave', () => {
+                    gsap.to(card, {
+                        rotationX: 0,
+                        rotationY: 0,
+                        duration: 0.5,
+                        ease: 'power2.out'
+                    });
+                });
+            });
+            
+            // Timeline animation
+            gsap.to('.timeline-progress', {
+                height: '100%',
+                ease: 'none',
+                scrollTrigger: {
+                    trigger: '.timeline',
+                    start: 'top 80%',
+                    end: 'bottom 20%',
+                    scrub: 0.3
+                }
+            });
+            
+            gsap.utils.toArray('.timeline-item').forEach(item => {
+                gsap.from(item, {
+                    opacity: 0,
+                    x: -50,
+                    duration: 1,
+                    scrollTrigger: {
+                        trigger: item,
+                        start: 'top 80%',
+                        toggleActions: 'play none none reverse'
+                    }
+                });
+            });
+            
+            // Expertise items parallax
+            gsap.utils.toArray('.expertise-item').forEach(item => {
+                const depth = item.getAttribute('data-depth');
+                gsap.to(item, {
+                    y: -50 * depth,
+                    ease: 'none',
+                    scrollTrigger: {
+                        trigger: '.expertise-section',
+                        start: 'top bottom',
+                        end: 'bottom top',
+                        scrub: true
+                    }
+                });
+            });
+            
+            // Parallax layers in expertise section
+            gsap.utils.toArray('.layer').forEach(layer => {
+                const depth = layer.getAttribute('data-depth');
+                gsap.to(layer, {
+                    y: -100 * depth,
+                    ease: 'none',
+                    scrollTrigger: {
+                        trigger: '.expertise-section',
+                        start: 'top bottom',
+                        end: 'bottom top',
+                        scrub: true
+                    }
+                });
+            });
+            
+            // Quote reveal animation
+            gsap.from('.reveal-quote p, .reveal-quote cite', {
+                y: 50,
+                opacity: 0,
+                duration: 1,
+                stagger: 0.3,
+                scrollTrigger: {
+                    trigger: '.quote-section',
+                    start: 'top 70%'
+                }
+            });
+            
+            // Glitch effect for hero title
+            const glitchElement = document.querySelector('.glitch-effect');
+            if (glitchElement) {
+                setInterval(() => {
+                    glitchElement.classList.add('active');
+                    setTimeout(() => {
+                        glitchElement.classList.remove('active');
+                    }, 200);
+                }, 3000);
+            }
+
+            // Vision stats animation
+            gsap.from('.vision-stats .stat', {
+                y: 30,
+                opacity: 0,
+                stagger: 0.2,
+                duration: 0.8,
+                scrollTrigger: {
+                    trigger: '.vision-stats',
+                    start: 'top 80%'
+                }
+            });
+        });
+    </script>
 </body>
 </html>
