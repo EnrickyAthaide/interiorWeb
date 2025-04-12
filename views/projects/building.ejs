@@ -1,14 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><%= projectName %> | Luxury Interior Design</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <title>Luxury Interior Design Project</title>
     <link rel="stylesheet" href="/stylesheets/project-detail.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.5/gsap.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.5/ScrollTrigger.min.js"></script>
 </head>
+
 <body>
     <!-- Header -->
     <header class="site-header">
@@ -42,28 +41,82 @@
             </h1>
         </div>
         <div class="hero-background">
-            <div class="parallax-image" style="background-image: url('/images/projects/complex.jpg')"></div>
+            <div class="parallax-image" style="background-image: url('/images/projects/complex.jpg');"></div>
+        </div>
+    </section>
+    
+    <!-- Project Overview Section (like the image) -->
+    <section class="project-overview" id="textAni1">
+        <div class="project-overview-content" id="content1">
+            <div class="large-title" id="headAni1">
+               <h2>A</h2>
+                <h2>UNIQUE</h2>
+                <h2>AND</h2>
+                <h2>IMPRESSIVE</h2>
+                <h2>FAMILY HOME</h2>
+            </div>
+            <div class="project-description" id="parAni1">
+                <p>This distinctive and utterly captivating new-build family home </p>
+                <p>was completed in the late summer of 2022. A stunning</p>
+                <p>compilation of classic, contemporary detailing has formed</p>
+                <p>the bones of our clients forever home.</p>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Dual Image Section -->
+    <section class="dual-image-section " id="ani1">
+        <div class="image-container left" id="left1">
+            <!-- Replace with your actual image path when available -->
+            <img src="https://images.unsplash.com/photo-1591088398332-8a7791972843?q=80&w=1000" alt="Elegant staircase design">
+        </div>
+        <div class="image-container right" id="right1">
+            <!-- Replace with your actual image path when available -->
+            <img src="https://images.unsplash.com/photo-1584622650111-993a426fbf0a?q=80&w=1000" alt="Luxury spa pool area">
+        </div>
+    </section>
+    
+    <section class="gallery-section">
+        <div class="gallery-image"><img src="/images/projects/complex.jpg" alt="image not found"></div>
+    </section>
+    <!-- Gallery Section -->
+        <section style="background-color: #FAF9F6;" class="project-overview" id="textAni2">
+            <div class="project-overview-content" style="color: black;" id="content2">
+                <div class="large-title" id="headAni2">
+                   <h2>A</h2>
+                    <h2>UNIQUE</h2>
+                    <h2>AND</h2>
+                    <h2>IMPRESSIVE</h2>
+                    <h2>FAMILY HOME</h2>
+                </div>
+                <div class="project-description2" id="parAni2">
+                    <p>This distinctive and utterly captivating new-build family home </p>
+                    <p>was completed in the late summer of 2022. A stunning</p>
+                    <p>compilation of classic, contemporary detailing has formed</p>
+                    <p>the bones of our clients forever home.</p>
+                </div>
+            </div>
+        </section>
+
+    <section style="background-color: #FAF9F6; height:200vh;" class="dual-image-section" id="ani2">
+        <div class="image-container left" id="left2">
+            <!-- Replace with your actual image path when available -->
+            <img src="https://images.unsplash.com/photo-1591088398332-8a7791972843?q=80&w=1000" alt="Elegant staircase design">
+        </div>
+        <div class="image-container right" id="right2">
+            <!-- Replace with your actual image path when available -->
+            <img src="https://images.unsplash.com/photo-1584622650111-993a426fbf0a?q=80&w=1000" alt="Luxury spa pool area">
         </div>
     </section>
 
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            // Register ScrollTrigger plugin
-            gsap.registerPlugin(ScrollTrigger);
-            
-            // Smoother parallax effect for hero image
-            gsap.to('.parallax-image', {
-                yPercent: -25,
-                ease: "power1.inOut",
-                scrollTrigger: {
-                    trigger: '.hero-section',
-                    start: 'top top',
-                    end: 'bottom top',
-                    scrub: 0.3, // Smoother scrubbing effect
-                    invalidateOnRefresh: true
-                }
-            });
-        });
-    </script>
+    <section class="gallery-section">
+        <h2>Gallery</h2>
+    </section>
+
+    <!-- Scripts at bottom -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.5/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.5/ScrollTrigger.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/studio-freight/lenis@1.0.19/bundled/lenis.min.js"></script>
+    <script src="/javascripts/project-details.js"></script>
 </body>
 </html>

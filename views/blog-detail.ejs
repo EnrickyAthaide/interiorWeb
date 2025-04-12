@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= title %></title>
+    <link rel="stylesheet" href="/stylesheets/blog-detail.css">
+</head>
+<body>
+    <!-- Header - Simplified without navigation -->
+    <header class="site-header">
+        <div class="left-header">
+            <a href="/" class="header-text">INTERIOR DESIGN &<br>ARCHITECTURE STUDIO</a>
+        </div>
+        <div class="center-header">
+            <a href="/" class="logo">
+                <img src="/images/logo.png" alt="Studio Logo" class="logo-img">
+            </a>
+        </div>
+    </header>
+
+    <!-- Hero Section - Black Background -->
+    <section class="blog-hero">
+        <div class="hero-content">
+            <div class="blog-meta">
+                <span class="blog-category"><%= blog.category %></span>
+                <span class="blog-date"><%= blog.date %></span>
+            </div>
+            <h1 class="blog-title"><%= blog.title %></h1>
+            <p class="blog-subtitle"><%= blog.subtitle %></p>
+        </div>
+        <div class="hero-image">
+            <div class="parallax-image" style="background-image: url('<%= blog.heroImage %>');"></div>
+        </div>
+    </section>
+
+    <!-- Blog Content - Creamy Brown Background -->
+    <article class="blog-content">
+        <div class="content-wrapper">
+            <div class="main-content">
+                <p class="lead-paragraph">In the realm of interior design, creating spaces that transcend fleeting trends while embracing contemporary sensibilities is an art form that requires a deep understanding of both classical principles and modern aesthetics.</p>
+                
+                <h2>The Foundation of Timeless Design</h2>
+                <p>At its core, timeless design is rooted in principles that have endured through centuries of architectural and design evolution. The careful consideration of proportion, scale, and harmony forms the foundation upon which all enduring spaces are built.</p>
+                
+                <div class="image-block">
+                    <img src="<%= blog.contentImages[0] %>" alt="Elegant interior showing timeless design principles">
+                    <span class="image-caption">Classical proportions meet contemporary materials in this London residence</span>
+                </div>
+
+                <h2>Material Selection and Craftsmanship</h2>
+                <p>The selection of materials plays a crucial role in creating spaces that age gracefully. Natural materials like stone, wood, and metal not only provide durability but also develop character over time, adding layers of history to the space.</p>
+
+                <blockquote>
+                    "True luxury lies not in opulence, but in the perfect execution of simplicity."
+                </blockquote>
+
+                <div class="dual-image-block">
+                    <div class="image-container">
+                        <img src="<%= blog.contentImages[1] %>" alt="Material detail">
+                        <span class="image-caption">Hand-finished brass details</span>
+                    </div>
+                    <div class="image-container">
+                        <img src="<%= blog.contentImages[2] %>" alt="Craftsmanship detail">
+                        <span class="image-caption">Custom joinery work</span>
+                    </div>
+                </div>
+
+                <h2>The Role of Light and Space</h2>
+                <p>Natural light is perhaps the most fundamental element in creating timeless interiors. The way light interacts with space throughout the day brings life and movement to even the most minimal designs.</p>
+            </div>
+
+            <aside class="sidebar">
+                <div class="author-info">
+                    <img src="<%= blog.author.image %>" alt="<%= blog.author.name %>" class="author-image">
+                    <h3><%= blog.author.name %></h3>
+                    <p><%= blog.author.role %></p>
+                </div>
+                <div class="related-posts">
+                    <h4>Related Articles</h4>
+                    <ul>
+                        <% blog.relatedPosts.forEach(function(post) { %>
+                            <li><a href="<%= post.link %>"><%= post.title %></a></li>
+                        <% }); %>
+                    </ul>
+                </div>
+            </aside>
+        </div>
+    </article>
+
+    <!-- Next Article Section - Black Background -->
+    <section class="next-article">
+        <div class="next-article-content">
+            <span class="next-label">NEXT ARTICLE</span>
+            <h2><%= blog.nextArticle.title %></h2>
+            <a href="<%= blog.nextArticle.link %>" class="read-more">Read Article</a>
+        </div>
+        <div class="next-article-image">
+            <div class="parallax-image" style="background-image: url('<%= blog.nextArticle.image %>');"></div>
+        </div>
+    </section>
+
+    <!-- Scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.5/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.5/ScrollTrigger.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/studio-freight/lenis@1.0.19/bundled/lenis.min.js"></script>
+    <script src="/javascripts/blog-detail.js"></script>
+</body>
+</html> 
