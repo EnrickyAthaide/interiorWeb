@@ -17,7 +17,7 @@ function initializeAnimations() {
             scrollTrigger: {
                 trigger: ".blog-hero",
                 start: "top top",
-                end: "bottom top",
+                end: "bottom bottom",
                 scrub: true
             }
         });
@@ -31,8 +31,7 @@ function initializeAnimations() {
             ease: "none",
             scrollTrigger: {
                 trigger: image,
-                start: "top bottom",
-                end: "bottom top",
+                toggleActions: "play reverse play reverse",
                 scrub: true
             }
         });
