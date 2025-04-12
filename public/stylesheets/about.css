@@ -452,117 +452,99 @@ img {
 
 /* Team Section */
 .founder-section {
-    background-color: var(--dark-bg);
-    padding: 120px 0;
+    background-color: var(--dark-accent);
     position: relative;
     overflow: hidden;
+    padding: 150px 0;
 }
 
 .founder-container {
     display: grid;
     grid-template-columns: 1fr 1.2fr;
-    gap: 100px;
+    gap: 80px;
     max-width: 1400px;
     margin: 0 auto;
-    padding: 0 30px;
+    padding: 0 40px;
     align-items: center;
-}
-
-.founder-container.reverse {
-    grid-template-columns: 1.2fr 1fr;
-}
-
-.founder-container.reverse .founder-content {
-    order: -1;
-    padding-right: 0;
-    padding-left: 50px;
-    text-align: right;
-}
-
-.founder-container.reverse .founder-quote {
-    border-left: none;
-    border-right: 2px solid var(--accent-color);
-    padding-left: 0;
-    padding-right: 30px;
-    text-align: right;
 }
 
 .founder-image-wrapper {
     position: relative;
-    overflow: hidden;
+    padding-top: 120%;
 }
 
 .founder-image {
+    position: absolute;
+    top: 0;
+    left: 0;
     width: 100%;
-    aspect-ratio: 4/5;
-    position: relative;
+    height: 100%;
+    overflow: hidden;
+    border-radius: 2px;
+    box-shadow: var(--shadow);
 }
 
 .founder-image img {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    transition: transform 0.7s cubic-bezier(0.4, 0, 0.2, 1);
+    transition: transform 0.7s ease;
+}
+
+.founder-image:hover img {
+    transform: scale(1.05);
 }
 
 .founder-content {
-    padding-right: 50px;
+    padding-right: 40px;
+}
+
+.founder-header {
+    margin-bottom: 40px;
 }
 
 .founder-name {
-    font-family: var(--font-secondary);
-    font-size: 4.5rem;
-    letter-spacing: 2px;
-    color: var(--text-primary);
-    margin-bottom: 10px;
+    font-size: 3.5rem;
     font-weight: 400;
-    line-height: 1;
-    text-transform: uppercase;
-    background: linear-gradient(45deg, var(--text-primary) 60%, var(--accent-color));
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
+    letter-spacing: 2px;
+    margin-bottom: 15px;
+    color: var(--text-primary);
+    font-family: var(--font-secondary);
+    line-height: 1.2;
 }
 
 .founder-title {
-    font-size: 1rem;
-    text-transform: uppercase;
-    letter-spacing: 5px;
+    font-size: 1.2rem;
     color: var(--accent-color);
     margin-bottom: 10px;
-    font-family: var(--font-primary);
-    font-weight: 300;
+    font-weight: 500;
+    letter-spacing: 1px;
 }
 
 .founder-credentials {
-    font-size: 0.9rem;
+    font-size: 1rem;
     color: var(--text-secondary);
     letter-spacing: 2px;
-    margin-bottom: 40px;
-    font-family: var(--font-primary);
     position: relative;
-    display: inline-block;
+    padding-left: 45px;
+    margin-top: 20px;
 }
 
-.founder-credentials::after {
-    content: '';
+.founder-credentials::before {
+    content: "";
     position: absolute;
-    bottom: -10px;
     left: 0;
-    width: 40px;
+    top: 50%;
+    width: 35px;
     height: 1px;
     background-color: var(--accent-color);
-}
-
-.founder-container.reverse .founder-credentials::after {
-    left: auto;
-    right: 0;
 }
 
 .founder-bio {
     font-size: 1.1rem;
     line-height: 1.8;
     color: var(--text-secondary);
-    margin-bottom: 30px;
+    margin-bottom: 40px;
 }
 
 .founder-quote {
@@ -571,89 +553,83 @@ img {
     line-height: 1.6;
     color: var(--text-primary);
     font-style: italic;
-    margin: 40px 0;
-    padding-left: 30px;
-    border-left: 2px solid var(--accent-color);
+    position: relative;
+    padding: 30px 0;
+    margin-bottom: 40px;
+    border-top: 1px solid rgba(171, 126, 95, 0.2);
+    border-bottom: 1px solid rgba(171, 126, 95, 0.2);
 }
 
 .founder-achievements {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 30px;
-    margin-top: 40px;
-}
-
-.founder-container.reverse .founder-achievements {
-    direction: rtl;
 }
 
 .achievement {
     text-align: center;
-    padding: 20px;
+    padding: 25px 20px;
     background-color: rgba(171, 126, 95, 0.1);
-    border: 1px solid rgba(171, 126, 95, 0.2);
-    transition: transform 0.3s ease;
+    border-radius: 2px;
+    transition: transform 0.3s ease, background-color 0.3s ease;
 }
 
 .achievement:hover {
     transform: translateY(-5px);
+    background-color: rgba(171, 126, 95, 0.15);
 }
 
 .achievement-number {
-    font-family: var(--font-secondary);
     font-size: 2.5rem;
     color: var(--accent-color);
+    font-weight: 600;
     margin-bottom: 5px;
+    font-family: var(--font-secondary);
 }
 
 .achievement-label {
     font-size: 0.9rem;
     color: var(--text-secondary);
     letter-spacing: 1px;
-    text-transform: uppercase;
 }
 
 @media (max-width: 1200px) {
-    .founder-container,
-    .founder-container.reverse {
+    .founder-container {
         grid-template-columns: 1fr;
         gap: 60px;
+        padding: 0 30px;
     }
 
-    .founder-content,
-    .founder-container.reverse .founder-content {
-        padding-right: 0;
-        padding-left: 0;
-        text-align: left;
-        order: 2;
-    }
-
-    .founder-container.reverse .founder-quote {
-        border-right: none;
-        border-left: 2px solid var(--accent-color);
-        padding-right: 0;
-        padding-left: 30px;
-        text-align: left;
-    }
-
-    .founder-image {
+    .founder-image-wrapper {
+        padding-top: 80%;
         max-width: 600px;
         margin: 0 auto;
     }
 
-    .founder-container.reverse .founder-achievements {
-        direction: ltr;
+    .founder-content {
+        padding-right: 0;
+        text-align: center;
+        max-width: 800px;
+        margin: 0 auto;
     }
 
-    .founder-container.reverse .founder-credentials::after {
-        left: 0;
-        right: auto;
+    .founder-credentials {
+        display: inline-block;
+    }
+
+    .founder-achievements {
+        max-width: 600px;
+        margin: 0 auto;
     }
 }
 
 @media (max-width: 768px) {
+    .founder-section {
+        padding: 100px 0;
+    }
+
     .founder-name {
-        font-size: 3.5rem;
+        font-size: 2.8rem;
     }
 
     .founder-quote {
@@ -668,10 +644,15 @@ img {
 @media (max-width: 480px) {
     .founder-achievements {
         grid-template-columns: 1fr;
+        gap: 20px;
     }
 
     .founder-name {
-        font-size: 2.8rem;
+        font-size: 2.2rem;
+    }
+
+    .founder-container {
+        padding: 0 20px;
     }
 }
 
