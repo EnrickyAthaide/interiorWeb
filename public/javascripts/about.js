@@ -260,6 +260,52 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
         
+        // Founder section animations
+        gsap.from('.founder-image-wrapper', {
+            x: -30,
+            opacity: 0,
+            duration: 0.8,
+            ease: 'power2.out',
+            scrollTrigger: {
+                trigger: '.founder-section',
+                start: 'top 80%'
+            }
+        });
+        
+        gsap.from('.founder-name, .founder-title', {
+            y: 20,
+            opacity: 0,
+            duration: 0.6,
+            stagger: 0.1,
+            scrollTrigger: {
+                trigger: '.founder-content',
+                start: 'top 80%'
+            }
+        });
+        
+        gsap.from('.founder-quote', {
+            opacity: 0,
+            duration: 0.6,
+            delay: 0.2,
+            scrollTrigger: {
+                trigger: '.founder-content',
+                start: 'top 80%'
+            }
+        });
+        
+        gsap.from('.achievement', {
+            y: 10,
+            opacity: 0,
+            duration: 0.4,
+            stagger: 0.1,
+            delay: 0.2,
+            scrollTrigger: {
+                trigger: '.founder-achievements',
+                start: 'top 95%',
+                toggleActions: 'play none none none'
+            }
+        });
+        
         // Vision section animation
         gsap.from('.vision-statement', {
             y: 30,

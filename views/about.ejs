@@ -17,67 +17,81 @@
     <!-- Scroll Progress Indicator -->
     <div class="scroll-progress"></div>
 
-    <!-- Hero Section - Modern Full Width Design -->
+    <!-- Hero Section -->
     <section class="hero">
         <div class="hero-background">
-            <img src="https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?ixlib=rb-4.0.3&auto=format&fit=crop&w=2400&q=80" alt="Interior Design Showcase">
+            <img src="https://images.unsplash.com/photo-1615529182904-14819c35db37?ixlib=rb-4.0.3&auto=format&fit=crop&w=2000&q=80" alt="Luxury Interior Design">
+            <div class="overlay"></div>
         </div>
-        <div class="hero-content">
-            <div class="brand-mark">
-                <span class="diamond"></span>
-                <span class="line"></span>
+        <div class="container">
+            <div class="hero-content">
+                <div class="hero-meta">
+                    <div class="meta-line"></div>
+                    <span>ABOUT US</span>
+                </div>
+                <h1>We Create <span>Extraordinary</span> Spaces</h1>
+                <p>Ultra Interiors combines exceptional craftsmanship with innovative thinking to create spaces that inspire and endure.</p>
+                <div class="hero-stats">
+                    <div class="stat-item">
+                        <span class="stat-number">2015</span>
+                        <span class="stat-label">ESTABLISHED</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number">100+</span>
+                        <span class="stat-label">PROJECTS</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number">28</span>
+                        <span class="stat-label">AWARDS</span>
+                    </div>
+                </div>
             </div>
-            <h1>About <span class="accent-text">Us</span></h1>
-            <div class="hero-tagline">Redefining Luxury Through Space</div>
-            <div class="hero-description">
-                An award-winning interior design studio crafting exceptional spaces since 2015. We bring together creativity, technical expertise, and a deep understanding of human-centered design.
-            </div>
-            <a href="#vision" class="hero-cta">
-                <span>Discover our vision</span>
-                <i class="fas fa-arrow-right"></i>
-            </a>
         </div>
         <div class="scroll-indicator">
             <div class="mouse"></div>
-            <span>Scroll to explore</span>
+            <span>SCROLL</span>
         </div>
     </section>
 
     <!-- Luxury Showcase Section -->
     <section class="luxury-showcase">
-        <div class="showcase-grid">
-            <div class="showcase-text">
-                <div class="section-label">Crafting Elegance</div>
-                <h2>Redefining <br><span class="highlight">Luxury Living</span></h2>
-                <p class="showcase-description">With over two decades of excellence, we transform spaces into timeless masterpieces. Our signature approach combines avant-garde design with unparalleled craftsmanship, creating environments that transcend ordinary luxury.</p>
-                <div class="achievements">
-                    <div class="achievement-item">
-                        <span class="number">350+</span>
-                        <span class="label">Projects Completed</span>
-                    </div>
-                    <div class="achievement-item">
-                        <span class="number">15+</span>
-                        <span class="label">Design Awards</span>
-                    </div>
-                    <div class="achievement-item">
-                        <span class="number">98%</span>
-                        <span class="label">Client Satisfaction</span>
+        <div class="container">
+            <div class="showcase-grid">
+                <div class="showcase-text">
+                    <span class="section-label fade-in">Our Legacy</span>
+                    <h2 class="fade-in">Elevating <span class="highlight">Design</span> to an Art Form</h2>
+                    <p class="showcase-description fade-in">With a passion for creating extraordinary spaces, Ultra Interiors combines exceptional craftsmanship with innovative thinking. We craft environments that merge timeless elegance with contemporary vision.</p>
+                    
+                    <div class="achievements fade-in">
+                        <div class="achievement-item" data-aos="fade-up">
+                            <span class="number counter">120</span>
+                            <span class="label">Projects Completed</span>
+                        </div>
+                        <div class="achievement-item" data-aos="fade-up" data-aos-delay="100">
+                            <span class="number counter">28</span>
+                            <span class="label">Design Awards</span>
+                        </div>
+                        <div class="achievement-item" data-aos="fade-up" data-aos-delay="200">
+                            <span class="number counter">9</span>
+                            <span class="label">Global Studios</span>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="showcase-gallery">
-                <div class="gallery-item main">
-                    <img src="https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80" alt="Luxury Interior">
-                    <div class="gallery-overlay"></div>
-                </div>
-                <div class="gallery-item secondary">
-                    <img src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Modern Design">
-                    <div class="gallery-overlay"></div>
-                </div>
-                <div class="gallery-item accent">
-                    <div class="accent-content">
-                        <span class="accent-year">EST. 2015</span>
-                        <span class="accent-text">Luxury Interior Design Studio</span>
+                
+                <div class="showcase-gallery fade-in">
+                    <div class="gallery-item main">
+                        <img src="https://images.unsplash.com/photo-1600607687126-8a3414349a51?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80" alt="Luxury interior">
+                        <div class="gallery-overlay"></div>
+                    </div>
+                    <div class="gallery-item">
+                        <img src="https://images.unsplash.com/photo-1600585152220-90363fe7e115?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80" alt="Modern space">
+                        <div class="gallery-overlay"></div>
+                    </div>
+                    <div class="gallery-item accent">
+                        <div class="accent-content">
+                            <span class="accent-year"><%= vision.foundingYear %></span>
+                            <span class="accent-text">Year Established</span>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -131,39 +145,61 @@
 
     <!-- Founder Section -->
     <section class="founder-section">
+        <div class="section-header centered">
+            <span class="section-number">03</span>
+            <h2>Our Leadership</h2>
+        </div>
         <div class="founder-container">
             <div class="founder-image-wrapper">
                 <div class="founder-image">
                     <img src="https://images.unsplash.com/photo-1607990281513-2c110a25bd8c?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80" alt="Alexander Bennett">
+                    <div class="image-overlay"></div>
                 </div>
             </div>
             <div class="founder-content">
                 <div class="founder-header">
-                    <h2 class="founder-name">ALEXANDER BENNETT</h2>
-                    <div class="founder-title">Founder & Chief Executive Officer</div>
-                    <div class="founder-credentials">NCIDQ, ASID, IIDA</div>
+                    <h2 class="founder-name">Alexander Bennett</h2>
+                    <div class="founder-title">
+                        Founder & CEO 
+                        <span class="title-badge">Since 2015</span>
+                    </div>
+                    <div class="founder-credentials">
+                        <span class="credential">NCIDQ</span>
+                        <span class="credential">LEED AP</span>
+                        <span class="credential">ASID</span>
+                    </div>
+                </div>
+                <div class="founder-quote">
+                    <i class="fas fa-quote-left quote-icon"></i>
+                    <blockquote>
+                        "Our mission is to transform spaces into timeless masterpieces that inspire and elevate the human experience."
+                    </blockquote>
+                </div>
+                <div class="founder-bio">
+                    <p>Alexander Bennett brings <span class="bio-highlight">25+ years of experience</span> in luxury interior design, having trained at the Royal College of Art in London before founding Ultra Interiors in 2015. Born to an architect father and artist mother in Copenhagen, Alexander developed a passion for design from an early age.</p>
+                    
+                    <p>Throughout his career, Alexander has collaborated with leading architects and craftsmen worldwide, developing a signature style characterized by meticulous attention to detail and unexpected material combinations. A pioneer in <span class="bio-highlight">sustainable luxury design</span>, he creates spaces that are both timeless and contemporary.</p>
                 </div>
                 
-                <p class="founder-bio">
-                    With over two decades of experience in luxury interior design, I've dedicated my career to creating spaces that transcend conventional aesthetics. My journey began at the prestigious Parsons School of Design, followed by collaborations with renowned design houses in Paris and London.
-                </p>
-
-                <div class="founder-quote">
-                    "Interior design is not just about creating beautiful spaces – it's about crafting environments that tell stories, inspire emotions, and elevate the human experience."
+                <div class="specialty-tags">
+                    <span class="specialty-tag">Residential Design</span>
+                    <span class="specialty-tag">Commercial Spaces</span>
+                    <span class="specialty-tag">Heritage Renovation</span>
+                    <span class="specialty-tag">Sustainable Luxury</span>
                 </div>
-
+                
                 <div class="founder-achievements">
                     <div class="achievement">
                         <div class="achievement-number">25+</div>
-                        <div class="achievement-label">Years Experience</div>
+                        <div class="achievement-label">Years</div>
                     </div>
                     <div class="achievement">
                         <div class="achievement-number">180</div>
-                        <div class="achievement-label">Luxury Projects</div>
+                        <div class="achievement-label">Projects</div>
                     </div>
                     <div class="achievement">
-                        <div class="achievement-number">12</div>
-                        <div class="achievement-label">Design Awards</div>
+                        <div class="achievement-number">15</div>
+                        <div class="achievement-label">Awards</div>
                     </div>
                 </div>
             </div>
@@ -330,188 +366,11 @@
                     <a href="#">Terms of Service</a>
                     <a href="#">Cookies</a>
                 </div>
-    </div>
-    </div>
+            </div>
+        </div>
     </footer>
 
-    <!-- Script -->
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            // Register ScrollTrigger plugin
-            gsap.registerPlugin(ScrollTrigger);
-            
-            // Remove cursor follow effect from inline script as it's handled in about.js
-            
-            // Hero parallax effect
-            gsap.to('.parallax-bg', {
-                yPercent: 30,
-                ease: "none",
-                scrollTrigger: {
-                    trigger: '.hero',
-                    start: 'top top',
-                    end: 'bottom top',
-                    scrub: 1
-                }
-            });
-            
-            // Scroll progress indicator
-            gsap.to('.scroll-progress', {
-                width: '100%',
-                ease: 'none',
-                scrollTrigger: {
-                    trigger: 'body',
-                    start: 'top top',
-                    end: 'bottom bottom',
-                    scrub: 0.3
-                }
-            });
-            
-            // Section header animations
-            gsap.utils.toArray('.section-header').forEach(header => {
-                gsap.from(header.children, {
-                    y: 50,
-                    opacity: 0,
-                    duration: 1,
-                    stagger: 0.2,
-                    scrollTrigger: {
-                        trigger: header,
-                        start: 'top 80%'
-                    }
-                });
-            });
-            
-            // Image reveal animations
-            gsap.utils.toArray('.image-reveal').forEach(reveal => {
-                gsap.from(reveal, {
-                    clipPath: 'inset(0 100% 0 0)',
-                    duration: 1,
-                    scrollTrigger: {
-                        trigger: reveal,
-                        start: 'top 80%'
-                    }
-                });
-            });
-            
-            // Philosophy cards 3D effect
-            document.querySelectorAll('.philosophy-card').forEach(card => {
-                card.addEventListener('mousemove', (e) => {
-                    const rect = card.getBoundingClientRect();
-                    const x = e.clientX - rect.left;
-                    const y = e.clientY - rect.top;
-                    const centerX = rect.width / 2;
-                    const centerY = rect.height / 2;
-                    const rotationY = ((x - centerX) / centerX) * 10;
-                    const rotationX = ((centerY - y) / centerY) * 10;
-                    
-                    gsap.to(card, {
-                        rotationX: rotationX,
-                        rotationY: rotationY,
-                        duration: 0.5,
-                        ease: 'power2.out',
-                        transformPerspective: 1000
-                    });
-                });
-                
-                card.addEventListener('mouseleave', () => {
-                    gsap.to(card, {
-                        rotationX: 0,
-                        rotationY: 0,
-                        duration: 0.5,
-                        ease: 'power2.out'
-                    });
-                });
-            });
-            
-            // Timeline animation
-            gsap.to('.timeline-progress', {
-                height: '100%',
-                ease: 'none',
-                scrollTrigger: {
-                    trigger: '.timeline',
-                    start: 'top 80%',
-                    end: 'bottom 20%',
-                    scrub: 0.3
-                }
-            });
-            
-            gsap.utils.toArray('.timeline-item').forEach(item => {
-                gsap.from(item, {
-                    opacity: 0,
-                    x: -50,
-                    duration: 1,
-                    scrollTrigger: {
-                        trigger: item,
-                        start: 'top 80%',
-                        toggleActions: 'play none none reverse'
-                    }
-                });
-            });
-            
-            // Expertise items parallax
-            gsap.utils.toArray('.expertise-item').forEach(item => {
-                const depth = item.getAttribute('data-depth');
-                gsap.to(item, {
-                    y: -50 * depth,
-                    ease: 'none',
-                    scrollTrigger: {
-                        trigger: '.expertise-section',
-                        start: 'top bottom',
-                        end: 'bottom top',
-                        scrub: true
-                    }
-                });
-            });
-            
-            // Parallax layers in expertise section
-            gsap.utils.toArray('.layer').forEach(layer => {
-                const depth = layer.getAttribute('data-depth');
-                gsap.to(layer, {
-                    y: -100 * depth,
-                    ease: 'none',
-                    scrollTrigger: {
-                        trigger: '.expertise-section',
-                        start: 'top bottom',
-                        end: 'bottom top',
-                        scrub: true
-                    }
-                });
-            });
-            
-            // Quote reveal animation
-            gsap.from('.reveal-quote p, .reveal-quote cite', {
-                y: 50,
-                opacity: 0,
-                duration: 1,
-                stagger: 0.3,
-                scrollTrigger: {
-                    trigger: '.quote-section',
-                    start: 'top 70%'
-                }
-            });
-            
-            // Glitch effect for hero title
-            const glitchElement = document.querySelector('.glitch-effect');
-            if (glitchElement) {
-                setInterval(() => {
-                    glitchElement.classList.add('active');
-                    setTimeout(() => {
-                        glitchElement.classList.remove('active');
-                    }, 200);
-                }, 3000);
-            }
-
-            // Vision stats animation
-            gsap.from('.vision-stats .stat', {
-                y: 30,
-                opacity: 0,
-                stagger: 0.2,
-                duration: 0.8,
-                scrollTrigger: {
-                    trigger: '.vision-stats',
-                    start: 'top 80%'
-                }
-            });
-        });
-    </script>
+    <!-- Custom JavaScript for About Page -->
+    <script src="/javascript/about.js"></script>
 </body>
 </html>
