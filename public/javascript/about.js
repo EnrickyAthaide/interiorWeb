@@ -11,6 +11,9 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // Initialize achievement counters
     initCounters();
+    
+    // Initialize timeline animation
+    initTimelineAnimation();
 });
 
 // Cursor follow effect
@@ -122,5 +125,74 @@ function initCounters() {
     
     counterElements.forEach(element => {
         observer.observe(element);
+    });
+}
+
+// Timeline animation
+function initTimelineAnimation() {
+    const timelineEvents = document.querySelectorAll('.timeline-event');
+    const timelineProgressIndicator = document.querySelector('.timeline-progress-indicator');
+    
+    if (!timelineEvents.length || !timelineProgressIndicator) return;
+    
+    // Set up observer for timeline events
+    const observerOptions = {
+        threshold: 0.3,
+        rootMargin: '0px 0px -10% 0px'
+    };
+    
+    let activeCount = 0;
+    
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('active');
+                activeCount++;
+                
+                // Update progress bar width based on active items
+                const progress = (activeCount / timelineEvents.length) * 100;
+                timelineProgressIndicator.style.width = `${progress}%`;
+                
+                // For vertical layout on mobile
+                timelineProgressIndicator.style.height = `${progress}%`;
+                
+                observer.unobserve(entry.target);
+            }
+        });
+    }, observerOptions);
+    
+    timelineEvents.forEach(event => {
+        observer.observe(event);
+    });
+    
+    // Additional hover effects for timeline items
+    timelineEvents.forEach(event => {
+        event.addEventListener('mouseenter', () => {
+            const dot = event.querySelector('.event-dot');
+            const year = event.querySelector('.event-year');
+            
+            if (dot) {
+                dot.style.transform = 'translateX(-50%) scale(1.2)';
+                dot.style.boxShadow = '0 0 20px rgba(171, 126, 95, 0.7)';
+            }
+            
+            if (year) {
+                year.style.color = '#ffffff';
+            }
+        });
+        
+        event.addEventListener('mouseleave', () => {
+            const dot = event.querySelector('.event-dot');
+            const year = event.querySelector('.event-year');
+            
+            if (dot) {
+                dot.style.transform = 'translateX(-50%) scale(1)';
+                dot.style.boxShadow = '0 0 15px rgba(171, 126, 95, 0.5)';
+            }
+            
+            if (year) {
+                year.style.color = 'var(--accent-color)';
+            }
+        });
     });
 } 

@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= title %></title>
+    <link rel="stylesheet" href="/stylesheets/style.css">
+    <link rel="stylesheet" href="/stylesheets/contact.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Optional MapBox resources - will fallback to static image if not available -->
+    <script src="https://api.mapbox.com/mapbox-gl-js/v2.15.0/mapbox-gl.js" onerror="window.mapboxLoadError = true;"></script>
+    <link href="https://api.mapbox.com/mapbox-gl-js/v2.15.0/mapbox-gl.css" rel="stylesheet">
+</head>
+<body>
+    <!-- Cursor follow effect -->
+    <div class="cursor-follow"></div>
+    
+    <!-- Scroll progress bar -->
+    <div class="scroll-progress"></div>
+
+    <!-- Hero Section -->
+    <section class="contact-hero">
+        <div class="hero-background">
+            <img src="https://images.unsplash.com/photo-1571055107559-3e67626fa8be?ixlib=rb-4.0.3&auto=format&fit=crop&w=2000&q=80" alt="Luxury Interior Design Studio">
+            <div class="overlay"></div>
+        </div>
+        <div class="container">
+            <div class="hero-content">
+                <div class="hero-meta">
+                    <div class="meta-line"></div>
+                    <span>CONNECT WITH US</span>
+                </div>
+                <h1>Let's Create <span>Something</span> Extraordinary</h1>
+                <p>We're committed to transforming your vision into reality. Reach out to begin your design journey with Ultra Interiors.</p>
+            </div>
+        </div>
+        <div class="scroll-indicator">
+            <div class="mouse"></div>
+            <span>SCROLL</span>
+        </div>
+    </section>
+
+    <!-- Contact Grid Section -->
+    <section class="contact-grid-section">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-number">01</span>
+                <h2>Contact <span class="highlight">Information</span></h2>
+            </div>
+            
+            <div class="contact-grid">
+                <div class="contact-info-card">
+                    <div class="contact-icon">
+                        <i class="fas fa-map-marker-alt"></i>
+                    </div>
+                    <h3>Visit Us</h3>
+                    <p><%= contactInfo.address %></p>
+                    <a href="https://maps.google.com/?q=<%= contactInfo.address %>" class="contact-link" target="_blank">Get Directions</a>
+                </div>
+                
+                <div class="contact-info-card">
+                    <div class="contact-icon">
+                        <i class="fas fa-envelope"></i>
+                    </div>
+                    <h3>Email Us</h3>
+                    <p><%= contactInfo.email %></p>
+                    <a href="mailto:<%= contactInfo.email %>" class="contact-link">Send Email</a>
+                </div>
+                
+                <div class="contact-info-card">
+                    <div class="contact-icon">
+                        <i class="fas fa-phone-alt"></i>
+                    </div>
+                    <h3>Call Us</h3>
+                    <p><%= contactInfo.phone %></p>
+                    <a href="tel:<%= contactInfo.phone.replace(/\s+/g, '') %>" class="contact-link">Make Call</a>
+                </div>
+                
+                <div class="contact-info-card">
+                    <div class="contact-icon">
+                        <i class="fas fa-clock"></i>
+                    </div>
+                    <h3>Working Hours</h3>
+                    <p><%= contactInfo.hours %></p>
+                    <a href="#appointment" class="contact-link">Book Appointment</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Form and Map Section -->
+    <section class="form-map-section">
+        <div class="container">
+            <div class="form-map-grid">
+                <div class="contact-form-container">
+                    <div class="section-header">
+                        <span class="section-number">02</span>
+                        <h2>Get In <span class="highlight">Touch</span></h2>
+                    </div>
+                    <p class="form-intro">Share your project details with us, and one of our design consultants will reach out to schedule a consultation.</p>
+                    
+                    <form id="contactForm" class="contact-form">
+                        <div class="form-group">
+                            <label for="name">Full Name <span class="required">*</span></label>
+                            <input type="text" id="name" name="name" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="email">Email <span class="required">*</span></label>
+                            <input type="email" id="email" name="email" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="phone">Phone</label>
+                            <input type="tel" id="phone" name="phone">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="service">Service Interested In <span class="required">*</span></label>
+                            <select id="service" name="service" required>
+                                <option value="" selected disabled>Select a service</option>
+                                <option value="residential">Residential Design</option>
+                                <option value="commercial">Commercial Design</option>
+                                <option value="hospitality">Hospitality Design</option>
+                                <option value="consultation">Design Consultation</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group full-width">
+                            <label for="message">Project Details <span class="required">*</span></label>
+                            <textarea id="message" name="message" rows="5" required></textarea>
+                        </div>
+                        
+                        <div class="form-group full-width submit-container">
+                            <button type="submit" class="submit-btn">
+                                <span>Send Message</span>
+                                <i class="fas fa-arrow-right"></i>
+                            </button>
+                        </div>
+                    </form>
+                </div>
+                
+                <div class="map-container">
+                    <div id="map" class="contact-map"></div>
+                    <div class="map-overlay">
+                        <div class="map-card">
+                            <h3>Ultra Interiors</h3>
+                            <p><%= contactInfo.address %></p>
+                            <p><%= contactInfo.phone %></p>
+                            <a href="mailto:<%= contactInfo.email %>"><%= contactInfo.email %></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Studios Section -->
+    <section class="studios-section">
+        <div class="container">
+            <div class="section-header centered">
+                <h2>Our <span class="highlight">Studios</span></h2>
+            </div>
+            <p class="section-intro">Visit one of our design studios around the world for an immersive experience of our design philosophy.</p>
+            
+            <div class="studios-grid">
+                <% studios.forEach(function(studio) { %>
+                <div class="studio-card">
+                    <div class="studio-image">
+                        <img src="<%= studio.image %>" alt="<%= studio.city %> Studio">
+                        <div class="studio-overlay"></div>
+                        <div class="studio-city"><%= studio.city %></div>
+                    </div>
+                    <div class="studio-info">
+                        <h3><%= studio.city %> Studio</h3>
+                        <ul class="studio-details">
+                            <li>
+                                <i class="fas fa-map-marker-alt"></i>
+                                <span><%= studio.address %></span>
+                            </li>
+                            <li>
+                                <i class="fas fa-phone-alt"></i>
+                                <span><%= studio.phone %></span>
+                            </li>
+                            <li>
+                                <i class="fas fa-envelope"></i>
+                                <span><%= studio.email %></span>
+                            </li>
+                        </ul>
+                        <a href="https://maps.google.com/?q=<%= studio.address %>" class="studio-link" target="_blank">View on Map</a>
+                    </div>
+                </div>
+                <% }); %>
+            </div>
+        </div>
+    </section>
+
+    <!-- Social Connect Section -->
+    <section class="social-connect-section">
+        <div class="container">
+            <div class="social-connect-content">
+                <h2>Follow Our <span class="highlight">Journey</span></h2>
+                <p>Join our community to stay updated with our latest projects, design insights, and events.</p>
+                
+                <div class="social-links">
+                    <% socialMedia.forEach(function(social) { %>
+                    <a href="<%= social.url %>" target="_blank" class="social-link">
+                        <i class="<%= social.icon %>"></i>
+                        <span><%= social.name %></span>
+                    </a>
+                    <% }); %>
+                </div>
+                
+                <div class="newsletter-signup">
+                    <h3>Subscribe to Our Newsletter</h3>
+                    <form class="newsletter-form">
+                        <input type="email" placeholder="Your email address" required>
+                        <button type="submit">Subscribe</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="site-footer">
+        <div class="footer-content">
+            <div class="footer-brand">
+                <div class="footer-logo">
+                    <h3>ULTRA INTERIORS</h3>
+                </div>
+                <p class="footer-tagline">Redefining Luxury Through Design</p>
+            </div>
+            
+            <div class="footer-links">
+                <div class="footer-column">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="/">Home</a></li>
+                        <li><a href="/projects">Projects</a></li>
+                        <li><a href="/about">About</a></li>
+                        <li><a href="/blogs">Journal</a></li>
+                        <li><a href="/contact">Contact</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h4>Services</h4>
+                    <ul>
+                        <li><a href="#">Residential Design</a></li>
+                        <li><a href="#">Commercial Design</a></li>
+                        <li><a href="#">Hospitality Design</a></li>
+                        <li><a href="#">Consultation</a></li>
+                        <li><a href="#">Virtual Design</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h4>Contact</h4>
+                    <ul class="contact-info">
+                        <li>
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span><%= contactInfo.address %></span>
+                        </li>
+                        <li>
+                            <i class="fas fa-phone-alt"></i>
+                            <span><%= contactInfo.phone %></span>
+                        </li>
+                        <li>
+                            <i class="fas fa-envelope"></i>
+                            <span><%= contactInfo.email %></span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        
+        <div class="footer-bottom">
+            <div class="container">
+                <p>&copy; 2024 Ultra Interiors. All rights reserved.</p>
+                <div class="footer-legal">
+                    <a href="#">Privacy Policy</a>
+                    <a href="#">Terms of Service</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="/javascript/contact.js"></script>
+</body>
+</html> 
