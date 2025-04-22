@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><%= projectName %> | Luxury Interior Design Project</title>
+    <title>Luxury Interior Design Project</title>
     <link rel="stylesheet" href="/stylesheets/project-detail.css">
 </head>
 
@@ -25,7 +25,6 @@
                     <li><a href="/">HOME</a></li>
                     <li><a href="/about">ABOUT</a></li>
                     <li class="active"><a href="/projects">PROJECTS</a></li>
-                    <li><a href="/blogs">JOURNAL</a></li>
                     <li><a href="/contact">CONTACT</a></li>
                     <li><a href="/press">PRESS</a></li>
                 </ul>
@@ -37,34 +36,30 @@
     <section class="hero-section">
         <div class="hero-content">
             <h1 class="project-title">
-                <%= projectName.toUpperCase().replace(' ', '<br>') %>
+                CLARENDON<br>
+                HOUSE
             </h1>
         </div>
         <div class="hero-background">
-            <div class="parallax-image" style="background-image: url('<%= projectImages[0] %>');"></div>
+            <div class="parallax-image" style="background-image: url('/images/projects/complex.jpg');"></div>
         </div>
     </section>
     
-    <!-- Project Overview Section -->
+    <!-- Project Overview Section (like the image) -->
     <section class="project-overview" id="textAni1">
         <div class="project-overview-content" id="content1">
             <div class="large-title" id="headAni1">
-                <% 
-                const subtitleWords = projectSubtitle.split(' ');
-                subtitleWords.forEach(word => { 
-                %>
-                <h2><%= word.toUpperCase() %></h2>
-                <% }); %>
+               <h2>A</h2>
+                <h2>UNIQUE</h2>
+                <h2>AND</h2>
+                <h2>IMPRESSIVE</h2>
+                <h2>FAMILY HOME</h2>
             </div>
             <div class="project-description" id="parAni1">
-                <% 
-                const descriptionSentences = projectDescription.split('.');
-                descriptionSentences.forEach(sentence => { 
-                    if(sentence.trim().length > 0) {
-                %>
-                <p><%= sentence.trim() %>.</p>
-                <% }
-                }); %>
+                <p>This distinctive and utterly captivating new-build family home </p>
+                <p>was completed in the late summer of 2022. A stunning</p>
+                <p>compilation of classic, contemporary detailing has formed</p>
+                <p>the bones of our clients forever home.</p>
             </div>
         </div>
     </section>
@@ -72,52 +67,50 @@
     <!-- Dual Image Section -->
     <section class="dual-image-section " id="ani1">
         <div class="image-container left" id="left1">
-            <img src="<%= projectImages[1] || 'https://images.unsplash.com/photo-1591088398332-8a7791972843?q=80&w=1000' %>" alt="<%= projectName %> detail view">
+            <!-- Replace with your actual image path when available -->
+            <img src="https://images.unsplash.com/photo-1591088398332-8a7791972843?q=80&w=1000" alt="Elegant staircase design">
         </div>
         <div class="image-container right" id="right1">
-            <img src="<%= projectImages[2] || 'https://images.unsplash.com/photo-1584622650111-993a426fbf0a?q=80&w=1000' %>" alt="<%= projectName %> interior view">
+            <!-- Replace with your actual image path when available -->
+            <img src="https://images.unsplash.com/photo-1584622650111-993a426fbf0a?q=80&w=1000" alt="Luxury spa pool area">
         </div>
     </section>
     
     <section class="gallery-section">
-        <div class="gallery-image"><img src="<%= projectImages[3] || projectImages[0] %>" alt="Gallery image of <%= projectName %>"></div>
+        <div class="gallery-image"><img src="/images/projects/complex.jpg" alt="image not found"></div>
     </section>
-    
-    <!-- Additional Text Section -->
-    <section style="background-color: #FAF9F6;" class="project-overview" id="textAni2">
-        <div class="project-overview-content" style="color: black;" id="content2">
-            <div class="large-title" id="headAni2">
-                <h2>DESIGN</h2>
-                <h2>AND</h2>
-                <h2>CRAFTSMANSHIP</h2>
+    <!-- Gallery Section -->
+        <section style="background-color: #FAF9F6;" class="project-overview" id="textAni2">
+            <div class="project-overview-content" style="color: black;" id="content2">
+                <div class="large-title" id="headAni2">
+                   <h2>A</h2>
+                    <h2>UNIQUE</h2>
+                    <h2>AND</h2>
+                    <h2>IMPRESSIVE</h2>
+                    <h2>FAMILY HOME</h2>
+                </div>
+                <div class="project-description2" id="parAni2">
+                    <p>This distinctive and utterly captivating new-build family home </p>
+                    <p>was completed in the late summer of 2022. A stunning</p>
+                    <p>compilation of classic, contemporary detailing has formed</p>
+                    <p>the bones of our clients forever home.</p>
+                </div>
             </div>
-            <div class="project-description2" id="parAni2">
-                <p>Our design philosophy for this project centered around creating</p>
-                <p>a space that feels both timeless and contemporary. Every detail,</p>
-                <p>from the custom joinery to the curated materials palette,</p>
-                <p>contributes to the cohesive design language throughout.</p>
-            </div>
-        </div>
-    </section>
+        </section>
 
-    <!-- Additional Dual Image Section -->
     <section style="background-color: #FAF9F6; height:200vh;" class="dual-image-section" id="ani2">
         <div class="image-container left" id="left2">
-            <img src="<%= projectImages[4] || 'https://images.unsplash.com/photo-1591088398332-8a7791972843?q=80&w=1000' %>" alt="<%= projectName %> design detail">
+            <!-- Replace with your actual image path when available -->
+            <img src="https://images.unsplash.com/photo-1591088398332-8a7791972843?q=80&w=1000" alt="Elegant staircase design">
         </div>
         <div class="image-container right" id="right2">
-            <img src="<%= projectImages[5] || 'https://images.unsplash.com/photo-1584622650111-993a426fbf0a?q=80&w=1000' %>" alt="<%= projectName %> craftsmanship detail">
+            <!-- Replace with your actual image path when available -->
+            <img src="https://images.unsplash.com/photo-1584622650111-993a426fbf0a?q=80&w=1000" alt="Luxury spa pool area">
         </div>
     </section>
 
-    <!-- Next Project Section -->
-    <section class="next-project-section">
-        <div class="next-project-wrapper">
-            <div class="next-project-label">NEXT PROJECT</div>
-            <h3 class="next-project-title"><%= nextProject.name %></h3>
-            <p class="next-project-description"><%= nextProject.description %></p>
-            <a href="<%= nextProject.link %>" class="next-project-link">VIEW PROJECT</a>
-        </div>
+    <section class="gallery-section">
+        <h2>Gallery</h2>
     </section>
 
     <!-- Scripts at bottom -->

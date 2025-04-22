@@ -286,132 +286,26 @@ app.get('/blogs/:slug', (req, res) => {
     });
 });
 
-// Individual project routes
-app.get("/projects/:slug", (req, res) => {
-  const slug = req.params.slug;
-  
-  // Sample project data store
-  const projects = {
-    'clarendon-house': {
-      projectName: "Clarendon House",
-      projectSubtitle: "A Unique and Impressive Family Home",
-      projectDescription: "This distinctive and utterly captivating new-build family home was completed in the late summer of 2022. A stunning compilation of classic, contemporary detailing has formed the bones of our clients forever home.",
-      projectImages: [
-        "/images/projects/complex.jpg",
-        "/images/projects/hotel.jpg",
-        "/images/projects/landscape.jpg",
-        "/images/projects/office.jpg",
-        "/images/projects/villa.jpg",
-        "/images/projects/hotel.jpg"
-      ],
-      nextProject: {
-        name: "Lane",
-        description: "Minimalist urban design",
-        link: "/projects/lane"
-      }
-    },
-    'terry': {
-      projectName: "Terry",
-      projectSubtitle: "A Timeless Family Home",
-      projectDescription: "A modern interpretation of classic design principles, this family home blends comfort with sophisticated aesthetics. The project showcases our commitment to creating spaces that feel both contemporary and timeless.",
-      projectImages: [
-        "/images/projects/hotel.jpg",
-        "/images/projects/complex.jpg",
-        "/images/projects/landscape.jpg",
-        "/images/projects/villa.jpg",
-        "/images/projects/office.jpg",
-        "/images/projects/hotel.jpg"
-      ],
-      nextProject: {
-        name: "Clarendon House",
-        description: "Modern architectural marvel",
-        link: "/projects/clarendon-house"
-      }
-    },
-    'lane': {
-      projectName: "Lane",
-      projectSubtitle: "Minimalist Urban Design",
-      projectDescription: "An exercise in restraint and precision, this urban residence demonstrates how minimalist principles can create spaces of profound impact. Every element has been carefully considered to achieve a sense of calm and clarity.",
-      projectImages: [
-        "/images/projects/landscape.jpg",
-        "/images/projects/complex.jpg",
-        "/images/projects/hotel.jpg",
-        "/images/projects/office.jpg",
-        "/images/projects/villa.jpg",
-        "/images/projects/hotel.jpg"
-      ],
-      nextProject: {
-        name: "Project Four",
-        description: "Luxurious countryside retreat",
-        link: "/projects/project-four"
-      }
-    },
-    'project-four': {
-      projectName: "Project Four",
-      projectSubtitle: "Luxurious Countryside Retreat",
-      projectDescription: "Nestled in the rolling hills, this countryside home balances luxury with a deep connection to its natural surroundings. The design emphasizes open spaces, natural light, and a seamless transition between indoors and outdoors.",
-      projectImages: [
-        "/images/projects/office.jpg",
-        "/images/projects/complex.jpg",
-        "/images/projects/hotel.jpg",
-        "/images/projects/landscape.jpg",
-        "/images/projects/villa.jpg",
-        "/images/projects/hotel.jpg"
-      ],
-      nextProject: {
-        name: "Project Five",
-        description: "Coastal contemporary living",
-        link: "/projects/project-five"
-      }
-    },
-    'project-five': {
-      projectName: "Project Five",
-      projectSubtitle: "Coastal Contemporary Living",
-      projectDescription: "With panoramic ocean views, this coastal residence celebrates its spectacular setting through thoughtful architectural design. Materials were selected for their durability against the elements and their ability to complement the natural backdrop.",
-      projectImages: [
-        "/images/projects/villa.jpg",
-        "/images/projects/complex.jpg",
-        "/images/projects/hotel.jpg",
-        "/images/projects/landscape.jpg",
-        "/images/projects/office.jpg",
-        "/images/projects/hotel.jpg"
-      ],
-      nextProject: {
-        name: "Project Six",
-        description: "Industrial loft conversion",
-        link: "/projects/project-six"
-      }
-    },
-    'project-six': {
-      projectName: "Project Six",
-      projectSubtitle: "Industrial Loft Conversion",
-      projectDescription: "This transformation of a former industrial space into a sophisticated urban dwelling preserves the raw character of the original structure while introducing refined modern elements. The contrast creates a dynamic and unique living environment.",
-      projectImages: [
-        "/images/projects/hotel.jpg",
-        "/images/projects/complex.jpg",
-        "/images/projects/landscape.jpg",
-        "/images/projects/office.jpg",
-        "/images/projects/villa.jpg",
-        "/images/projects/hotel.jpg"
-      ],
-      nextProject: {
-        name: "Terry",
-        description: "A timeless family home",
-        link: "/projects/terry"
-      }
+// New route for Clarendon House project
+app.get("/projects/clarendon-house", (req, res) => {
+  res.render("projects/building", {
+    projectName: "Clarendon House",
+    projectSubtitle: "A Unique and Impressive Family home",
+    projectDescription: "This distinctive and utterly captivating new-build family home was completed in the late summer of 2022. A stunning compilation of classic, contemporary detailing has formed the bones of our clients forever home.",
+    projectImages: [
+      "/images/projects/complex.jpg",
+      "/images/projects/hotel.jpg",
+      "/images/projects/landscape.jpg",
+      "/images/projects/office.jpg",
+      "/images/projects/villa.jpg",
+      "/images/projects/hotel.jpg"
+    ],
+    nextProject: {
+      name: "Lancaster",
+      description: "A luxurious and elegant home",
+      link: "/projects/lancaster"
     }
-  };
-  
-  // Get the project data for the requested slug
-  const project = projects[slug];
-  
-  // If project doesn't exist, redirect to projects page
-  if (!project) {
-    return res.redirect('/projects');
-  }
-  
-  // Render the project detail page with the project data
-  res.render("projects/building", project);
+  });
 });
 
 // app.get("/project-building",(req , res)=>{
