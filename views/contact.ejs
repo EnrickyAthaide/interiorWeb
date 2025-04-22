@@ -3,293 +3,330 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><%= title %></title>
-    <link rel="stylesheet" href="/stylesheets/style.css">
+    <title>Contact Us | Ultra Interiors</title>
+    <link rel="stylesheet" href="/stylesheets/global.css">
     <link rel="stylesheet" href="/stylesheets/contact.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Raleway:wght@300;400;500;600&display=swap">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <!-- Optional MapBox resources - will fallback to static image if not available -->
-    <script src="https://api.mapbox.com/mapbox-gl-js/v2.15.0/mapbox-gl.js" onerror="window.mapboxLoadError = true;"></script>
-    <link href="https://api.mapbox.com/mapbox-gl-js/v2.15.0/mapbox-gl.css" rel="stylesheet">
 </head>
-<body>
-    <!-- Cursor follow effect -->
-    <div class="cursor-follow"></div>
+<body class="dark-theme">
+    <!-- Cursor Follow Effect - Hidden by default -->
+    <div class="cursor-follow" style="display: none;"></div>
     
-    <!-- Scroll progress bar -->
-    <div class="scroll-progress"></div>
+    <!-- Scroll Progress Bar -->
+    <div class="scroll-progress-container">
+        <div class="scroll-progress"></div>
+    </div>
 
     <!-- Hero Section -->
     <section class="contact-hero">
-        <div class="hero-background">
-            <img src="https://images.unsplash.com/photo-1571055107559-3e67626fa8be?ixlib=rb-4.0.3&auto=format&fit=crop&w=2000&q=80" alt="Luxury Interior Design Studio">
-            <div class="overlay"></div>
-        </div>
+        <div class="hero-overlay"></div>
         <div class="container">
             <div class="hero-content">
-                <div class="hero-meta">
-                    <div class="meta-line"></div>
-                    <span>CONNECT WITH US</span>
-                </div>
-                <h1>Let's Create <span>Something</span> Extraordinary</h1>
-                <p>We're committed to transforming your vision into reality. Reach out to begin your design journey with Ultra Interiors.</p>
+                <div class="subtitle">CONTACT</div>
+                <h1>Elevate Your <span class="accent-text">Space</span></h1>
+                <p>Begin your design journey with Ultra Interiors. Our team of expert designers is ready to transform your vision into reality.</p>
+                <a href="#contact-form-section" class="cta-button"><span>Get in Touch</span> <i class="fas fa-arrow-right"></i></a>
             </div>
-        </div>
-        <div class="scroll-indicator">
-            <div class="mouse"></div>
-            <span>SCROLL</span>
         </div>
     </section>
 
-    <!-- Contact Grid Section -->
-    <section class="contact-grid-section">
+    <!-- Contact Section -->
+    <section class="contact-section">
         <div class="container">
             <div class="section-header">
                 <span class="section-number">01</span>
-                <h2>Contact <span class="highlight">Information</span></h2>
+                <h2>Get In Touch</h2>
+                <div class="separator"></div>
+                <p>Our design experts are ready to bring your vision to life. Share your ideas and let's create something extraordinary together.</p>
             </div>
             
-            <div class="contact-grid">
-                <div class="contact-info-card">
-                    <div class="contact-icon">
-                        <i class="fas fa-map-marker-alt"></i>
-                    </div>
-                    <h3>Visit Us</h3>
-                    <p><%= contactInfo.address %></p>
-                    <a href="https://maps.google.com/?q=<%= contactInfo.address %>" class="contact-link" target="_blank">Get Directions</a>
-                </div>
-                
-                <div class="contact-info-card">
-                    <div class="contact-icon">
-                        <i class="fas fa-envelope"></i>
-                    </div>
-                    <h3>Email Us</h3>
-                    <p><%= contactInfo.email %></p>
-                    <a href="mailto:<%= contactInfo.email %>" class="contact-link">Send Email</a>
-                </div>
-                
-                <div class="contact-info-card">
-                    <div class="contact-icon">
-                        <i class="fas fa-phone-alt"></i>
-                    </div>
-                    <h3>Call Us</h3>
-                    <p><%= contactInfo.phone %></p>
-                    <a href="tel:<%= contactInfo.phone.replace(/\s+/g, '') %>" class="contact-link">Make Call</a>
-                </div>
-                
-                <div class="contact-info-card">
-                    <div class="contact-icon">
-                        <i class="fas fa-clock"></i>
-                    </div>
-                    <h3>Working Hours</h3>
-                    <p><%= contactInfo.hours %></p>
-                    <a href="#appointment" class="contact-link">Book Appointment</a>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Form and Map Section -->
-    <section class="form-map-section">
-        <div class="container">
-            <div class="form-map-grid">
-                <div class="contact-form-container">
-                    <div class="section-header">
-                        <span class="section-number">02</span>
-                        <h2>Get In <span class="highlight">Touch</span></h2>
-                    </div>
-                    <p class="form-intro">Share your project details with us, and one of our design consultants will reach out to schedule a consultation.</p>
-                    
-                    <form id="contactForm" class="contact-form">
+            <div class="contact-wrapper">
+                <!-- Form Side -->
+                <div class="contact-form-side slide-in-left" id="contact-form-section">
+                    <form id="contact-form">
                         <div class="form-group">
-                            <label for="name">Full Name <span class="required">*</span></label>
-                            <input type="text" id="name" name="name" required>
+                            <label for="name">Full Name</label>
+                            <input type="text" id="name" name="name" placeholder="Your name" required>
+                            <span id="name-validation" class="validation-message"></span>
+                        </div>
+                        
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="email">Email Address</label>
+                                <input type="email" id="email" name="email" placeholder="Your email" required>
+                                <span id="email-validation" class="validation-message"></span>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="phone">Phone Number</label>
+                                <input type="tel" id="phone" name="phone" placeholder="Your phone (optional)">
+                                <span id="phone-validation" class="validation-message"></span>
+                            </div>
                         </div>
                         
                         <div class="form-group">
-                            <label for="email">Email <span class="required">*</span></label>
-                            <input type="email" id="email" name="email" required>
-                        </div>
-                        
-                        <div class="form-group">
-                            <label for="phone">Phone</label>
-                            <input type="tel" id="phone" name="phone">
-                        </div>
-                        
-                        <div class="form-group">
-                            <label for="service">Service Interested In <span class="required">*</span></label>
+                            <label for="service">Service of Interest</label>
                             <select id="service" name="service" required>
                                 <option value="" selected disabled>Select a service</option>
                                 <option value="residential">Residential Design</option>
                                 <option value="commercial">Commercial Design</option>
-                                <option value="hospitality">Hospitality Design</option>
                                 <option value="consultation">Design Consultation</option>
+                                <option value="renovation">Renovation</option>
+                                <option value="other">Other Services</option>
                             </select>
+                            <span id="service-validation" class="validation-message"></span>
                         </div>
                         
-                        <div class="form-group full-width">
-                            <label for="message">Project Details <span class="required">*</span></label>
-                            <textarea id="message" name="message" rows="5" required></textarea>
+                        <div class="form-group">
+                            <label for="message">Your Message</label>
+                            <textarea id="message" name="message" rows="4" placeholder="Tell us about your project" required></textarea>
+                            <span id="message-validation" class="validation-message"></span>
                         </div>
                         
-                        <div class="form-group full-width submit-container">
-                            <button type="submit" class="submit-btn">
-                                <span>Send Message</span>
-                                <i class="fas fa-arrow-right"></i>
-                            </button>
-                        </div>
+                        <button type="submit" class="submit-btn">
+                            <span>Send Message</span>
+                            <i class="fas fa-arrow-right"></i>
+                        </button>
                     </form>
+                    
+                    <div class="success-message">
+                        <i class="fas fa-check-circle"></i>
+                        <h3>Thank you for your message!</h3>
+                        <p>We appreciate your interest in Ultra Interiors. One of our design consultants will be in touch with you shortly.</p>
+                    </div>
                 </div>
                 
-                <div class="map-container">
-                    <div id="map" class="contact-map"></div>
-                    <div class="map-overlay">
-                        <div class="map-card">
-                            <h3>Ultra Interiors</h3>
-                            <p><%= contactInfo.address %></p>
-                            <p><%= contactInfo.phone %></p>
-                            <a href="mailto:<%= contactInfo.email %>"><%= contactInfo.email %></a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Studios Section -->
-    <section class="studios-section">
-        <div class="container">
-            <div class="section-header centered">
-                <h2>Our <span class="highlight">Studios</span></h2>
-            </div>
-            <p class="section-intro">Visit one of our design studios around the world for an immersive experience of our design philosophy.</p>
-            
-            <div class="studios-grid">
-                <% studios.forEach(function(studio) { %>
-                <div class="studio-card">
-                    <div class="studio-image">
-                        <img src="<%= studio.image %>" alt="<%= studio.city %> Studio">
-                        <div class="studio-overlay"></div>
-                        <div class="studio-city"><%= studio.city %></div>
-                    </div>
-                    <div class="studio-info">
-                        <h3><%= studio.city %> Studio</h3>
-                        <ul class="studio-details">
-                            <li>
+                <!-- Info Side -->
+                <div class="contact-info-side slide-in-right">
+                    <div class="info-card">
+                        <div class="info-item">
+                            <div class="info-icon">
                                 <i class="fas fa-map-marker-alt"></i>
-                                <span><%= studio.address %></span>
-                            </li>
-                            <li>
-                                <i class="fas fa-phone-alt"></i>
-                                <span><%= studio.phone %></span>
-                            </li>
-                            <li>
+                            </div>
+                            <div class="info-content">
+                                <h3>Visit Our Studio</h3>
+                                <p>123 Fifth Avenue<br>New York, NY 10010<br>United States</p>
+                            </div>
+                        </div>
+                        
+                        <div class="info-item">
+                            <div class="info-icon">
                                 <i class="fas fa-envelope"></i>
-                                <span><%= studio.email %></span>
-                            </li>
-                        </ul>
-                        <a href="https://maps.google.com/?q=<%= studio.address %>" class="studio-link" target="_blank">View on Map</a>
+                            </div>
+                            <div class="info-content">
+                                <h3>Email Us</h3>
+                                <p><a href="mailto:info@ultrainteriors.com">info@ultrainteriors.com</a></p>
+                            </div>
+                        </div>
+                        
+                        <div class="info-item">
+                            <div class="info-icon">
+                                <i class="fas fa-phone-alt"></i>
+                            </div>
+                            <div class="info-content">
+                                <h3>Call Us</h3>
+                                <p><a href="tel:+12125551234">+1 (212) 555-1234</a></p>
+                            </div>
+                        </div>
+                        
+                        <div class="info-item">
+                            <div class="info-icon">
+                                <i class="fas fa-clock"></i>
+                            </div>
+                            <div class="info-content">
+                                <h3>Working Hours</h3>
+                                <p>Monday - Friday: 9:00 AM - 6:00 PM<br>
+                                Saturday: By appointment<br>
+                                Sunday: Closed</p>
+                            </div>
+                        </div>
+                        
+                        <div class="social-links">
+                            <a href="#" aria-label="Instagram" class="social-icon"><i class="fab fa-instagram"></i></a>
+                            <a href="#" aria-label="Pinterest" class="social-icon"><i class="fab fa-pinterest"></i></a>
+                            <a href="#" aria-label="LinkedIn" class="social-icon"><i class="fab fa-linkedin-in"></i></a>
+                            <a href="#" aria-label="Houzz" class="social-icon"><i class="fab fa-houzz"></i></a>
+                        </div>
                     </div>
                 </div>
-                <% }); %>
             </div>
         </div>
     </section>
 
-    <!-- Social Connect Section -->
-    <section class="social-connect-section">
+    <!-- Design Philosophy Section -->
+    <section class="philosophy-section">
         <div class="container">
-            <div class="social-connect-content">
-                <h2>Follow Our <span class="highlight">Journey</span></h2>
-                <p>Join our community to stay updated with our latest projects, design insights, and events.</p>
-                
-                <div class="social-links">
-                    <% socialMedia.forEach(function(social) { %>
-                    <a href="<%= social.url %>" target="_blank" class="social-link">
-                        <i class="<%= social.icon %>"></i>
-                        <span><%= social.name %></span>
-                    </a>
-                    <% }); %>
+            <div class="philosophy-content">
+                <div class="philosophy-left slide-in-left">
+                    <h2>Our Design <span class="accent-text">Philosophy</span></h2>
+                    <p>At Ultra Interiors, we believe that exceptional design is a perfect balance of aesthetics and functionality. Every space we create tells a story, reflecting the unique personality and lifestyle of its inhabitants.</p>
+                    <div class="credentials">
+                        <div class="credential-item fade-in delay-100">
+                            <div class="credential-number">15+</div>
+                            <div class="credential-text">Years of Excellence</div>
+                        </div>
+                        <div class="credential-item fade-in delay-300">
+                            <div class="credential-number">200+</div>
+                            <div class="credential-text">Projects Completed</div>
+                        </div>
+                        <div class="credential-item fade-in delay-500">
+                            <div class="credential-number">35</div>
+                            <div class="credential-text">Design Awards</div>
+                        </div>
+                    </div>
                 </div>
-                
-                <div class="newsletter-signup">
-                    <h3>Subscribe to Our Newsletter</h3>
-                    <form class="newsletter-form">
-                        <input type="email" placeholder="Your email address" required>
-                        <button type="submit">Subscribe</button>
-                    </form>
+                <div class="philosophy-right">
+                    <div class="service-card slide-in-right delay-100">
+                        <div class="service-icon">
+                            <i class="fas fa-home"></i>
+                        </div>
+                        <h3>Residential Design</h3>
+                        <p>Transform your home into a personalized sanctuary that reflects your unique style and meets your lifestyle needs.</p>
+                    </div>
+                    <div class="service-card slide-in-right delay-300">
+                        <div class="service-icon">
+                            <i class="fas fa-building"></i>
+                        </div>
+                        <h3>Commercial Design</h3>
+                        <p>Create inspiring workspaces that enhance productivity, impress clients, and embody your brand identity.</p>
+                    </div>
+                    <div class="service-card slide-in-right delay-500">
+                        <div class="service-icon">
+                            <i class="fas fa-pencil-ruler"></i>
+                        </div>
+                        <h3>Consultation</h3>
+                        <p>Get expert advice and tailored recommendations to solve specific design challenges in your space.</p>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- Footer -->
-    <footer class="site-footer">
-        <div class="footer-content">
-            <div class="footer-brand">
-                <div class="footer-logo">
-                    <h3>ULTRA INTERIORS</h3>
+    <footer class="main-footer">
+        <div class="container">
+            <div class="footer-content">
+                <!-- Brand -->
+                <div class="footer-brand">
+                    <h2>Ultra Interiors</h2>
+                    <p>Transforming spaces into extraordinary experiences since 2005. Our award-winning design team creates bespoke interiors that reflect your unique style and vision.</p>
                 </div>
-                <p class="footer-tagline">Redefining Luxury Through Design</p>
-            </div>
-            
-            <div class="footer-links">
-                <div class="footer-column">
-                    <h4>Quick Links</h4>
+                
+                <!-- Quick Links -->
+                <div class="footer-links">
+                    <h3>Quick Links</h3>
                     <ul>
                         <li><a href="/">Home</a></li>
-                        <li><a href="/projects">Projects</a></li>
-                        <li><a href="/about">About</a></li>
-                        <li><a href="/blogs">Journal</a></li>
+                        <li><a href="/about">About Us</a></li>
+                        <li><a href="/services">Services</a></li>
+                        <li><a href="/portfolio">Portfolio</a></li>
                         <li><a href="/contact">Contact</a></li>
                     </ul>
                 </div>
                 
-                <div class="footer-column">
-                    <h4>Services</h4>
-                    <ul>
-                        <li><a href="#">Residential Design</a></li>
-                        <li><a href="#">Commercial Design</a></li>
-                        <li><a href="#">Hospitality Design</a></li>
-                        <li><a href="#">Consultation</a></li>
-                        <li><a href="#">Virtual Design</a></li>
-                    </ul>
+                <!-- Contact Info -->
+                <div class="footer-contact">
+                    <h3>Contact Us</h3>
+                    <p><i class="fas fa-map-marker-alt"></i> 123 Fifth Avenue, New York, NY 10010</p>
+                    <p><i class="fas fa-phone"></i> +1 (212) 555-1234</p>
+                    <p><i class="fas fa-envelope"></i> info@ultrainteriors.com</p>
                 </div>
                 
-                <div class="footer-column">
-                    <h4>Contact</h4>
-                    <ul class="contact-info">
-                        <li>
-                            <i class="fas fa-map-marker-alt"></i>
-                            <span><%= contactInfo.address %></span>
-                        </li>
-                        <li>
-                            <i class="fas fa-phone-alt"></i>
-                            <span><%= contactInfo.phone %></span>
-                        </li>
-                        <li>
-                            <i class="fas fa-envelope"></i>
-                            <span><%= contactInfo.email %></span>
-                        </li>
-                    </ul>
+                <!-- Newsletter -->
+                <div class="footer-newsletter">
+                    <h3>Subscribe to Our Newsletter</h3>
+                    <p>Stay updated with our latest projects and design insights.</p>
+                    <form class="newsletter-form">
+                        <input type="email" placeholder="Your email address" required>
+                        <button type="submit"><i class="fas fa-paper-plane"></i></button>
+                    </form>
                 </div>
             </div>
-        </div>
-        
-        <div class="footer-bottom">
-            <div class="container">
-                <p>&copy; 2024 Ultra Interiors. All rights reserved.</p>
-                <div class="footer-legal">
-                    <a href="#">Privacy Policy</a>
-                    <a href="#">Terms of Service</a>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2023 Ultra Interiors. All Rights Reserved.</p>
+                <div class="legal-links">
+                    <a href="/privacy-policy">Privacy Policy</a>
+                    <a href="/terms-of-service">Terms of Service</a>
                 </div>
             </div>
         </div>
     </footer>
 
+    <!-- Back to Top Button -->
+    <a href="#" class="back-to-top" aria-label="Back to top"><i class="fas fa-chevron-up"></i></a>
+
     <!-- Scripts -->
-    <script src="/javascript/contact.js"></script>
+    <script src="/javascripts/global.js"></script>
+    <script src="/javascripts/contact.js"></script>
+    
+    <!-- Remove any circular elements -->
+    <style>
+        body:after, 
+        footer:after, 
+        .main-footer:after,
+        .back-to-top:after,
+        .footer-bottom:after {
+            display: none !important;
+            content: none !important;
+            visibility: hidden !important;
+            opacity: 0 !important;
+        }
+        
+        /* Hide any fixed position elements in the corner */
+        [style*="position: fixed"][style*="bottom"][style*="right"],
+        [style*="position:fixed"][style*="bottom"][style*="right"] {
+            display: none !important;
+            visibility: hidden !important;
+        }
+    </style>
+    
+    <!-- Script to find and remove the brown dot -->
+    <script>
+        // Wait for the page to fully load
+        window.addEventListener('load', function() {
+            // First attempt: Remove any div that's a direct child of body and has position:fixed
+            const removeUnwantedElements = function() {
+                // Get all direct children of body
+                const bodyChildren = document.body.children;
+                
+                // Check each element
+                for (let i = 0; i < bodyChildren.length; i++) {
+                    const element = bodyChildren[i];
+                    
+                    // Skip essential elements
+                    if (element.classList.contains('back-to-top') || 
+                        element.classList.contains('scroll-progress-container') ||
+                        element.classList.contains('cursor-follow') ||
+                        element.tagName === 'SCRIPT' ||
+                        element.tagName === 'STYLE') {
+                        continue;
+                    }
+                    
+                    // Check if it's positioned fixed and in the bottom right
+                    const style = window.getComputedStyle(element);
+                    if (style.position === 'fixed' && 
+                        (style.bottom === '0px' || parseInt(style.bottom) > 0) && 
+                        (style.right === '0px' || parseInt(style.right) > 0)) {
+                        // Remove the element if it's likely the brown dot
+                        element.remove();
+                    }
+                }
+            };
+            
+            // Run immediately
+            removeUnwantedElements();
+            
+            // Also run when scrolling starts
+            window.addEventListener('scroll', function() {
+                // Use requestAnimationFrame to avoid performance issues
+                requestAnimationFrame(removeUnwantedElements);
+            }, { passive: true });
+            
+            // Run every second as a fallback
+            setInterval(removeUnwantedElements, 1000);
+        });
+    </script>
 </body>
 </html> 

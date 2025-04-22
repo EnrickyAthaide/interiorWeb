@@ -183,11 +183,10 @@ app.get("/projects/clarendon-house", (req, res) => {
   });
 });
 
-// app.get("/project-building",(req , res)=>{
-//   res.render("building", {
-//     image1: "/images/projects/building.jpg"
-//   })
-// })
+// Contact page route
+app.get("/contact", (req, res) => {
+  res.render("contact");
+});
 
 const PORT = 4000
 app.listen(PORT, () => {
