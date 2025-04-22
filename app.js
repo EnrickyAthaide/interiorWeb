@@ -118,69 +118,300 @@ app.get("/blogs", (req, res) => {
   });
 });
 
-// Blog detail page route
-app.get("/blogs/timeless-spaces", (req, res) => {
-  res.render("blog-detail", {
-    title: "The Art of Creating Timeless Spaces | Interior Design & Architecture Studio",
-    blog: {
-      category: "INTERIOR DESIGN",
-      date: "MARCH 15, 2024",
-      title: "The Art of Creating Timeless Spaces",
-      subtitle: "Exploring the delicate balance between contemporary design and enduring elegance",
-      author: {
-        name: "Sarah Anderson",
-        role: "Principal Designer",
-        image: "https://images.unsplash.com/photo-1580489944761-15a19d654956?q=80&w=1000"
-      },
-      heroImage: "https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?q=80&w=1000",
-      contentImages: [
-        "https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?q=80&w=1000",
-        "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=1000",
-        "https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?q=80&w=1000"
-      ],
-      relatedPosts: [
-        {
-          title: "The Psychology of Space: How Design Affects Mood",
-          link: "/blogs/psychology-of-space"
-        },
-        {
-          title: "Sustainable Luxury: The New Standard",
-          link: "/blogs/sustainable-luxury"
-        },
-        {
-          title: "Color Theory in Interior Design",
-          link: "/blogs/color-theory"
-        }
-      ],
-      nextArticle: {
-        title: "Sustainable Luxury: The New Standard",
-        link: "/blogs/sustainable-luxury",
-        image: "https://images.unsplash.com/photo-1598928506311-c55ded91a20c?q=80&w=1000"
-      }
-    }
-  });
+// Blog list route
+app.get('/blogs', (req, res) => {
+    res.render('blogs', { title: 'Design Journal | Interior Design & Architecture Studio' });
 });
 
-// New route for Clarendon House project
-app.get("/projects/clarendon-house", (req, res) => {
-  res.render("projects/building", {
-    projectName: "Clarendon House",
-    projectSubtitle: "A Unique and Impressive Family home",
-    projectDescription: "This distinctive and utterly captivating new-build family home was completed in the late summer of 2022. A stunning compilation of classic, contemporary detailing has formed the bones of our clients forever home.",
-    projectImages: [
-      "/images/projects/complex.jpg",
-      "/images/projects/hotel.jpg",
-      "/images/projects/landscape.jpg",
-      "/images/projects/office.jpg",
-      "/images/projects/villa.jpg",
-      "/images/projects/hotel.jpg"
-    ],
-    nextProject: {
-      name: "Lancaster",
-      description: "A luxurious and elegant home",
-      link: "/projects/lancaster"
+// Individual blog routes
+app.get('/blogs/:slug', (req, res) => {
+    const slug = req.params.slug;
+    
+    // Sample blog data store (in a real app, this would come from a database)
+    const blogs = {
+        'timeless-spaces': {
+            title: 'The Art of Creating Timeless Spaces',
+            subtitle: 'Explore the delicate balance between contemporary design and enduring elegance',
+            category: 'INTERIOR DESIGN',
+            date: 'MARCH 15, 2024',
+            heroImage: 'https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?q=80&w=1000',
+            contentImages: [
+                'https://images.unsplash.com/photo-1616593969747-4797dc75033e?q=80&w=1000',
+                'https://images.unsplash.com/photo-1618219908412-a29a1bb7b86e?q=80&w=1000',
+                'https://images.unsplash.com/photo-1615529328331-f8917597711f?q=80&w=1000',
+                'https://images.unsplash.com/photo-1616593969747-4797dc75033e?q=80&w=1000',
+                'https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?q=80&w=1000',
+                'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=1000',
+                'https://images.unsplash.com/photo-1558002038-1055907df827?q=80&w=1000',
+                'https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?q=80&w=1000',
+                'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=1000',
+                'https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?q=80&w=1000',
+                'https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?q=80&w=1000'
+            ],
+            author: {
+                name: 'Sarah Thompson',
+                role: 'Senior Design Consultant',
+                image: 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?q=80&w=200'
+            },
+            relatedPosts: [
+                { title: 'Timeless Elegance: Designing the Perfect Luxury Kitchen', link: '/blogs/luxury-kitchen-design' },
+                { title: 'Architectural Harmony: Balancing Form and Function', link: '/blogs/architectural-harmony' },
+                { title: 'Sustainable Luxury: Eco-Conscious Design Without Compromise', link: '/blogs/sustainable-luxury' }
+            ],
+            nextArticle: {
+                title: 'Timeless Elegance: Designing the Perfect Luxury Kitchen',
+                link: '/blogs/luxury-kitchen-design',
+                image: 'https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?q=80&w=1000'
+            }
+        },
+        'luxury-kitchen-design': {
+            title: 'Timeless Elegance: Designing the Perfect Luxury Kitchen',
+            subtitle: 'From bespoke cabinetry to statement lighting, discover the essential elements of sophisticated kitchen spaces',
+            category: 'KITCHEN DESIGN',
+            date: 'NOVEMBER 28, 2023',
+            heroImage: 'https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?q=80&w=1000',
+            contentImages: [
+                'https://images.unsplash.com/photo-1556912167-f556f1f39fdf?q=80&w=1000',
+                'https://images.unsplash.com/photo-1556909212-d5b604d0c90d?q=80&w=1000',
+                'https://images.unsplash.com/photo-1594761051656-71868b4aebd9?q=80&w=1000',
+                'https://images.unsplash.com/photo-1600607687644-c7171b16498f?q=80&w=1000',
+                'https://images.unsplash.com/photo-1556910103-1c02745aec78?q=80&w=1000',
+                'https://images.unsplash.com/photo-1600585154526-990dced4db3d?q=80&w=1000',
+                'https://images.unsplash.com/photo-1600566752355-35792bedcfea?q=80&w=1000',
+                'https://images.unsplash.com/photo-1616593969747-4797dc75033e?q=80&w=1000',
+                'https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?q=80&w=1000',
+                'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=1000',
+                'https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?q=80&w=1000'
+            ],
+            author: {
+                name: 'Michael Chen',
+                role: 'Kitchen Design Specialist',
+                image: 'https://images.unsplash.com/photo-1564564321837-a57b7070ac4f?q=80&w=200'
+            },
+            relatedPosts: [
+                { title: 'The Art of Creating Timeless Spaces', link: '/blogs/timeless-spaces' },
+                { title: 'Architectural Harmony: Balancing Form and Function', link: '/blogs/architectural-harmony' },
+                { title: 'Sustainable Luxury: Eco-Conscious Design Without Compromise', link: '/blogs/sustainable-luxury' }
+            ],
+            nextArticle: {
+                title: 'Architectural Harmony: Balancing Form and Function',
+                link: '/blogs/architectural-harmony',
+                image: 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=1000'
+            }
+        },
+        'architectural-harmony': {
+            title: 'Architectural Harmony: Balancing Form and Function',
+            subtitle: 'The delicate relationship between aesthetic beauty and practical livability in modern residential architecture',
+            category: 'ARCHITECTURE',
+            date: 'OCTOBER 17, 2023',
+            heroImage: 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=1000',
+            contentImages: [
+                'https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?q=80&w=1000',
+                'https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?q=80&w=1000',
+                'https://images.unsplash.com/photo-1618219908412-a29a1bb7b86e?q=80&w=1000',
+                'https://images.unsplash.com/photo-1618219908412-a29a1bb7b86e?q=80&w=1000',
+                'https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?q=80&w=1000',
+                'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=1000',
+                'https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?q=80&w=1000',
+                'https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?q=80&w=1000',
+                'https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?q=80&w=1000',
+                'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=1000', 
+                'https://images.unsplash.com/photo-1598928506311-c55ded91a20c?q=80&w=1000'
+            ],
+            author: {
+                name: 'Olivia Foster',
+                role: 'Architectural Designer',
+                image: 'https://images.unsplash.com/photo-1544005313-94ddf0286df2?q=80&w=200'
+            },
+            relatedPosts: [
+                { title: 'The Art of Creating Timeless Spaces', link: '/blogs/timeless-spaces' },
+                { title: 'Timeless Elegance: Designing the Perfect Luxury Kitchen', link: '/blogs/luxury-kitchen-design' },
+                { title: 'Sustainable Luxury: Eco-Conscious Design Without Compromise', link: '/blogs/sustainable-luxury' }
+            ],
+            nextArticle: {
+                title: 'Sustainable Luxury: Eco-Conscious Design Without Compromise',
+                link: '/blogs/sustainable-luxury',
+                image: 'https://images.unsplash.com/photo-1598928506311-c55ded91a20c?q=80&w=1000'
+            }
+        },
+        'sustainable-luxury': {
+            title: 'Sustainable Luxury: Eco-Conscious Design Without Compromise',
+            subtitle: 'How today\'s most innovative designers are creating environmentally responsible spaces that maintain the highest standards of luxury',
+            category: 'SUSTAINABLE DESIGN',
+            date: 'SEPTEMBER 5, 2023',
+            heroImage: 'https://images.unsplash.com/photo-1598928506311-c55ded91a20c?q=80&w=1000',
+            contentImages: [
+                'https://images.unsplash.com/photo-1600607686527-ddc628cbd2bf?q=80&w=1000',
+                'https://images.unsplash.com/photo-1600607687165-116c3a056652?q=80&w=1000',
+                'https://images.unsplash.com/photo-1600566752584-e1e5a1fd5a08?q=80&w=1000',
+                'https://images.unsplash.com/photo-1600585153490-76fb20a32601?q=80&w=1000',
+                'https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?q=80&w=1000',
+                'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=1000',
+                'https://images.unsplash.com/photo-1594760135052-125e893aa064?q=80&w=1000',
+                'https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?q=80&w=1000',
+                'https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?q=80&w=1000',
+                'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=1000',
+                'https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?q=80&w=1000'
+            ],
+            author: {
+                name: 'James Wilson',
+                role: 'Sustainability Consultant',
+                image: 'https://images.unsplash.com/photo-1564564295391-7f24f26f568b?q=80&w=200'
+            },
+            relatedPosts: [
+                { title: 'The Art of Creating Timeless Spaces', link: '/blogs/timeless-spaces' },
+                { title: 'Timeless Elegance: Designing the Perfect Luxury Kitchen', link: '/blogs/luxury-kitchen-design' },
+                { title: 'Architectural Harmony: Balancing Form and Function', link: '/blogs/architectural-harmony' }
+            ],
+            nextArticle: {
+                title: 'The Art of Creating Timeless Spaces',
+                link: '/blogs/timeless-spaces',
+                image: 'https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?q=80&w=1000'
+            }
+        }
+    };
+
+    // Get the blog data for the requested slug
+    const blog = blogs[slug];
+    
+    // If blog doesn't exist, redirect to blogs page
+    if (!blog) {
+        return res.redirect('/blogs');
     }
-  });
+    
+    // Render the blog detail page with the blog data
+    res.render('blog-detail', { 
+        title: `${blog.title} | Interior Design & Architecture Studio`,
+        blog: blog
+    });
+});
+
+// Individual project routes
+app.get("/projects/:slug", (req, res) => {
+  const slug = req.params.slug;
+  
+  // Sample project data store
+  const projects = {
+    'clarendon-house': {
+      projectName: "Clarendon House",
+      projectSubtitle: "A Unique and Impressive Family Home",
+      projectDescription: "This distinctive and utterly captivating new-build family home was completed in the late summer of 2022. A stunning compilation of classic, contemporary detailing has formed the bones of our clients forever home.",
+      projectImages: [
+        "/images/projects/complex.jpg",
+        "/images/projects/hotel.jpg",
+        "/images/projects/landscape.jpg",
+        "/images/projects/office.jpg",
+        "/images/projects/villa.jpg",
+        "/images/projects/hotel.jpg"
+      ],
+      nextProject: {
+        name: "Lane",
+        description: "Minimalist urban design",
+        link: "/projects/lane"
+      }
+    },
+    'terry': {
+      projectName: "Terry",
+      projectSubtitle: "A Timeless Family Home",
+      projectDescription: "A modern interpretation of classic design principles, this family home blends comfort with sophisticated aesthetics. The project showcases our commitment to creating spaces that feel both contemporary and timeless.",
+      projectImages: [
+        "/images/projects/hotel.jpg",
+        "/images/projects/complex.jpg",
+        "/images/projects/landscape.jpg",
+        "/images/projects/villa.jpg",
+        "/images/projects/office.jpg",
+        "/images/projects/hotel.jpg"
+      ],
+      nextProject: {
+        name: "Clarendon House",
+        description: "Modern architectural marvel",
+        link: "/projects/clarendon-house"
+      }
+    },
+    'lane': {
+      projectName: "Lane",
+      projectSubtitle: "Minimalist Urban Design",
+      projectDescription: "An exercise in restraint and precision, this urban residence demonstrates how minimalist principles can create spaces of profound impact. Every element has been carefully considered to achieve a sense of calm and clarity.",
+      projectImages: [
+        "/images/projects/landscape.jpg",
+        "/images/projects/complex.jpg",
+        "/images/projects/hotel.jpg",
+        "/images/projects/office.jpg",
+        "/images/projects/villa.jpg",
+        "/images/projects/hotel.jpg"
+      ],
+      nextProject: {
+        name: "Project Four",
+        description: "Luxurious countryside retreat",
+        link: "/projects/project-four"
+      }
+    },
+    'project-four': {
+      projectName: "Project Four",
+      projectSubtitle: "Luxurious Countryside Retreat",
+      projectDescription: "Nestled in the rolling hills, this countryside home balances luxury with a deep connection to its natural surroundings. The design emphasizes open spaces, natural light, and a seamless transition between indoors and outdoors.",
+      projectImages: [
+        "/images/projects/office.jpg",
+        "/images/projects/complex.jpg",
+        "/images/projects/hotel.jpg",
+        "/images/projects/landscape.jpg",
+        "/images/projects/villa.jpg",
+        "/images/projects/hotel.jpg"
+      ],
+      nextProject: {
+        name: "Project Five",
+        description: "Coastal contemporary living",
+        link: "/projects/project-five"
+      }
+    },
+    'project-five': {
+      projectName: "Project Five",
+      projectSubtitle: "Coastal Contemporary Living",
+      projectDescription: "With panoramic ocean views, this coastal residence celebrates its spectacular setting through thoughtful architectural design. Materials were selected for their durability against the elements and their ability to complement the natural backdrop.",
+      projectImages: [
+        "/images/projects/villa.jpg",
+        "/images/projects/complex.jpg",
+        "/images/projects/hotel.jpg",
+        "/images/projects/landscape.jpg",
+        "/images/projects/office.jpg",
+        "/images/projects/hotel.jpg"
+      ],
+      nextProject: {
+        name: "Project Six",
+        description: "Industrial loft conversion",
+        link: "/projects/project-six"
+      }
+    },
+    'project-six': {
+      projectName: "Project Six",
+      projectSubtitle: "Industrial Loft Conversion",
+      projectDescription: "This transformation of a former industrial space into a sophisticated urban dwelling preserves the raw character of the original structure while introducing refined modern elements. The contrast creates a dynamic and unique living environment.",
+      projectImages: [
+        "/images/projects/hotel.jpg",
+        "/images/projects/complex.jpg",
+        "/images/projects/landscape.jpg",
+        "/images/projects/office.jpg",
+        "/images/projects/villa.jpg",
+        "/images/projects/hotel.jpg"
+      ],
+      nextProject: {
+        name: "Terry",
+        description: "A timeless family home",
+        link: "/projects/terry"
+      }
+    }
+  };
+  
+  // Get the project data for the requested slug
+  const project = projects[slug];
+  
+  // If project doesn't exist, redirect to projects page
+  if (!project) {
+    return res.redirect('/projects');
+  }
+  
+  // Render the project detail page with the project data
+  res.render("projects/building", project);
 });
 
 // app.get("/project-building",(req , res)=>{

@@ -119,16 +119,12 @@ body {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    visibility: hidden;
-    transition: transform 0.1s ease;
-}
-
-/* Add smooth scaling transition */
-.project-image {
-    transition: transform 0.3s ease-out;
+    opacity: 0;
+    transition: transform 0.3s ease-out, opacity 0.3s ease;
 }
 
 .project-image.active {
+    opacity: 1;
     visibility: visible;
 }
 
@@ -160,4 +156,31 @@ body {
     color: #7d7d7d;
     position: relative;
     bottom: 2vh;
+}
+
+/* Project Links */
+.project-link {
+    display: block;
+    width: 100%;
+    height: 100%;
+    cursor: pointer;
+    position: absolute;
+    z-index: 10;
+}
+
+.title-link {
+    text-decoration: none;
+    color: inherit;
+    display: block;
+}
+
+/* Navigation Links */
+.navigation a {
+    text-decoration: none;
+    color: white;
+    cursor: pointer;
+}
+
+.navigation .active {
+    text-decoration: underline;
 }

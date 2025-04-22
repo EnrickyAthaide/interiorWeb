@@ -196,97 +196,97 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.5/ScrollTrigger.min.js"></script>
     <script src="https://cdn.jsdelivr.net/gh/studio-freight/lenis@1.0.19/bundled/lenis.min.js"></script>
     <script src="/javascripts/blog-detail.js"></script>
-    <script>
-        // Initialize GSAP ScrollTrigger
-        gsap.registerPlugin(ScrollTrigger);
+    <!-- <script>
+    //     // Initialize GSAP ScrollTrigger
+    //     gsap.registerPlugin(ScrollTrigger);
 
-        // Set background images from data attributes
-        document.querySelectorAll('.parallax-image[data-image]').forEach(element => {
-            const imageUrl = element.getAttribute('data-image');
-            element.style.backgroundImage = `url('${imageUrl}')`;
-        });
+    //     // Set background images from data attributes
+    //     document.querySelectorAll('.parallax-image[data-image]').forEach(element => {
+    //         const imageUrl = element.getAttribute('data-image');
+    //         element.style.backgroundImage = `url('${imageUrl}')`;
+    //     });
 
-        // Parallax effect for hero image
-        const heroImage = document.querySelector('.hero-image .parallax-image');
-        if (heroImage) {
-            gsap.to(heroImage, {
-                yPercent: -20,
-                ease: "power1.inOut",
-                scrollTrigger: {
-                    trigger: '.blog-hero',
-                    start: 'top top',
-                    end: 'bottom top',
-                    scrub: 0.5,
-                    markers: false
-                }
-            });
-        }
+    //     // Parallax effect for hero image
+    //     const heroImage = document.querySelector('.hero-image .parallax-image');
+    //     if (heroImage) {
+    //         gsap.to(heroImage, {
+    //             yPercent: -20,
+    //             ease: "power1.inOut",
+    //             scrollTrigger: {
+    //                 trigger: '.blog-hero',
+    //                 start: 'top top',
+    //                 end: 'bottom top',
+    //                 scrub: 0.5,
+    //                 markers: false
+    //             }
+    //         });
+    //     }
 
-        // Parallax effect for content images
-        const contentImages = document.querySelectorAll('.image-block .parallax-image, .dual-image-block .parallax-image');
-        contentImages.forEach((image, index) => {
-            gsap.to(image, {
-                yPercent: -15,
-                ease: "power1.inOut",
-                scrollTrigger: {
-                    trigger: image.parentElement,
-                    start: 'top bottom',
-                    end: 'bottom top',
-                    scrub: 0.5,
-                    markers: false
-                }
-            });
-        });
+    //     // Parallax effect for content images
+    //     const contentImages = document.querySelectorAll('.image-block .parallax-image, .dual-image-block .parallax-image');
+    //     contentImages.forEach((image, index) => {
+    //         gsap.to(image, {
+    //             yPercent: -15,
+    //             ease: "power1.inOut",
+    //             scrollTrigger: {
+    //                 trigger: image.parentElement,
+    //                 start: 'top bottom',
+    //                 end: 'bottom top',
+    //                 scrub: 0.5,
+    //                 markers: false
+    //             }
+    //         });
+    //     });
 
-        // Parallax effect for next article image
-        const nextArticleImage = document.querySelector('.next-article-image .parallax-image');
-        if (nextArticleImage) {
-            gsap.to(nextArticleImage, {
-                yPercent: -20,
-                ease: "power1.inOut",
-                scrollTrigger: {
-                    trigger: '.next-article',
-                    start: 'top bottom',
-                    end: 'bottom top',
-                    scrub: 0.5,
-                    markers: false
-                }
-            });
-        }
+    //     // Parallax effect for next article image
+    //     const nextArticleImage = document.querySelector('.next-article-image .parallax-image');
+    //     if (nextArticleImage) {
+    //         gsap.to(nextArticleImage, {
+    //             yPercent: -20,
+    //             ease: "power1.inOut",
+    //             scrollTrigger: {
+    //                 trigger: '.next-article',
+    //                 start: 'top bottom',
+    //                 end: 'bottom top',
+    //                 scrub: 0.5,
+    //                 markers: false
+    //             }
+    //         });
+    //     }
 
-        // Parallax effect for contact image
-        const contactImage = document.querySelector('.contact-image .parallax-image');
-        if (contactImage) {
-            gsap.to(contactImage, {
-                yPercent: -15,
-                ease: "power1.inOut",
-                scrollTrigger: {
-                    trigger: '.contact-section',
-                    start: 'top bottom',
-                    end: 'bottom top',
-                    scrub: 0.5,
-                    markers: false
-                }
-            });
-        }
+    //     // Parallax effect for contact image
+    //     const contactImage = document.querySelector('.contact-image .parallax-image');
+    //     if (contactImage) {
+    //         gsap.to(contactImage, {
+    //             yPercent: -15,
+    //             ease: "power1.inOut",
+    //             scrollTrigger: {
+    //                 trigger: '.contact-section',
+    //                 start: 'top bottom',
+    //                 end: 'bottom top',
+    //                 scrub: 0.5,
+    //                 markers: false
+    //             }
+    //         });
+    //     }
 
-        // Initialize smooth scrolling with Lenis
-        const lenis = new Lenis({
-            duration: 1.2,
-            easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
-            direction: 'vertical',
-            gestureDirection: 'vertical',
-            smooth: true,
-            smoothTouch: false,
-            touchMultiplier: 2,
-        });
+    //     // Initialize smooth scrolling with Lenis
+    //     const lenis = new Lenis({
+    //         duration: 1.2,
+    //         easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+    //         direction: 'vertical',
+    //         gestureDirection: 'vertical',
+    //         smooth: true,
+    //         smoothTouch: false,
+    //         touchMultiplier: 2,
+    //     });
 
-        function raf(time) {
-            lenis.raf(time);
-            requestAnimationFrame(raf);
-        }
+    //     function raf(time) {
+    //         lenis.raf(time);
+    //         requestAnimationFrame(raf);
+    //     }
 
-        requestAnimationFrame(raf);
-    </script>
+    //     requestAnimationFrame(raf);
+    // </script> -->
 </body>
 </html> 
