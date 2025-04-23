@@ -408,6 +408,18 @@ app.get('/blogs/:slug', (req, res) => {
     });
 });
 
+// Contact page route
+app.get("/contact", (req, res) => {
+  res.render("contact", {
+    title: "Contact | Luxury Interior Design",
+    contactInfo: {
+      email: "info@luxuryinteriors.com",
+      phone: "+1 (555) 123-4567",
+      address: "123 Design Avenue, New York, NY 10001"
+    }
+  });
+});
+
 const PORT = 4000
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`)
