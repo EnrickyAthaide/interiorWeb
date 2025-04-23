@@ -36,7 +36,7 @@
     <section class="hero-section">
         <div class="hero-content">
             <h1 class="project-title">
-                <%- projectTitle.split('\n').join('<br>') %>
+                <%= projectName %>
             </h1>
         </div>
         <div class="hero-background">
@@ -48,33 +48,32 @@
     <section class="project-overview" id="textAni1">
         <div class="project-overview-content" id="content1">
             <div class="large-title" id="headAni1">
-                <% const subtitleWords = projectSubtitle.split(' '); %>
-                <% subtitleWords.forEach(word => { %>
-                    <h2><%= word.toUpperCase() %></h2>
+                <% 
+                // Split the subtitle into words and render each on a new line
+                const words = projectSubtitle.split(' ');
+                words.forEach(word => { %>
+                   <h2><%= word.toUpperCase() %></h2>
                 <% }); %>
             </div>
             <div class="project-description" id="parAni1">
                 <% 
-                const words = projectDescription.split(' ');
-                const segments = [];
+                // Split description into multiple lines for animation
+                const descWords = projectDescription.split(' ');
+                let lines = [];
                 let currentLine = '';
                 
-                words.forEach((word, index) => {
-                    if (currentLine.length + word.length > 45) {
-                        segments.push(currentLine);
-                        currentLine = word;
-                    } else {
-                        currentLine += (currentLine ? ' ' : '') + word;
-                    }
-                    
-                    if (index === words.length - 1 && currentLine) {
-                        segments.push(currentLine);
+                // Create lines of 5-8 words each
+                descWords.forEach((word, index) => {
+                    currentLine += word + ' ';
+                    if ((index + 1) % 6 === 0 || index === descWords.length - 1) {
+                        lines.push(currentLine.trim());
+                        currentLine = '';
                     }
                 });
-                %>
                 
-                <% segments.forEach(segment => { %>
-                    <p><%= segment %></p>
+                // Output each line as a paragraph
+                lines.forEach(line => { %>
+                    <p><%= line %></p>
                 <% }); %>
             </div>
         </div>
@@ -83,46 +82,53 @@
     <!-- Dual Image Section -->
     <section class="dual-image-section " id="ani1">
         <div class="image-container left" id="left1">
-            <img src="<%= projectImages[1] %>" alt="Project image - left view">
+            <img src="<%= projectImages[1] %>" alt="<%= projectName %> design detail">
         </div>
         <div class="image-container right" id="right1">
-            <img src="<%= projectImages[2] %>" alt="Project image - right view">
+            <img src="<%= projectImages[2] %>" alt="<%= projectName %> interior view">
         </div>
     </section>
     
     <section class="gallery-section">
         <div class="gallery-image"><img src="<%= projectImages[3] %>" alt="<%= projectName %> gallery image"></div>
     </section>
-    <!-- Gallery Section -->
-        <section style="background-color: #FAF9F6;" class="project-overview" id="textAni2">
-            <div class="project-overview-content" style="color: black;" id="content2">
-                <div class="large-title" id="headAni2">
-                    <% subtitleWords.forEach(word => { %>
-                        <h2><%= word.toUpperCase() %></h2>
-                    <% }); %>
-                </div>
-                <div class="project-description2" id="parAni2">
-                    <% segments.forEach(segment => { %>
-                        <p><%= segment %></p>
-                    <% }); %>
-                </div>
+    
+    <!-- Second Overview Section -->
+    <section style="background-color: #FAF9F6;" class="project-overview" id="textAni2">
+        <div class="project-overview-content" style="color: black;" id="content2">
+            <div class="large-title" id="headAni2">
+                <% 
+                // Reuse the subtitle words for the second section
+                words.forEach(word => { %>
+                   <h2><%= word.toUpperCase() %></h2>
+                <% }); %>
             </div>
-        </section>
-
-    <section style="background-color: #FAF9F6; height:200vh;" class="dual-image-section" id="ani2">
-        <div class="image-container left" id="left2">
-            <img src="<%= projectImages[4] %>" alt="Project image - additional view 1">
-        </div>
-        <div class="image-container right" id="right2">
-            <img src="<%= projectImages[5] %>" alt="Project image - additional view 2">
+            <div class="project-description2" id="parAni2">
+                <% 
+                // Reuse the description lines for the second section
+                lines.forEach(line => { %>
+                    <p><%= line %></p>
+                <% }); %>
+            </div>
         </div>
     </section>
 
-    <section class="gallery-section">
-        <div class="next-project">
-            <p class="next-label">NEXT PROJECT</p>
-            <h2><a href="<%= nextProject.link %>"><%= nextProject.name %></a></h2>
+    <section style="background-color: #FAF9F6; height:200vh;" class="dual-image-section" id="ani2">
+        <div class="image-container left" id="left2">
+            <img src="<%= projectImages[4] || projectImages[0] %>" alt="<%= projectName %> additional view">
+        </div>
+        <div class="image-container right" id="right2">
+            <img src="<%= projectImages[2] || projectImages[1] %>" alt="<%= projectName %> additional detail">
+        </div>
+    </section>
+
+    <!-- Next Project Section -->
+    <section class="next-project-section">
+        <div class="next-project-content">
+            <span class="next-label">NEXT PROJECT</span>
+            <h2><%= nextProject.name %></h2>
             <p><%= nextProject.description %></p>
+            <a href="<%= nextProject.link %>" class="next-project-link">View Project</a>
         </div>
     </section>
 
