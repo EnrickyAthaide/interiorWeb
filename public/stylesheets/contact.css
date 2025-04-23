@@ -242,7 +242,7 @@ img {
     font-weight: 400;
     letter-spacing: 1px;
     border: 1px solid var(--dark-primary);
-    border-radius: 0;
+    border-radius: 8px;
     text-decoration: none;
     transition: all 0.25s ease;
     position: relative;
@@ -420,7 +420,7 @@ img {
     font-weight: 400;
     letter-spacing: 1px;
     border: 1px solid var(--dark-primary);
-    border-radius: 0;
+    border-radius: 8px;
     cursor: pointer;
     transition: all 0.25s ease;
     position: relative;
@@ -622,10 +622,19 @@ img {
     transition: all 0.3s ease;
 }
 
+.social-icon i {
+    transition: all 0.3s ease;
+}
+
 .social-icon:hover {
     background: var(--dark-primary);
-    color: var(--dark-background);
+    color: #000000 !important;
     transform: translateY(-3px);
+    font-weight: bold;
+}
+
+.social-icon:hover i {
+    color: #000000 !important;
 }
 
 /* Philosophy Section */
