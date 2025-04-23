@@ -9,6 +9,7 @@ document.addEventListener('DOMContentLoaded', function () {
     let currentIndex = 1; // Start with Clarendon House active
     let isAnimating = false;
     let isFirstLoad = true;
+    let isNavigating = false; // Flag to prevent double navigation
 
     // Initial setup
     gsap.set(descriptions[currentIndex], { autoAlpha: 1 });
@@ -16,9 +17,32 @@ document.addEventListener('DOMContentLoaded', function () {
     images[currentIndex].classList.add('active'); // Ensure active class is set initially
     updateSliderPosition(true);
 
-    
-
+    // Handle title clicks
     titles.forEach((title, index) => {
+        title.addEventListener('click', function(e) {
+            // First animate to the slide
+            if (!isAnimating && currentIndex !== index) {
+                animateToSlide(index);
+                
+                // Set a timeout to navigate after animation completes
+                setTimeout(() => {
+                    if (!isNavigating) {
+                        isNavigating = true;
+                        const targetLink = title.getAttribute('data-link');
+                        if (targetLink) {
+                            window.location.href = targetLink;
+                        }
+                    }
+                }, 1200); // Wait for animation to complete before navigating
+            } else if (currentIndex === index) {
+                // If already on this slide, navigate immediately
+                const targetLink = title.getAttribute('data-link');
+                if (targetLink) {
+                    window.location.href = targetLink;
+                }
+            }
+        });
+
         title.addEventListener('mouseenter', function () {
             const activeImage = images[index]; // Get the image at the same index
             if (activeImage) {
@@ -38,6 +62,19 @@ document.addEventListener('DOMContentLoaded', function () {
                     scale: 1,
                     ease: "power1.out"
                 });
+            }
+        });
+    });
+
+    // Make project images clickable too
+    images.forEach((image, index) => {
+        image.addEventListener('click', function() {
+            if (!isNavigating) {
+                isNavigating = true;
+                const targetLink = titles[index].getAttribute('data-link');
+                if (targetLink) {
+                    window.location.href = targetLink;
+                }
             }
         });
     });

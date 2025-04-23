@@ -286,33 +286,139 @@ app.get('/blogs/:slug', (req, res) => {
     });
 });
 
-// New route for Clarendon House project
-app.get("/projects/clarendon-house", (req, res) => {
-  res.render("projects/building", {
-    projectName: "Clarendon House",
-    projectSubtitle: "A Unique and Impressive Family home",
-    projectDescription: "This distinctive and utterly captivating new-build family home was completed in the late summer of 2022. A stunning compilation of classic, contemporary detailing has formed the bones of our clients forever home.",
-    projectImages: [
-      "/images/projects/complex.jpg",
-      "/images/projects/hotel.jpg",
-      "/images/projects/landscape.jpg",
-      "/images/projects/office.jpg",
-      "/images/projects/villa.jpg",
-      "/images/projects/hotel.jpg"
-    ],
-    nextProject: {
-      name: "Lancaster",
-      description: "A luxurious and elegant home",
-      link: "/projects/lancaster"
+// Dynamic project routes
+app.get("/projects/:slug", (req, res) => {
+  const slug = req.params.slug;
+  
+  // Sample project data store (in a real app, this would come from a database)
+  const projects = {
+    'terry': {
+      projectName: "Terry",
+      projectTitle: "TERRY",
+      projectSubtitle: "A Classic and Sophisticated Urban Retreat",
+      projectDescription: "This masterfully renovated urban residence exemplifies the perfect balance of classic elements and contemporary design. Completed in early 2023, the space features thoughtful attention to detail and luxurious finishes throughout.",
+      projectImages: [
+        "/images/projects/complex.jpg",
+        "https://images.unsplash.com/photo-1591088398332-8a7791972843?q=80&w=1000",
+        "https://images.unsplash.com/photo-1584622650111-993a426fbf0a?q=80&w=1000",
+        "/images/projects/hotel.jpg",
+        "/images/projects/landscape.jpg",
+        "/images/projects/office.jpg"
+      ],
+      nextProject: {
+        name: "Clarendon House",
+        description: "A unique and impressive family home",
+        link: "/projects/clarendon-house"
+      }
+    },
+    'clarendon-house': {
+      projectName: "Clarendon House",
+      projectTitle: "CLARENDON\nHOUSE",
+      projectSubtitle: "A Unique and Impressive Family Home",
+      projectDescription: "This distinctive and utterly captivating new-build family home was completed in the late summer of 2022. A stunning compilation of classic, contemporary detailing has formed the bones of our clients forever home.",
+      projectImages: [
+        "/images/projects/complex.jpg",
+        "https://images.unsplash.com/photo-1591088398332-8a7791972843?q=80&w=1000",
+        "https://images.unsplash.com/photo-1584622650111-993a426fbf0a?q=80&w=1000",
+        "/images/projects/hotel.jpg",
+        "/images/projects/landscape.jpg",
+        "/images/projects/office.jpg"
+      ],
+      nextProject: {
+        name: "Lane",
+        description: "A minimalist urban design",
+        link: "/projects/lane"
+      }
+    },
+    'lane': {
+      projectName: "Lane",
+      projectTitle: "LANE",
+      projectSubtitle: "Minimalist Urban Design",
+      projectDescription: "A study in minimalism and urban functionality, the Lane project represents our commitment to elegant simplicity. Completed in spring 2023, this space demonstrates how thoughtful restraint can create powerful design impact.",
+      projectImages: [
+        "/images/projects/landscape.jpg",
+        "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=1000",
+        "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?q=80&w=1000",
+        "/images/projects/office.jpg",
+        "/images/projects/villa.jpg",
+        "/images/projects/hotel.jpg"
+      ],
+      nextProject: {
+        name: "Project Four",
+        description: "A luxurious countryside retreat",
+        link: "/projects/project-four"
+      }
+    },
+    'project-four': {
+      projectName: "Project Four",
+      projectTitle: "PROJECT\nFOUR",
+      projectSubtitle: "Luxurious Countryside Retreat",
+      projectDescription: "This expansive countryside estate blends natural materials with contemporary design sensibilities. The project, completed in autumn 2022, creates harmony between indoor luxury and the surrounding landscape.",
+      projectImages: [
+        "/images/projects/office.jpg",
+        "https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?q=80&w=1000",
+        "https://images.unsplash.com/photo-1616593969747-4797dc75033e?q=80&w=1000",
+        "/images/projects/landscape.jpg",
+        "/images/projects/complex.jpg",
+        "/images/projects/villa.jpg"
+      ],
+      nextProject: {
+        name: "Project Five",
+        description: "Coastal contemporary living",
+        link: "/projects/project-five"
+      }
+    },
+    'project-five': {
+      projectName: "Project Five",
+      projectTitle: "PROJECT\nFIVE",
+      projectSubtitle: "Coastal Contemporary Living",
+      projectDescription: "Perched along the coastline, this contemporary residence celebrates its unique location with expansive views and materials that reflect the surrounding environment. Completed in summer 2023, this home exemplifies our approach to context-sensitive design.",
+      projectImages: [
+        "/images/projects/villa.jpg",
+        "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=1000",
+        "https://images.unsplash.com/photo-1618219908412-a29a1bb7b86e?q=80&w=1000",
+        "/images/projects/hotel.jpg",
+        "/images/projects/office.jpg",
+        "/images/projects/complex.jpg"
+      ],
+      nextProject: {
+        name: "Project Six",
+        description: "Industrial loft conversion",
+        link: "/projects/project-six"
+      }
+    },
+    'project-six': {
+      projectName: "Project Six",
+      projectTitle: "PROJECT\nSIX",
+      projectSubtitle: "Industrial Loft Conversion",
+      projectDescription: "This transformation of a historical industrial space into a residential loft preserves original architectural elements while introducing sophisticated modern interventions. The project highlights our commitment to honoring historical context while creating contemporary living environments.",
+      projectImages: [
+        "/images/projects/hotel.jpg",
+        "https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?q=80&w=1000",
+        "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?q=80&w=1000",
+        "/images/projects/villa.jpg",
+        "/images/projects/landscape.jpg",
+        "/images/projects/complex.jpg"
+      ],
+      nextProject: {
+        name: "Terry",
+        description: "A classic and sophisticated urban retreat",
+        link: "/projects/terry"
+      }
     }
-  });
-});
+  };
 
-// app.get("/project-building",(req , res)=>{
-//   res.render("building", {
-//     image1: "/images/projects/building.jpg"
-//   })
-// })
+  // Get the project data for the requested slug
+  const project = projects[slug];
+  
+  // If project doesn't exist, redirect to projects page
+  if (!project) {
+    return res.redirect('/projects');
+  }
+  
+  // Render the project detail page with the project data
+  res.render("projects/building", project);
+});
 
 const PORT = 4000
 app.listen(PORT, () => {
