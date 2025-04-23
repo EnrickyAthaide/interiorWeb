@@ -365,91 +365,68 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
-    // Timeline animation
-    const timelineItems = document.querySelectorAll('.timeline-item');
-    
-    const timelineObserver = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.classList.add('active');
-                timelineObserver.unobserve(entry.target);
-            }
-        });
-    }, {
-        threshold: 0.2
-    });
-    
-    timelineItems.forEach(item => {
-        timelineObserver.observe(item);
-    });
+    // Initialize timeline animation
+    function initTimelineAnimation() {
+        const timelineSection = document.querySelector('.timeline-section');
+        if (!timelineSection) return;
 
-    // Expertise section animation
-    const expertiseItems = document.querySelectorAll('.expertise-item');
-    
-    const expertiseObserver = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.classList.add('active');
-                expertiseObserver.unobserve(entry.target);
-            }
-        });
-    }, {
-        threshold: 0.2
-    });
-    
-    expertiseItems.forEach(item => {
-        expertiseObserver.observe(item);
-    });
-
-    // Quote section - simplified to just reveal animation, no background movement
-    const quoteSection = document.querySelector('.quote-section');
-    if (quoteSection) {
-        // Quote reveal animation 
-        const quoteObserver = new IntersectionObserver((entries) => {
+        const events = document.querySelectorAll('.timeline-event');
+        const progress = document.querySelector('.timeline-progress-indicator');
+        
+        // Set up observer
+        const options = {
+            root: null,
+            rootMargin: '0px',
+            threshold: 0.2
+        };
+        
+        let activeCount = 0;
+        const totalEvents = events.length;
+        
+        const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
-                    const quote = entry.target.querySelector('.reveal-quote');
-                    if (quote) {
-                        quote.classList.add('active');
-                        
-                        if (window.gsap) {
-                            gsap.from('.reveal-quote p', {
-                                y: 50,
-                                opacity: 0,
-                                duration: 0.8,
-                                delay: 0.2
-                            });
-                            
-                            gsap.from('.reveal-quote cite', {
-                                y: 30,
-                                opacity: 0,
-                                duration: 0.8,
-                                delay: 0.6
-                            });
-                        }
+                    entry.target.classList.add('active');
+                    activeCount = document.querySelectorAll('.timeline-event.active').length;
+                    updateProgressBar();
+                    // Keep observing to handle scrolling up and down
+                } else {
+                    if (entry.boundingClientRect.top > 0) {
+                        // Scrolled up past the element
+                        entry.target.classList.remove('active');
+                        activeCount = document.querySelectorAll('.timeline-event.active').length;
+                        updateProgressBar();
                     }
-                    quoteObserver.unobserve(entry.target);
                 }
             });
-        }, {
-            threshold: 0.3
+        }, options);
+        
+        events.forEach(event => {
+            observer.observe(event);
         });
-
-        quoteObserver.observe(quoteSection);
+        
+        function updateProgressBar() {
+            if (totalEvents > 0) {
+                const progressValue = (activeCount / totalEvents) * 100;
+                progress.style.height = `${progressValue}%`;
+            }
+        }
+        
+        // Initial update
+        updateProgressBar();
     }
+
+    // Initialize all animations when DOM is loaded
+    initTimelineAnimation();
 
     // Add smooth scroll behavior for anchor links
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-        anchor.addEventListener('click', function(e) {
+        anchor.addEventListener('click', function (e) {
             e.preventDefault();
-            
-            const targetId = this.getAttribute('href');
-            const targetElement = document.querySelector(targetId);
-            
-            if (targetElement) {
-                targetElement.scrollIntoView({
-                    behavior: 'smooth',
-                    block: 'start'
+            const target = document.querySelector(this.getAttribute('href'));
+            if (target) {
+                target.scrollIntoView({
+                    behavior: 'smooth'
                 });
             }
         });
