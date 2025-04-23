@@ -1,106 +1,18 @@
 // Register GSAP ScrollTrigger Plugin
 gsap.registerPlugin(ScrollTrigger);
 
+// Initialize Lenis for smooth scrolling
+let lenis;
+
 // Wait for DOM to be fully loaded
 document.addEventListener('DOMContentLoaded', () => {
-    initializeAnimations();
     initializeSmoothScrolling();
+    initializeAnimations();
 });
-
-function initializeAnimations() {
-    // Hero Section Parallax
-    const heroImage = document.querySelector('.hero-image .parallax-image');
-    if (heroImage) {
-        gsap.to(heroImage, {
-            yPercent: -20,
-            ease: "none",
-            scrollTrigger: {
-                trigger: ".blog-hero",
-                start: "top top",
-                end: "bottom bottom",
-                scrub: true
-            }
-        });
-    }
-
-    // Content images parallax
-    const contentImages = document.querySelectorAll('.image-block img, .image-container img');
-    contentImages.forEach(image => {
-        gsap.to(image, {
-            yPercent: -15,
-            ease: "none",
-            scrollTrigger: {
-                trigger: image,
-                toggleActions: "play reverse play reverse",
-                scrub: true
-            }
-        });
-    });
-
-    // Next article section parallax
-    const nextArticleImage = document.querySelector('.next-article-image .parallax-image');
-    if (nextArticleImage) {
-        gsap.to(nextArticleImage, {
-            yPercent: -20,
-            ease: "none",
-            scrollTrigger: {
-                trigger: ".next-article",
-                start: "top bottom",
-                end: "bottom top",
-                scrub: true
-            }
-        });
-    }
-
-    // Fade in content sections
-    gsap.utils.toArray('.main-content > *').forEach(element => {
-        gsap.from(element, {
-            opacity: 0,
-            y: 30,
-            duration: 1,
-            ease: 'power2.out',
-            scrollTrigger: {
-                trigger: element,
-                start: 'top 80%',
-                toggleActions: 'play none none reverse'
-            }
-        });
-    });
-
-    // Animate images
-    gsap.utils.toArray('.image-block, .dual-image-block').forEach(image => {
-        gsap.from(image, {
-            opacity: 0,
-            scale: 0.95,
-            duration: 1.2,
-            ease: 'power2.out',
-            scrollTrigger: {
-                trigger: image,
-                start: 'top 85%',
-                toggleActions: 'play none none reverse'
-            }
-        });
-    });
-
-    // Animate blockquotes
-    gsap.utils.toArray('blockquote').forEach(quote => {
-        gsap.from(quote, {
-            opacity: 0,
-            x: -50,
-            duration: 1,
-            ease: 'power2.out',
-            scrollTrigger: {
-                trigger: quote,
-                start: 'top 80%',
-                toggleActions: 'play none none reverse'
-            }
-        });
-    });
-}
 
 function initializeSmoothScrolling() {
     // Initialize Lenis for smooth scrolling
-    const lenis = new Lenis({
+    lenis = new Lenis({
         duration: 1.2,
         easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
         direction: 'vertical',
@@ -125,6 +37,124 @@ function initializeSmoothScrolling() {
     
     gsap.ticker.add((time) => {
         lenis.raf(time * 900);
+    });
+}
+
+function initializeAnimations() {
+    // Set background images from data attributes
+    document.querySelectorAll('.parallax-image[data-image]').forEach(element => {
+        const imageUrl = element.getAttribute('data-image');
+        element.style.backgroundImage = `url('${imageUrl}')`;
+    });
+
+    // Hero Section Parallax
+    const heroImage = document.querySelector('.hero-image .parallax-image');
+    if (heroImage) {
+        gsap.to(heroImage, {
+            yPercent: -20,
+            ease: "power1.inOut",
+            scrollTrigger: {
+                trigger: ".blog-hero",
+                start: "top top",
+                end: "bottom bottom",
+                scrub: 0.5,
+                markers: false
+            }
+        });
+    }
+
+    // Content images parallax
+    const contentImages = document.querySelectorAll('.image-block .parallax-image, .dual-image-block .parallax-image');
+    contentImages.forEach(image => {
+        gsap.to(image, {
+            yPercent: -15,
+            ease: "power1.inOut",
+            scrollTrigger: {
+                trigger: image.parentElement,
+                start: 'top bottom',
+                end: 'bottom top',
+                scrub: 0.5,
+                markers: false
+            }
+        });
+    });
+
+    // Next article section parallax
+    const nextArticleImage = document.querySelector('.next-article-image .parallax-image');
+    if (nextArticleImage) {
+        gsap.to(nextArticleImage, {
+            yPercent: -20,
+            ease: "power1.inOut",
+            scrollTrigger: {
+                trigger: ".next-article",
+                start: "top bottom",
+                end: "bottom top",
+                scrub: 0.5,
+                markers: false
+            }
+        });
+    }
+
+    // Contact image parallax
+    const contactImage = document.querySelector('.contact-image .parallax-image');
+    if (contactImage) {
+        gsap.to(contactImage, {
+            yPercent: -15,
+            ease: "power1.inOut",
+            scrollTrigger: {
+                trigger: ".contact-section",
+                start: "top bottom",
+                end: "bottom top",
+                scrub: 0.5,
+                markers: false
+            }
+        });
+    }
+
+    // Fade in content sections
+    gsap.utils.toArray('.main-content > *').forEach(element => {
+        gsap.from(element, {
+            opacity: 0,
+            y: 30,
+            duration: 1,
+            ease: 'power2.out',
+            scrollTrigger: {
+                trigger: element,
+                start: 'top 80%',
+                toggleActions: 'play none none reverse'
+            }
+        });
+    });
+
+    // Animate images
+    gsap.utils.toArray('.image-block img, .dual-image-block img').forEach(image => {
+        gsap.from(image, {
+            opacity: 0,
+            scale: 0.95,
+            duration: 0.5,
+            ease: 'power2.out',
+            scrollTrigger: {
+                trigger: image,
+                start: 'top 75%',
+                toggleActions: "play reverse play reverse",
+                markers:true
+            }
+        });
+    });
+
+    // Animate blockquotes
+    gsap.utils.toArray('blockquote').forEach(quote => {
+        gsap.from(quote, {
+            opacity: 0,
+            x: -50,
+            duration: 1,
+            ease: 'power2.out',
+            scrollTrigger: {
+                trigger: quote,
+                start: 'top 80%',
+                toggleActions: 'play none none reverse'
+            }
+        });
     });
 }
 
