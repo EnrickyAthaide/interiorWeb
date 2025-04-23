@@ -159,7 +159,7 @@ img {
     display: flex;
     align-items: center;
     overflow: hidden;
-    background: url('https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?ixlib=rb-4.0.3&auto=format&fit=crop&w=1950&q=80') no-repeat center center;
+    background: url('/images/contact/bg-6.jpg') no-repeat center center;
     background-size: cover;
     color: var(--light-color);
 }

@@ -3,27 +3,27 @@
 
 /* Option 1: Elegant living room with dark tones */
 .contact-hero-alt1 {
-    background: url('https://images.unsplash.com/photo-1615529182904-14819c35db37?ixlib=rb-4.0.3&auto=format&fit=crop&w=1950&q=80') no-repeat center center;
+    background: url('/images/contact/bg-1.jpg') no-repeat center center;
 }
 
 /* Option 2: Minimalist luxury kitchen */
 .contact-hero-alt2 {
-    background: url('https://images.unsplash.com/photo-1600607688066-890987f18a86?ixlib=rb-4.0.3&auto=format&fit=crop&w=1950&q=80') no-repeat center center;
+    background: url('/images/contact/bg-2.jpg') no-repeat center center;
 }
 
 /* Option 3: Sophisticated dark living room */
 .contact-hero-alt3 {
-    background: url('https://images.unsplash.com/photo-1586023492125-27b2c045efd7?ixlib=rb-4.0.3&auto=format&fit=crop&w=1950&q=80') no-repeat center center;
+    background: url('/images/contact/bg-3.jpg') no-repeat center center;
 }
 
 /* Option 4: Modern living room with fireplace */
 .contact-hero-alt4 {
-    background: url('https://images.unsplash.com/photo-1560185007-cde436f6a4d0?ixlib=rb-4.0.3&auto=format&fit=crop&w=1950&q=80') no-repeat center center;
+    background: url('/images/contact/bg-4.jpg') no-repeat center center;
 }
 
 /* Option 5: Luxury bathroom with marble */
 .contact-hero-alt5 {
-    background: url('https://images.unsplash.com/photo-1572742478197-e07d2b9a443e?ixlib=rb-4.0.3&auto=format&fit=crop&w=1950&q=80') no-repeat center center;
+    background: url('/images/contact/bg-6.jpg') no-repeat center center;
 }
 
 /* To use any of these options, replace the background URL in contact.css with the desired URL */ 

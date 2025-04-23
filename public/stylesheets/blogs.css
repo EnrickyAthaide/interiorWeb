@@ -116,7 +116,7 @@ body::-webkit-scrollbar {
     box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
 }
 
-.blog-link {
+.blog-card {
     display: block;
     color: inherit;
     text-decoration: none;
@@ -146,52 +146,36 @@ body::-webkit-scrollbar {
     color: #fff;
 }
 
-.blog-date {
-    font-size: 0.8rem;
-    color: #cbcbcb;
-    margin-bottom: 1rem;
-    letter-spacing: 0.05em;
-}
-
-.blog-title {
+.blog-content h3 {
     font-family: 'Times New Roman', Times, serif;
-    font-size: 2rem;
+    font-size: 1.8rem;
     font-weight: 300;
     margin-bottom: 1rem;
     line-height: 1.2;
     color: #fff;
+    text-decoration: none;
 }
 
-.blog-excerpt {
+.blog-content p {
     color: #cbcbcb;
-    margin-bottom: 2rem;
+    margin-bottom: 1.5rem;
     font-size: 1rem;
     line-height: 1.6;
+    text-decoration: none;
 }
 
-.read-more {
-    font-size: 0.8rem;
-    letter-spacing: 0.05em;
-    position: relative;
-    display: inline-block;
+.blog-meta {
+    color: #888;
+    font-size: 0.85rem;
+    margin-top: 1rem;
 }
 
-.read-more::after {
-    content: '';
-    position: absolute;
-    bottom: -4px;
-    left: 0;
-    width: 100%;
-    height: 1px;
-    background-color: #fff;
-    transform: scaleX(0);
-    transform-origin: right;
-    transition: transform 0.3s ease;
+.blog-date {
+    margin-right: 1rem;
 }
 
-.blog-item:hover .read-more::after {
-    transform: scaleX(1);
-    transform-origin: left;
+.blog-author {
+    font-style: italic;
 }
 
 /* Responsive Design */
@@ -246,9 +230,5 @@ body::-webkit-scrollbar {
 
     .blog-image {
         height: 300px;
-    }
-
-    .blog-title {
-        font-size: 1.5rem;
     }
 } 

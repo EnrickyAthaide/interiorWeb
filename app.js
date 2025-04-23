@@ -16,18 +16,18 @@ app.get("/" ,(req,res)=>{
         awardTitle: "Award Winning Global Luxury Design Company",
         awardSubtitle: "Crafting unique spaces since 2014",
         projects: [
-          { name: "Project One", category: "Residential", year: "2023", image: "https://www.essajeesatelier.com/wp-content/uploads/2023/05/Simple-Splendour-grid-home.jpg" },
-          { name: "Project Two", category: "Commercial", year: "2023", image: "https://www.essajeesatelier.com/wp-content/uploads/2023/07/A-Timeless-Legacy-home.jpg" },
-          { name: "Project Three", category: "Residential", year: "2022", image: "https://www.essajeesatelier.com/wp-content/uploads/2023/07/A-Timeless-Legacy-home.jpg" },
-          { name: "Project Four", category: "Commercial", year: "2021", image: "https://www.essajeesatelier.com/wp-content/uploads/2023/05/Luxe-In-The-CIty-grid-home.jpg" }
+          { name: "Project One", category: "Residential", year: "2023", image: "/images/home/project-1.jpg" },
+          { name: "Project Two", category: "Commercial", year: "2023", image: "/images/home/project-2.jpg" },
+          { name: "Project Three", category: "Residential", year: "2022", image: "/images/home/project-2.jpg" },
+          { name: "Project Four", category: "Commercial", year: "2021", image: "/images/home/project-3.jpg" }
         ],
         about: {
-          image: "https://www.essajeesatelier.com/wp-content/uploads/2023/07/Sarah-Sham.jpg",
+          image: "/images/home/about.jpg",
           description: "We are a global design company offering end-to-end services in luxury interiors. Our signature style is defined by unmatched aesthetics and an obsessive attention to detail."
         },
         seamless: {
-          before: "https://www.essajeesatelier.com/wp-content/uploads/2023/07/Before-.jpg",
-          after: "https://www.essajeesatelier.com/wp-content/uploads/2023/07/After-.jpg"
+          before: "/images/home/before.jpg",
+          after: "/images/home/after.jpg"
         },
         processSteps: [
           { title: "Briefing", description: "Understanding client needs." , icon: "fa-regular fa-comments" },
@@ -74,13 +74,13 @@ app.get("/about" , (req , res)=>{
           name: "Alexandra Chen",
           role: "Founder & Design Director",
           bio: "With a background in architecture and fine arts, Alexandra brings a unique perspective to spatial design, combining structural precision with artistic vision.",
-          image: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?ixlib=rb-4.0.3&auto=format&fit=crop&w=776&q=80"
+          image: "/images/blogs/authors/author-1.jpg"
         },
         {
           name: "Marcus Reed",
           role: "Technical Director",
           bio: "Marcus combines his expertise in sustainable materials and smart home technology to create environments that are both environmentally conscious and technologically advanced.",
-          image: "https://images.unsplash.com/photo-1560250097-0b93528c311a?ixlib=rb-4.0.3&auto=format&fit=crop&w=774&q=80"
+          image: "/images/blogs/authors/author-2.jpg"
         }
       ],
       timeline: [
@@ -125,7 +125,7 @@ app.get("/projects/:slug", (req, res) => {
         "/images/projects/landscape.jpg",
         "/images/projects/complex.jpg",
         "/images/projects/hotel.jpg",
-        "/images/projects/office.jpg",
+        "/images/projects/high-quality/gallery-1.jpg",
         "/images/projects/villa.jpg"
       ],
       nextProject: {
@@ -142,7 +142,7 @@ app.get("/projects/:slug", (req, res) => {
         "/images/projects/complex.jpg",
         "/images/projects/hotel.jpg",
         "/images/projects/landscape.jpg",
-        "/images/projects/office.jpg",
+        "/images/projects/high-quality/gallery-2.jpg",
         "/images/projects/villa.jpg"
       ],
       nextProject: {
@@ -159,7 +159,7 @@ app.get("/projects/:slug", (req, res) => {
         "/images/projects/villa.jpg",
         "/images/projects/complex.jpg",
         "/images/projects/hotel.jpg",
-        "/images/projects/landscape.jpg",
+        "/images/projects/high-quality/gallery-3.jpg",
         "/images/projects/office.jpg"
       ],
       nextProject: {
@@ -176,7 +176,7 @@ app.get("/projects/:slug", (req, res) => {
         "/images/projects/office.jpg",
         "/images/projects/villa.jpg",
         "/images/projects/complex.jpg",
-        "/images/projects/hotel.jpg",
+        "/images/projects/high-quality/gallery-4.jpg",
         "/images/projects/landscape.jpg"
       ],
       nextProject: {
@@ -193,7 +193,7 @@ app.get("/projects/:slug", (req, res) => {
         "/images/projects/hotel.jpg",
         "/images/projects/office.jpg",
         "/images/projects/villa.jpg",
-        "/images/projects/complex.jpg",
+        "/images/projects/high-quality/gallery-5.jpg",
         "/images/projects/landscape.jpg"
       ],
       nextProject: {
@@ -210,7 +210,7 @@ app.get("/projects/:slug", (req, res) => {
         "/images/projects/landscape.jpg",
         "/images/projects/hotel.jpg",
         "/images/projects/office.jpg",
-        "/images/projects/villa.jpg",
+        "/images/projects/high-quality/gallery-6.jpg",
         "/images/projects/complex.jpg"
       ],
       nextProject: {
@@ -256,24 +256,24 @@ app.get('/blogs/:slug', (req, res) => {
             subtitle: 'Explore the delicate balance between contemporary design and enduring elegance',
             category: 'INTERIOR DESIGN',
             date: 'MARCH 15, 2024',
-            heroImage: 'https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?q=80&w=1000',
+            heroImage: '/images/blogs/hero/hero-1.jpg',
             contentImages: [
-                'https://images.unsplash.com/photo-1616593969747-4797dc75033e?q=80&w=1000',
-                'https://images.unsplash.com/photo-1618219908412-a29a1bb7b86e?q=80&w=1000',
-                'https://images.unsplash.com/photo-1615529328331-f8917597711f?q=80&w=1000',
-                'https://images.unsplash.com/photo-1616593969747-4797dc75033e?q=80&w=1000',
-                'https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?q=80&w=1000',
-                'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=1000',
-                'https://images.unsplash.com/photo-1558002038-1055907df827?q=80&w=1000',
-                'https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?q=80&w=1000',
-                'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=1000',
-                'https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?q=80&w=1000',
-                'https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?q=80&w=1000'
+                '/images/blogs/content/content-1.jpg',
+                '/images/blogs/content/content-2.jpg',
+                '/images/blogs/content/content-3.jpg',
+                '/images/blogs/content/content-1.jpg',
+                '/images/blogs/content/content-4.jpg',
+                '/images/blogs/content/content-5.jpg',
+                '/images/blogs/content/content-6.jpg',
+                '/images/blogs/content/content-2.jpg',
+                '/images/blogs/content/content-5.jpg',
+                '/images/blogs/content/content-4.jpg',
+                '/images/blogs/content/content-2.jpg'
             ],
             author: {
                 name: 'Sarah Thompson',
                 role: 'Senior Design Consultant',
-                image: 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?q=80&w=200'
+                image: '/images/blogs/authors/author-1.jpg'
             },
             relatedPosts: [
                 { title: 'Timeless Elegance: Designing the Perfect Luxury Kitchen', link: '/blogs/luxury-kitchen-design' },
@@ -283,7 +283,7 @@ app.get('/blogs/:slug', (req, res) => {
             nextArticle: {
                 title: 'Timeless Elegance: Designing the Perfect Luxury Kitchen',
                 link: '/blogs/luxury-kitchen-design',
-                image: 'https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?q=80&w=1000'
+                image: '/images/blogs/content/content-2.jpg'
             }
         },
         'luxury-kitchen-design': {
@@ -291,24 +291,24 @@ app.get('/blogs/:slug', (req, res) => {
             subtitle: 'From bespoke cabinetry to statement lighting, discover the essential elements of sophisticated kitchen spaces',
             category: 'KITCHEN DESIGN',
             date: 'NOVEMBER 28, 2023',
-            heroImage: 'https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?q=80&w=1000',
+            heroImage: '/images/blogs/hero/hero-2.jpg',
             contentImages: [
-                'https://images.unsplash.com/photo-1556912167-f556f1f39fdf?q=80&w=1000',
-                'https://images.unsplash.com/photo-1556909212-d5b604d0c90d?q=80&w=1000',
-                'https://images.unsplash.com/photo-1594761051656-71868b4aebd9?q=80&w=1000',
-                'https://images.unsplash.com/photo-1600607687644-c7171b16498f?q=80&w=1000',
-                'https://images.unsplash.com/photo-1556910103-1c02745aec78?q=80&w=1000',
-                'https://images.unsplash.com/photo-1600585154526-990dced4db3d?q=80&w=1000',
-                'https://images.unsplash.com/photo-1600566752355-35792bedcfea?q=80&w=1000',
-                'https://images.unsplash.com/photo-1616593969747-4797dc75033e?q=80&w=1000',
-                'https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?q=80&w=1000',
-                'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=1000',
-                'https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?q=80&w=1000'
+                '/images/blogs/content/content-7.jpg',
+                '/images/blogs/content/content-8.jpg',
+                '/images/blogs/content/content-3.jpg',
+                '/images/blogs/content/content-5.jpg',
+                '/images/blogs/content/content-4.jpg',
+                '/images/blogs/content/content-6.jpg',
+                '/images/blogs/content/content-13.jpg',
+                '/images/blogs/content/content-1.jpg',
+                '/images/blogs/content/content-4.jpg',
+                '/images/blogs/content/content-5.jpg',
+                '/images/blogs/content/content-1.jpg'
             ],
             author: {
                 name: 'Michael Chen',
                 role: 'Kitchen Design Specialist',
-                image: 'https://images.unsplash.com/photo-1564564321837-a57b7070ac4f?q=80&w=200'
+                image: '/images/blogs/authors/author-2.jpg'
             },
             relatedPosts: [
                 { title: 'The Art of Creating Timeless Spaces', link: '/blogs/timeless-spaces' },
@@ -318,7 +318,7 @@ app.get('/blogs/:slug', (req, res) => {
             nextArticle: {
                 title: 'Architectural Harmony: Balancing Form and Function',
                 link: '/blogs/architectural-harmony',
-                image: 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=1000'
+                image: '/images/blogs/content/content-5.jpg'
             }
         },
         'architectural-harmony': {
@@ -326,24 +326,24 @@ app.get('/blogs/:slug', (req, res) => {
             subtitle: 'The delicate relationship between aesthetic beauty and practical livability in modern residential architecture',
             category: 'ARCHITECTURE',
             date: 'OCTOBER 17, 2023',
-            heroImage: 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=1000',
+            heroImage: '/images/blogs/hero/hero-3.jpg',
             contentImages: [
-                'https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?q=80&w=1000',
-                'https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?q=80&w=1000',
-                'https://images.unsplash.com/photo-1618219908412-a29a1bb7b86e?q=80&w=1000',
-                'https://images.unsplash.com/photo-1618219908412-a29a1bb7b86e?q=80&w=1000',
-                'https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?q=80&w=1000',
-                'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=1000',
-                'https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?q=80&w=1000',
-                'https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?q=80&w=1000',
-                'https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?q=80&w=1000',
-                'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=1000', 
-                'https://images.unsplash.com/photo-1598928506311-c55ded91a20c?q=80&w=1000'
+                '/images/blogs/content/content-4.jpg',
+                '/images/blogs/content/content-14.jpg',
+                '/images/blogs/content/content-2.jpg',
+                '/images/blogs/content/content-2.jpg',
+                '/images/blogs/content/content-4.jpg',
+                '/images/blogs/content/content-5.jpg',
+                '/images/blogs/content/content-1.jpg',
+                '/images/blogs/content/content-2.jpg',
+                '/images/blogs/content/content-4.jpg',
+                '/images/blogs/content/content-5.jpg',
+                '/images/blogs/content/content-18.jpg'
             ],
             author: {
                 name: 'Olivia Foster',
                 role: 'Architectural Designer',
-                image: 'https://images.unsplash.com/photo-1544005313-94ddf0286df2?q=80&w=200'
+                image: '/images/blogs/authors/author-3.jpg'
             },
             relatedPosts: [
                 { title: 'The Art of Creating Timeless Spaces', link: '/blogs/timeless-spaces' },
@@ -353,7 +353,7 @@ app.get('/blogs/:slug', (req, res) => {
             nextArticle: {
                 title: 'Sustainable Luxury: Eco-Conscious Design Without Compromise',
                 link: '/blogs/sustainable-luxury',
-                image: 'https://images.unsplash.com/photo-1598928506311-c55ded91a20c?q=80&w=1000'
+                image: '/images/blogs/content/content-18.jpg'
             }
         },
         'sustainable-luxury': {
@@ -361,24 +361,24 @@ app.get('/blogs/:slug', (req, res) => {
             subtitle: 'How today\'s most innovative designers are creating environmentally responsible spaces that maintain the highest standards of luxury',
             category: 'SUSTAINABLE DESIGN',
             date: 'SEPTEMBER 5, 2023',
-            heroImage: 'https://images.unsplash.com/photo-1598928506311-c55ded91a20c?q=80&w=1000',
+            heroImage: '/images/blogs/hero/hero-4.jpg',
             contentImages: [
-                'https://images.unsplash.com/photo-1600607686527-ddc628cbd2bf?q=80&w=1000',
-                'https://images.unsplash.com/photo-1600607687165-116c3a056652?q=80&w=1000',
-                'https://images.unsplash.com/photo-1600566752584-e1e5a1fd5a08?q=80&w=1000',
-                'https://images.unsplash.com/photo-1600585153490-76fb20a32601?q=80&w=1000',
-                'https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?q=80&w=1000',
-                'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=1000',
-                'https://images.unsplash.com/photo-1594760135052-125e893aa064?q=80&w=1000',
-                'https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?q=80&w=1000',
-                'https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?q=80&w=1000',
-                'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=1000',
-                'https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?q=80&w=1000'
+                '/images/blogs/content/content-1.jpg',
+                '/images/blogs/content/content-13.jpg',
+                '/images/blogs/content/content-18.jpg',
+                '/images/blogs/content/content-4.jpg',
+                '/images/blogs/content/content-5.jpg',
+                '/images/blogs/content/content-6.jpg',
+                '/images/blogs/content/content-7.jpg',
+                '/images/blogs/content/content-8.jpg',
+                '/images/blogs/content/content-4.jpg',
+                '/images/blogs/content/content-5.jpg',
+                '/images/blogs/content/content-2.jpg'
             ],
             author: {
                 name: 'James Wilson',
                 role: 'Sustainability Consultant',
-                image: 'https://images.unsplash.com/photo-1564564295391-7f24f26f568b?q=80&w=200'
+                image: '/images/blogs/authors/author-4.jpg'
             },
             relatedPosts: [
                 { title: 'The Art of Creating Timeless Spaces', link: '/blogs/timeless-spaces' },
@@ -388,7 +388,7 @@ app.get('/blogs/:slug', (req, res) => {
             nextArticle: {
                 title: 'The Art of Creating Timeless Spaces',
                 link: '/blogs/timeless-spaces',
-                image: 'https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?q=80&w=1000'
+                image: '/images/blogs/hero/hero-1.jpg'
             }
         }
     };
