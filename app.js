@@ -308,6 +308,18 @@ app.get("/projects/clarendon-house", (req, res) => {
   });
 });
 
+// Contact page route
+app.get("/contact", (req, res) => {
+  res.render("contact", {
+    title: "Contact | Luxury Interior Design",
+    contactInfo: {
+      email: "info@luxuryinteriors.com",
+      phone: "+1 (555) 123-4567",
+      address: "123 Design Avenue, New York, NY 10001"
+    }
+  });
+});
+
 // app.get("/project-building",(req , res)=>{
 //   res.render("building", {
 //     image1: "/images/projects/building.jpg"
