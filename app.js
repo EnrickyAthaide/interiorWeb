@@ -15,10 +15,7 @@ app.use(cookieParser())
 // app.js
 const mongoose = require('mongoose');
 
-mongoose.connect('mongodb://localhost:27017/portfolio', {
-  useNewUrlParser:true,
-  useUnifiedTopology:true
-})
+mongoose.connect('mongodb://localhost:27017/portfolio')
 .then(()=>console.log('MongoDB connected ✅'))
 .catch(err=>console.error('MongoDB error', err));
 
@@ -281,24 +278,24 @@ app.get('/blogs/:slug', (req, res) => {
             subtitle: 'Explore the delicate balance between contemporary design and enduring elegance',
             category: 'INTERIOR DESIGN',
             date: 'MARCH 15, 2024',
-            heroImage: '/images/blogs/hero/hero-1.jpg',
+            heroImage: '/images/blogs/timeless-spaces/hero-1616486338812-3dadae4b4ace.jpg',
             contentImages: [
-                '/images/blogs/content/content-1.jpg',
-                '/images/blogs/content/content-2.jpg',
-                '/images/blogs/content/content-3.jpg',
-                '/images/blogs/content/content-1.jpg',
-                '/images/blogs/content/content-4.jpg',
-                '/images/blogs/content/content-5.jpg',
-                '/images/blogs/content/content-6.jpg',
-                '/images/blogs/content/content-2.jpg',
-                '/images/blogs/content/content-5.jpg',
-                '/images/blogs/content/content-4.jpg',
-                '/images/blogs/content/content-2.jpg'
+                '/images/blogs/timeless-spaces/content-1-1616593969747-4797dc75033e.jpg',
+                '/images/blogs/timeless-spaces/content-2-1618219908412-a29a1bb7b86e.jpg',
+                '/images/blogs/timeless-spaces/content-3-1615529328331-f8917597711f.jpg',
+                '/images/blogs/timeless-spaces/content-4-1602872030490-4a484a7b3ba6.jpg',
+                '/images/blogs/timeless-spaces/content-5-1600607687939-ce8a6c25118c.jpg',
+                '/images/blogs/timeless-spaces/content-6-1600585154340-be6161a56a0c.jpg',
+                '/images/blogs/timeless-spaces/content-7-1558002038-1055907df827.jpg',
+                '/images/blogs/timeless-spaces/content-8-1618221195710-dd6b41faaea6.jpg',
+                '/images/blogs/timeless-spaces/content-9-1609348445429-67e90f10a390.jpg',
+                '/images/blogs/timeless-spaces/content-10-1594026112284-02bb6f3352fe.jpg',
+                '/images/blogs/timeless-spaces/content-11-1603794067602-9feaa4f70e0c.jpg'
             ],
             author: {
                 name: 'Sarah Thompson',
                 role: 'Senior Design Consultant',
-                image: '/images/blogs/authors/author-1.jpg'
+                image: '/images/blogs/authors/author-timeless-spaces-1573496359142-b8d87734a5a2.jpg'
             },
             relatedPosts: [
                 { title: 'Timeless Elegance: Designing the Perfect Luxury Kitchen', link: '/blogs/luxury-kitchen-design' },
@@ -308,7 +305,7 @@ app.get('/blogs/:slug', (req, res) => {
             nextArticle: {
                 title: 'Timeless Elegance: Designing the Perfect Luxury Kitchen',
                 link: '/blogs/luxury-kitchen-design',
-                image: '/images/blogs/content/content-2.jpg'
+                image: '/images/blogs/luxury-kitchen-design/hero-1618221195710-dd6b41faaea6.jpg'
             }
         },
         'luxury-kitchen-design': {
@@ -316,24 +313,24 @@ app.get('/blogs/:slug', (req, res) => {
             subtitle: 'From bespoke cabinetry to statement lighting, discover the essential elements of sophisticated kitchen spaces',
             category: 'KITCHEN DESIGN',
             date: 'NOVEMBER 28, 2023',
-            heroImage: '/images/blogs/hero/hero-2.jpg',
+            heroImage: '/images/blogs/luxury-kitchen-design/hero-1618221195710-dd6b41faaea6.jpg',
             contentImages: [
-                '/images/blogs/content/content-7.jpg',
-                '/images/blogs/content/content-8.jpg',
-                '/images/blogs/content/content-3.jpg',
-                '/images/blogs/content/content-5.jpg',
-                '/images/blogs/content/content-4.jpg',
-                '/images/blogs/content/content-6.jpg',
-                '/images/blogs/content/content-13.jpg',
-                '/images/blogs/content/content-1.jpg',
-                '/images/blogs/content/content-4.jpg',
-                '/images/blogs/content/content-5.jpg',
-                '/images/blogs/content/content-1.jpg'
+                '/images/blogs/luxury-kitchen-design/content-1-1556912167-f556f1f39fdf.jpg',
+                '/images/blogs/luxury-kitchen-design/content-2-1556909212-d5b604d0c90d.jpg',
+                '/images/blogs/luxury-kitchen-design/content-3-1594761051656-71868b4aebd9.jpg',
+                '/images/blogs/luxury-kitchen-design/content-4-1600607687644-c7171b16498f.jpg',
+                '/images/blogs/luxury-kitchen-design/content-5-1556910103-1c02745aec78.jpg',
+                '/images/blogs/luxury-kitchen-design/content-6-1600585154526-990dced4db3d.jpg',
+                '/images/blogs/luxury-kitchen-design/content-7-1600566752355-35792bedcfea.jpg',
+                '/images/blogs/luxury-kitchen-design/content-8-1541123437800-1bb1317badc2.jpg',
+                '/images/blogs/luxury-kitchen-design/content-9-1593696140826-c58b021acf8b.jpg',
+                '/images/blogs/luxury-kitchen-design/content-10-1565538420870-da08ff96a207.jpg',
+                '/images/blogs/luxury-kitchen-design/content-11-1484154218962-a197022b5858.jpg'
             ],
             author: {
                 name: 'Michael Chen',
                 role: 'Kitchen Design Specialist',
-                image: '/images/blogs/authors/author-2.jpg'
+                image: '/images/blogs/authors/author-luxury-kitchen-design-1564564321837-a57b7070ac4f.jpg'
             },
             relatedPosts: [
                 { title: 'The Art of Creating Timeless Spaces', link: '/blogs/timeless-spaces' },
@@ -343,7 +340,7 @@ app.get('/blogs/:slug', (req, res) => {
             nextArticle: {
                 title: 'Architectural Harmony: Balancing Form and Function',
                 link: '/blogs/architectural-harmony',
-                image: '/images/blogs/content/content-5.jpg'
+                image: '/images/blogs/architectural-harmony/hero-1600585154340-be6161a56a0c.jpg'
             }
         },
         'architectural-harmony': {
@@ -351,24 +348,24 @@ app.get('/blogs/:slug', (req, res) => {
             subtitle: 'The delicate relationship between aesthetic beauty and practical livability in modern residential architecture',
             category: 'ARCHITECTURE',
             date: 'OCTOBER 17, 2023',
-            heroImage: '/images/blogs/hero/hero-3.jpg',
+            heroImage: '/images/blogs/architectural-harmony/hero-1600585154340-be6161a56a0c.jpg',
             contentImages: [
-                '/images/blogs/content/content-4.jpg',
-                '/images/blogs/content/content-14.jpg',
-                '/images/blogs/content/content-2.jpg',
-                '/images/blogs/content/content-2.jpg',
-                '/images/blogs/content/content-4.jpg',
-                '/images/blogs/content/content-5.jpg',
-                '/images/blogs/content/content-1.jpg',
-                '/images/blogs/content/content-2.jpg',
-                '/images/blogs/content/content-4.jpg',
-                '/images/blogs/content/content-5.jpg',
-                '/images/blogs/content/content-18.jpg'
+                '/images/blogs/architectural-harmony/content-1-1600607687939-ce8a6c25118c.jpg',
+                '/images/blogs/architectural-harmony/content-2-1600607687920-4e2a09cf159d.jpg',
+                '/images/blogs/architectural-harmony/content-3-1618219908412-a29a1bb7b86e.jpg',
+                '/images/blogs/architectural-harmony/content-4-1587614313085-5da51cebd8ac.jpg',
+                '/images/blogs/architectural-harmony/content-5-1581957460800-c8e17e4e38e1.jpg',
+                '/images/blogs/architectural-harmony/content-6-1616137356540-925661057aa1.jpg',
+                '/images/blogs/architectural-harmony/content-7-1622547748225-3fc4abd2cca0.jpg',
+                '/images/blogs/architectural-harmony/content-8-1600210492493-0946911123ea.jpg',
+                '/images/blogs/architectural-harmony/content-9-1600047509807-ba8f99d2cdde.jpg',
+                '/images/blogs/architectural-harmony/content-10-1613849925594-415a32298f54.jpg',
+                '/images/blogs/architectural-harmony/content-11-1598928506311-c55ded91a20c.jpg'
             ],
             author: {
                 name: 'Olivia Foster',
                 role: 'Architectural Designer',
-                image: '/images/blogs/authors/author-3.jpg'
+                image: '/images/blogs/authors/author-architectural-harmony-1544005313-94ddf0286df2.jpg'
             },
             relatedPosts: [
                 { title: 'The Art of Creating Timeless Spaces', link: '/blogs/timeless-spaces' },
@@ -378,7 +375,7 @@ app.get('/blogs/:slug', (req, res) => {
             nextArticle: {
                 title: 'Sustainable Luxury: Eco-Conscious Design Without Compromise',
                 link: '/blogs/sustainable-luxury',
-                image: '/images/blogs/content/content-18.jpg'
+                image: '/images/blogs/sustainable-luxury/hero-1598928506311-c55ded91a20c.jpg'
             }
         },
         'sustainable-luxury': {
@@ -386,24 +383,24 @@ app.get('/blogs/:slug', (req, res) => {
             subtitle: 'How today\'s most innovative designers are creating environmentally responsible spaces that maintain the highest standards of luxury',
             category: 'SUSTAINABLE DESIGN',
             date: 'SEPTEMBER 5, 2023',
-            heroImage: '/images/blogs/hero/hero-4.jpg',
+            heroImage: '/images/blogs/sustainable-luxury/hero-1598928506311-c55ded91a20c.jpg',
             contentImages: [
-                '/images/blogs/content/content-1.jpg',
-                '/images/blogs/content/content-13.jpg',
-                '/images/blogs/content/content-18.jpg',
-                '/images/blogs/content/content-4.jpg',
-                '/images/blogs/content/content-5.jpg',
-                '/images/blogs/content/content-6.jpg',
-                '/images/blogs/content/content-7.jpg',
-                '/images/blogs/content/content-8.jpg',
-                '/images/blogs/content/content-4.jpg',
-                '/images/blogs/content/content-5.jpg',
-                '/images/blogs/content/content-2.jpg'
+                '/images/blogs/sustainable-luxury/content-1-1600607686527-ddc628cbd2bf.jpg',
+                '/images/blogs/sustainable-luxury/content-2-1600607687165-116c3a056652.jpg',
+                '/images/blogs/sustainable-luxury/content-3-1600566752584-e1e5a1fd5a08.jpg',
+                '/images/blogs/sustainable-luxury/content-4-1600585153490-76fb20a32601.jpg',
+                '/images/blogs/sustainable-luxury/content-5-1580309576593-731aef18bbae.jpg',
+                '/images/blogs/sustainable-luxury/content-6-1616048056617-93b94a339009.jpg',
+                '/images/blogs/sustainable-luxury/content-7-1594760135052-125e893aa064.jpg',
+                '/images/blogs/sustainable-luxury/content-8-1509660933844-6910e12765a0.jpg',
+                '/images/blogs/sustainable-luxury/content-9-1498409785966-ab341407de6e.jpg',
+                '/images/blogs/sustainable-luxury/content-10-1583847268964-b28dc8f51f92.jpg',
+                '/images/blogs/sustainable-luxury/content-11-1585128999682-7d9ddd8e5eb0.jpg'
             ],
             author: {
                 name: 'James Wilson',
                 role: 'Sustainability Consultant',
-                image: '/images/blogs/authors/author-4.jpg'
+                image: '/images/blogs/authors/author-sustainable-luxury-1564564295391-7f24f26f568b.jpg'
             },
             relatedPosts: [
                 { title: 'The Art of Creating Timeless Spaces', link: '/blogs/timeless-spaces' },
@@ -413,7 +410,7 @@ app.get('/blogs/:slug', (req, res) => {
             nextArticle: {
                 title: 'The Art of Creating Timeless Spaces',
                 link: '/blogs/timeless-spaces',
-                image: '/images/blogs/hero/hero-1.jpg'
+                image: '/images/blogs/timeless-spaces/hero-1616486338812-3dadae4b4ace.jpg'
             }
         }
     };
