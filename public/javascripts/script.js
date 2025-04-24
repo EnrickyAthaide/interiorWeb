@@ -532,40 +532,82 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
   
-  // Process Section Animation
-  gsap.from('.process-step', {
-    opacity: 0,
-    y: 50,
-    stagger: 0.2,
-    duration: 1,
-    ease: 'power2.out',
-    scrollTrigger: {
-      trigger: '.process-steps',
-      start: 'top 70%',
-      toggleActions: 'play none none none'
-    }
-  });
+  // Timeline Process Animation
+  const timelineItems = document.querySelectorAll('.timeline-item');
   
-  // Process Icon Animation
-  document.querySelectorAll('.process-step').forEach(step => {
-    step.addEventListener('mouseenter', () => {
-      gsap.to(step.querySelector('.process-icon i'), {
-        rotation: 15,
-        scale: 1.2,
-        duration: 0.3,
-        ease: 'back.out(1.7)'
-      });
+  if (timelineItems.length > 0) {
+    // Initial animation for the timeline line
+    gsap.from('.timeline-line', {
+      width: 0,
+      duration: 1.5,
+      ease: 'power2.out',
+      scrollTrigger: {
+        trigger: '.timeline-wrapper',
+        start: 'top 70%',
+        toggleActions: 'play none none none'
+      }
     });
     
-    step.addEventListener('mouseleave', () => {
-      gsap.to(step.querySelector('.process-icon i'), {
-        rotation: 0,
-        scale: 1,
-        duration: 0.3,
-        ease: 'power1.inOut'
+    // Animate timeline dots
+    gsap.from('.timeline-dot', {
+      scale: 0,
+      opacity: 0,
+      stagger: 0.2,
+      duration: 0.5,
+      delay: 0.5,
+      ease: 'back.out(1.7)',
+      scrollTrigger: {
+        trigger: '.timeline-wrapper',
+        start: 'top 70%',
+        toggleActions: 'play none none none'
+      }
+    });
+    
+    // Animate timeline content
+    timelineItems.forEach((item, index) => {
+      const content = item.querySelector('.timeline-content');
+      const isTop = content.classList.contains('top');
+      
+      gsap.from(content, {
+        y: isTop ? -50 : 50,
+        opacity: 0,
+        duration: 0.8,
+        delay: 0.3 + (index * 0.2),
+        ease: 'power2.out',
+        scrollTrigger: {
+          trigger: item,
+          start: 'top 80%',
+          toggleActions: 'play none none none'
+        }
+      });
+      
+      gsap.from(item.querySelector('.timeline-icon'), {
+        scale: 0.5,
+        opacity: 0,
+        duration: 0.8,
+        delay: 0.5 + (index * 0.2),
+        ease: 'back.out(1.7)',
+        scrollTrigger: {
+          trigger: item,
+          start: 'top 80%',
+          toggleActions: 'play none none none'
+        }
+      });
+      
+      gsap.from(item.querySelector('.timeline-number'), {
+        opacity: 0,
+        x: -20,
+        duration: 0.8,
+        delay: 0.6 + (index * 0.2),
+        ease: 'power2.out',
+        scrollTrigger: {
+          trigger: item,
+          start: 'top 80%',
+          toggleActions: 'play none none none'
+        }
       });
     });
-  });
+  }
   
   // Testimonial Slider Functionality
   const testimonialItems = document.querySelectorAll('.testimonial-item');
