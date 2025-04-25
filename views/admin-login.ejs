@@ -7,6 +7,30 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Raleway:wght@300;400;500;600&display=swap">
   <link rel="stylesheet" href="/stylesheets/admin-login.css">
+  <style>
+    .flash-message {
+      padding: 10px 15px;
+      margin-bottom: 15px;
+      border-radius: 4px;
+      font-size: 14px;
+      font-weight: 500;
+      animation: fadeIn 0.5s;
+    }
+    .flash-error {
+      background-color: rgba(220, 53, 69, 0.1);
+      color: #dc3545;
+      border-left: 4px solid #dc3545;
+    }
+    .flash-success {
+      background-color: rgba(40, 167, 69, 0.1);
+      color: #28a745;
+      border-left: 4px solid #28a745;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(-10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+  </style>
 </head>
 <body>
   <!-- Custom Cursor -->
@@ -24,6 +48,20 @@
       
       <div class="login-form-container">
         <h2>Admin Access</h2>
+        
+        <!-- Flash Messages -->
+        <% if(error && error.length > 0) { %>
+          <div class="flash-message flash-error">
+            <i class="fas fa-exclamation-circle"></i> <%= error %>
+          </div>
+        <% } %>
+        
+        <% if(success && success.length > 0) { %>
+          <div class="flash-message flash-success">
+            <i class="fas fa-check-circle"></i> <%= success %>
+          </div>
+        <% } %>
+        
         <form class="login-form" action="/admin/login" method="POST">
           <div class="form-group">
             <label for="username">Username</label>
@@ -68,5 +106,24 @@
   <!-- Scripts -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.5/gsap.min.js"></script>
   <script src="/javascripts/admin-login.js"></script>
+  
+  <!-- Auto-dismiss flash messages -->
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const flashMessages = document.querySelectorAll('.flash-message');
+      if (flashMessages.length > 0) {
+        setTimeout(function() {
+          flashMessages.forEach(message => {
+            message.style.opacity = '0';
+            message.style.transform = 'translateY(-10px)';
+            message.style.transition = 'all 0.5s ease';
+            setTimeout(() => {
+              message.remove();
+            }, 500);
+          });
+        }, 5000); // Auto-dismiss after 5 seconds
+      }
+    });
+  </script>
 </body>
 </html> 

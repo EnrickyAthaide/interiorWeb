@@ -5,6 +5,11 @@ const cookieParser = require("cookie-parser")
 require('dotenv').config()
 const Project = require('./models/project');
 const Blog = require('./models/blogs');
+const Admin = require('./models/admin');
+const jwt = require('jsonwebtoken');
+const bcrypt = require('bcrypt');
+const session = require('express-session');
+const flash = require('connect-flash');
 
 app.set("view engine" ,"ejs")
 
@@ -13,6 +18,24 @@ app.use(express.json())
 app.use(express.urlencoded({extended:true}))
 app.use(cookieParser())
 
+// Session configuration
+app.use(session({
+  secret: 'interior-design-secret',
+  resave: false,
+  saveUninitialized: false,
+  cookie: { maxAge: 60000 }
+}));
+
+// Flash messages
+app.use(flash());
+
+// Make flash messages available to all templates
+app.use((req, res, next) => {
+  res.locals.success = req.flash('success');
+  res.locals.error = req.flash('error');
+  next();
+});
+
 // app.js
 const mongoose = require('mongoose');
 
@@ -20,6 +43,24 @@ mongoose.connect('mongodb://localhost:27017/portfolio')
 .then(()=>console.log('MongoDB connected ✅'))
 .catch(err=>console.error('MongoDB error', err));
 
+// JWT Secret key - in production this should be in an environment variable
+const JWT_SECRET = 'gugugaga';
+
+// Middleware to check if user is authenticated
+const isAuthenticated = (req, res, next) => {
+  const token = req.cookies.token;
+  if (!token) {
+    return res.redirect('/admin');
+  }
+  
+  try {
+    const decoded = jwt.verify(token, JWT_SECRET);
+    req.user = decoded;
+    next();
+  } catch (err) {
+    return res.redirect('/admin');
+  }
+};
 
 app.get("/" ,(req,res)=>{
     res.render('index', {
@@ -303,13 +344,67 @@ app.get('/admin', (req, res) => {
   res.render('admin-login');
 });
 
-app.get('/admin/dashboard', (req, res) => {
-  // In a real app, you would verify the user is logged in here
+// Admin login POST route
+app.post('/admin/login', async (req, res) => {
+  try {
+    const { username, password } = req.body;
+    console.log('Login attempt:', { username });
+    
+    // Find admin user
+    const admin = await Admin.findOne({ username });
+    if (!admin) {
+      console.log('Admin not found');
+      req.flash('error', 'Invalid username or password');
+      return res.redirect('/admin');
+    }
+    
+    // Compare password
+    const isMatch = await admin.comparePassword(password);
+    console.log('Password match result:', isMatch);
+    
+    if (!isMatch) {
+      req.flash('error', 'Invalid username or password');
+      return res.redirect('/admin');
+    }
+    
+    // Create JWT token
+    const token = jwt.sign(
+      { username: admin.username, id: admin._id },
+      JWT_SECRET,
+      { expiresIn: '1h' }
+    );
+    
+    // Set token as cookie
+    res.cookie('token', token, {
+      httpOnly: true,
+      maxAge: 3600000 // 1 hour
+    });
+    
+    // Success message
+    req.flash('success', 'Successfully logged in!');
+    
+    // Redirect to dashboard
+    res.redirect('/admin/dashboard');
+  } catch (error) {
+    console.error('Login error:', error);
+    req.flash('error', 'An error occurred during login');
+    res.redirect('/admin');
+  }
+});
+
+// Logout route
+app.get('/admin/logout', (req, res) => {
+  res.clearCookie('token');
+  req.flash('success', 'Successfully logged out');
+  res.redirect('/admin');
+});
+
+// Protected admin routes
+app.get('/admin/dashboard', isAuthenticated, (req, res) => {
   res.render('admin-dashboard');
 });
 
-app.get('/admin/dashboard/contacts', (req, res) => {
-  // In a real app, you would verify the user is logged in and fetch contacts from database
+app.get('/admin/dashboard/contacts', isAuthenticated, (req, res) => {
   res.render('admin-dashboard');
 });
 
