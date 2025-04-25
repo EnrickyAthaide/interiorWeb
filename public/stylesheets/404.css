@@ -1,0 +1,296 @@
+/* Dark theme 404 error page */
+:root {
+  --bg-color: #121212;
+  --text-color: #f0f0f0;
+  --accent-color: #a67c52;
+  --accent-color-light: #c8a77f;
+  --secondary-color: #d4bc94;
+  --shadow-color: rgba(0, 0, 0, 0.5);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  font-family: 'Poppins', sans-serif;
+  height: 100vh;
+  overflow: hidden;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* New simple custom cursor */
+.custom-cursor {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background-color: var(--accent-color);
+  position: fixed;
+  pointer-events: none;
+  z-index: 9999;
+  opacity: 0;
+  transition: transform 0.1s, opacity 0.2s;
+}
+
+.custom-cursor-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background-color: var(--accent-color-light);
+  position: fixed;
+  pointer-events: none;
+  z-index: 10000;
+  opacity: 0;
+}
+
+/* Floating elements */
+.floating-elements {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  z-index: 0;
+}
+
+.floating-element {
+  position: absolute;
+  border-radius: 50%;
+  background: radial-gradient(circle at center, var(--accent-color), rgba(166, 124, 82, 0));
+  filter: blur(5px);
+  z-index: 1;
+  will-change: transform;
+}
+
+.floating-element:nth-child(1) { width: 150px; height: 150px; }
+.floating-element:nth-child(2) { width: 120px; height: 120px; }
+.floating-element:nth-child(3) { width: 200px; height: 200px; }
+.floating-element:nth-child(4) { width: 80px; height: 80px; }
+.floating-element:nth-child(5) { width: 180px; height: 180px; }
+.floating-element:nth-child(6) { width: 100px; height: 100px; }
+
+/* Error container */
+.error-container {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+  padding: 2rem;
+  max-width: 800px;
+  backdrop-filter: blur(5px);
+  background-color: rgba(18, 18, 18, 0.7);
+  border-radius: 20px;
+  box-shadow: 0 15px 25px var(--shadow-color);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  will-change: transform;
+}
+
+.error-content {
+  padding: 2rem;
+}
+
+.error-code {
+  font-size: 8rem;
+  font-weight: 900;
+  line-height: 1;
+  margin-bottom: 1rem;
+  color: var(--accent-color);
+  position: relative;
+  display: inline-block;
+  text-shadow: 0 0 10px rgba(166, 124, 82, 0.7);
+}
+
+.error-title {
+  font-size: 2rem;
+  margin-bottom: 1.5rem;
+  font-weight: 700;
+}
+
+.error-message {
+  font-size: 1.2rem;
+  margin-bottom: 2rem;
+  line-height: 1.6;
+  color: rgba(240, 240, 240, 0.8);
+}
+
+/* Glitch effect */
+.glitch {
+  position: relative;
+  will-change: transform;
+}
+
+/* Button style */
+.home-button, .primary-btn {
+  display: inline-block;
+  background-color: var(--accent-color);
+  color: white;
+  padding: 1rem 2rem;
+  font-size: 1.1rem;
+  font-weight: 600;
+  border-radius: 50px;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  border: none;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  z-index: 1;
+  box-shadow: 0 5px 15px rgba(166, 124, 82, 0.4);
+}
+
+.home-button:hover, .primary-btn:hover {
+  background-color: var(--accent-color-light);
+  transform: translateY(-3px);
+  box-shadow: 0 8px 20px rgba(166, 124, 82, 0.6);
+}
+
+.home-button:active, .primary-btn:active {
+  transform: translateY(-1px);
+  box-shadow: 0 5px 15px rgba(166, 124, 82, 0.4);
+}
+
+.secondary-btn {
+  display: inline-block;
+  background-color: transparent;
+  color: var(--text-color);
+  padding: 1rem 2rem;
+  font-size: 1.1rem;
+  font-weight: 600;
+  border-radius: 50px;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  border: 1px solid var(--accent-color-light);
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  z-index: 1;
+  margin-left: 1rem;
+}
+
+.secondary-btn:hover {
+  background-color: rgba(166, 124, 82, 0.1);
+  transform: translateY(-3px);
+}
+
+.error-actions {
+  margin-top: 2rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.decorative-line {
+  width: 100px;
+  height: 1px;
+  background-color: var(--accent-color-light);
+  margin: 1rem auto;
+}
+
+.error-brand {
+  margin-bottom: 2rem;
+}
+
+.error-brand h1 {
+  font-size: 0.8rem;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--accent-color-light);
+  margin-top: 0.5rem;
+}
+
+.logo-img {
+  max-width: 80px;
+  height: auto;
+}
+
+.brand-link {
+  display: inline-block;
+  color: var(--text-color);
+  text-decoration: none;
+}
+
+/* Footer */
+.footer-quote {
+  position: absolute;
+  bottom: 2rem;
+  left: 0;
+  width: 100%;
+  text-align: center;
+  font-style: italic;
+  color: rgba(240, 240, 240, 0.6);
+  font-size: 0.9rem;
+  padding: 0 2rem;
+}
+
+/* Interactive elements cursor styling */
+a, button, .primary-btn, .secondary-btn {
+  cursor: none;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .error-code {
+    font-size: 6rem;
+  }
+  
+  .error-title {
+    font-size: 1.8rem;
+  }
+  
+  .error-message {
+    font-size: 1rem;
+  }
+  
+  .home-button {
+    padding: 0.8rem 1.6rem;
+    font-size: 1rem;
+  }
+  
+  .error-container {
+    width: 90%;
+    padding: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .error-code {
+    font-size: 4rem;
+  }
+  
+  .error-title {
+    font-size: 1.5rem;
+  }
+  
+  .error-container {
+    width: 95%;
+    padding: 0.5rem;
+  }
+  
+  .floating-element {
+    opacity: 0.5;
+  }
+} 
+
+/* For touch devices, disable custom cursor */
+@media (hover: none) and (pointer: coarse) {
+  .custom-cursor, .custom-cursor-dot {
+    display: none;
+  }
+  
+  a, button, .primary-btn, .secondary-btn {
+    cursor: pointer;
+  }
+  
+  body {
+    cursor: auto;
+  }
+} 

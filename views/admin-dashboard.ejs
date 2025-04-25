@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Dashboard | Luxury Interior Design Studio</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Raleway:wght@300;400;500;600&display=swap">
+  <link rel="stylesheet" href="/stylesheets/admin-dashboard.css">
+</head>
+<body>
+  <!-- Custom Cursor -->
+  <div class="cursor"></div>
+  <div class="cursor-follower"></div>
+  
+  <div class="dashboard-container">
+    <!-- Sidebar -->
+    <aside class="sidebar">
+      <div class="sidebar-header">
+        <a href="/" class="brand-link">
+          <img src="/images/logo.png" alt="Studio Logo" class="logo-img">
+        </a>
+        <h1>ADMIN</h1>
+      </div>
+      
+      <nav class="sidebar-nav">
+        <ul>
+          <li class="nav-item active">
+            <a href="/admin/dashboard">
+              <i class="fas fa-home"></i>
+              <span>Dashboard</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="/admin/dashboard/contacts" class="active">
+              <i class="fas fa-envelope"></i>
+              <span>Contact Responses</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="/admin/dashboard/projects">
+              <i class="fas fa-briefcase"></i>
+              <span>Projects</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="/admin/dashboard/blogs">
+              <i class="fas fa-pen-fancy"></i>
+              <span>Blog Posts</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="/admin/dashboard/settings">
+              <i class="fas fa-cog"></i>
+              <span>Settings</span>
+            </a>
+          </li>
+        </ul>
+      </nav>
+      
+      <div class="sidebar-footer">
+        <a href="/admin/logout" class="logout-btn">
+          <i class="fas fa-sign-out-alt"></i>
+          <span>Log Out</span>
+        </a>
+      </div>
+    </aside>
+    
+    <!-- Main Content Area -->
+    <main class="main-content">
+      <header class="content-header">
+        <div class="header-left">
+          <button class="toggle-sidebar">
+            <i class="fas fa-bars"></i>
+          </button>
+          <h2>Contact Responses</h2>
+        </div>
+        
+        <div class="header-right">
+          <div class="search-box">
+            <i class="fas fa-search"></i>
+            <input type="text" placeholder="Search contacts...">
+          </div>
+          
+          <div class="admin-profile">
+            <span class="admin-name">Admin User</span>
+            <div class="admin-avatar">
+              <img src="/images/avatar-placeholder.jpg" alt="Admin">
+            </div>
+          </div>
+        </div>
+      </header>
+      
+      <div class="content-body">
+        <div class="dashboard-cards">
+          <div class="card">
+            <div class="card-icon">
+              <i class="fas fa-envelope-open"></i>
+            </div>
+            <div class="card-info">
+              <h3>23</h3>
+              <p>New Messages</p>
+            </div>
+          </div>
+          
+          <div class="card">
+            <div class="card-icon">
+              <i class="fas fa-clock"></i>
+            </div>
+            <div class="card-info">
+              <h3>5</h3>
+              <p>Pending Responses</p>
+            </div>
+          </div>
+          
+          <div class="card">
+            <div class="card-icon">
+              <i class="fas fa-check-circle"></i>
+            </div>
+            <div class="card-info">
+              <h3>48</h3>
+              <p>Resolved Inquiries</p>
+            </div>
+          </div>
+        </div>
+        
+        <div class="content-filters">
+          <div class="filter-group">
+            <label for="date-filter">Date Range:</label>
+            <select id="date-filter">
+              <option value="today">Today</option>
+              <option value="week" selected>This Week</option>
+              <option value="month">This Month</option>
+              <option value="all">All Time</option>
+            </select>
+          </div>
+          
+          <div class="filter-group">
+            <label for="status-filter">Status:</label>
+            <select id="status-filter">
+              <option value="all" selected>All Status</option>
+              <option value="new">New</option>
+              <option value="read">Read</option>
+              <option value="responded">Responded</option>
+            </select>
+          </div>
+          
+          <button class="filter-action">
+            <i class="fas fa-filter"></i>
+            <span>Apply Filters</span>
+          </button>
+        </div>
+        
+        <div class="data-table-container">
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>
+                  <input type="checkbox" id="select-all">
+                </th>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Subject</th>
+                <th>Date</th>
+                <th>Status</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><input type="checkbox" class="row-select"></td>
+                <td>Emily Johnson</td>
+                <td>emily.johnson@example.com</td>
+                <td>Kitchen Renovation Inquiry</td>
+                <td>May 12, 2024</td>
+                <td><span class="status new">New</span></td>
+                <td>
+                  <div class="action-buttons">
+                    <button class="action-btn view-btn" title="View Message">
+                      <i class="fas fa-eye"></i>
+                    </button>
+                    <button class="action-btn reply-btn" title="Reply">
+                      <i class="fas fa-reply"></i>
+                    </button>
+                    <button class="action-btn delete-btn" title="Delete">
+                      <i class="fas fa-trash"></i>
+                    </button>
+                  </div>
+                </td>
+              </tr>
+              <tr>
+                <td><input type="checkbox" class="row-select"></td>
+                <td>Michael Chen</td>
+                <td>michael.chen@example.com</td>
+                <td>Office Design Project</td>
+                <td>May 10, 2024</td>
+                <td><span class="status read">Read</span></td>
+                <td>
+                  <div class="action-buttons">
+                    <button class="action-btn view-btn" title="View Message">
+                      <i class="fas fa-eye"></i>
+                    </button>
+                    <button class="action-btn reply-btn" title="Reply">
+                      <i class="fas fa-reply"></i>
+                    </button>
+                    <button class="action-btn delete-btn" title="Delete">
+                      <i class="fas fa-trash"></i>
+                    </button>
+                  </div>
+                </td>
+              </tr>
+              <tr>
+                <td><input type="checkbox" class="row-select"></td>
+                <td>Sophia Rodriguez</td>
+                <td>sophia.r@example.com</td>
+                <td>Residential Interior Design</td>
+                <td>May 9, 2024</td>
+                <td><span class="status responded">Responded</span></td>
+                <td>
+                  <div class="action-buttons">
+                    <button class="action-btn view-btn" title="View Message">
+                      <i class="fas fa-eye"></i>
+                    </button>
+                    <button class="action-btn reply-btn" title="Reply">
+                      <i class="fas fa-reply"></i>
+                    </button>
+                    <button class="action-btn delete-btn" title="Delete">
+                      <i class="fas fa-trash"></i>
+                    </button>
+                  </div>
+                </td>
+              </tr>
+              <tr>
+                <td><input type="checkbox" class="row-select"></td>
+                <td>Alexander White</td>
+                <td>alex.white@example.com</td>
+                <td>Commercial Space Consultation</td>
+                <td>May 8, 2024</td>
+                <td><span class="status new">New</span></td>
+                <td>
+                  <div class="action-buttons">
+                    <button class="action-btn view-btn" title="View Message">
+                      <i class="fas fa-eye"></i>
+                    </button>
+                    <button class="action-btn reply-btn" title="Reply">
+                      <i class="fas fa-reply"></i>
+                    </button>
+                    <button class="action-btn delete-btn" title="Delete">
+                      <i class="fas fa-trash"></i>
+                    </button>
+                  </div>
+                </td>
+              </tr>
+              <tr>
+                <td><input type="checkbox" class="row-select"></td>
+                <td>Isabella Garcia</td>
+                <td>i.garcia@example.com</td>
+                <td>Villa Renovation Project</td>
+                <td>May 7, 2024</td>
+                <td><span class="status read">Read</span></td>
+                <td>
+                  <div class="action-buttons">
+                    <button class="action-btn view-btn" title="View Message">
+                      <i class="fas fa-eye"></i>
+                    </button>
+                    <button class="action-btn reply-btn" title="Reply">
+                      <i class="fas fa-reply"></i>
+                    </button>
+                    <button class="action-btn delete-btn" title="Delete">
+                      <i class="fas fa-trash"></i>
+                    </button>
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        
+        <div class="pagination">
+          <button class="page-btn prev">
+            <i class="fas fa-chevron-left"></i>
+          </button>
+          <div class="page-numbers">
+            <button class="page-number active">1</button>
+            <button class="page-number">2</button>
+            <button class="page-number">3</button>
+            <span class="page-ellipsis">...</span>
+            <button class="page-number">8</button>
+          </div>
+          <button class="page-btn next">
+            <i class="fas fa-chevron-right"></i>
+          </button>
+        </div>
+      </div>
+    </main>
+    
+    <!-- Message Preview Modal -->
+    <div class="modal" id="message-modal">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h3>Message Details</h3>
+          <button class="close-modal">
+            <i class="fas fa-times"></i>
+          </button>
+        </div>
+        <div class="modal-body">
+          <div class="message-header">
+            <div class="message-info">
+              <p><strong>From:</strong> <span id="modal-name">Emily Johnson</span></p>
+              <p><strong>Email:</strong> <span id="modal-email">emily.johnson@example.com</span></p>
+              <p><strong>Date:</strong> <span id="modal-date">May 12, 2024</span></p>
+              <p><strong>Subject:</strong> <span id="modal-subject">Kitchen Renovation Inquiry</span></p>
+            </div>
+          </div>
+          <div class="message-content">
+            <p>
+              Dear Interior Design Studio,<br><br>
+              I recently purchased a new home and I'm looking to completely renovate the kitchen. 
+              I'm particularly interested in your contemporary luxury design approach that I saw in your portfolio projects.<br><br>
+              Our space is approximately 400 square feet with an open-concept layout connecting to the dining area. 
+              We're interested in high-end appliances, custom cabinetry, and a statement island.<br><br>
+              Would it be possible to schedule a consultation in the coming weeks to discuss our vision and your services in more detail?<br><br>
+              Thank you for your time.<br>
+              Best regards,<br>
+              Emily Johnson
+            </p>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button class="modal-btn delete-btn">
+            <i class="fas fa-trash"></i>
+            <span>Delete</span>
+          </button>
+          <button class="modal-btn mark-btn">
+            <i class="fas fa-check"></i>
+            <span>Mark as Read</span>
+          </button>
+          <button class="modal-btn reply-btn">
+            <i class="fas fa-reply"></i>
+            <span>Reply</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.5/gsap.min.js"></script>
+  <script src="/javascripts/admin-dashboard.js"></script>
+</body>
+</html> 

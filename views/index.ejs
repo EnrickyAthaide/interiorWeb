@@ -162,24 +162,24 @@
         <div class="section-line"></div>
       </div>
       
-      <div class="timeline-wrapper">
-        <div class="timeline-line"></div>
-        
-        <div class="timeline-container">
-          <% processSteps.forEach((step, index) => { %>
-            <div class="timeline-item" data-step="<%= index + 1 %>">
-              <div class="timeline-dot"></div>
-              <div class="timeline-content <%= index % 2 === 0 ? 'top' : 'bottom' %>">
-                <div class="timeline-icon">
-                  <i class="<%= step.icon %>"></i>
-                </div>
-                <div class="timeline-number"><%= index + 1 %></div>
-                <h3><%= step.title %></h3>
-                <p><%= step.description %></p>
-              </div>
+      <div class="process-intro">
+        <p>Our systematic approach ensures every project is delivered with excellence, from the initial concept to the final handover.</p>
+      </div>
+      
+      <div class="process-steps">
+        <% processSteps.forEach((step, index) => { %>
+          <div class="process-step" data-step="<%= index + 1 %>">
+            <div class="process-icon">
+              <i class="<%= step.icon %>"></i>
             </div>
-          <% }); %>
-        </div>
+            <span class="process-number">0<%= index + 1 %></span>
+            <h3><%= step.title %></h3>
+            <p><%= step.description %></p>
+            <div class="process-arrow">
+              <i class="fa-solid fa-arrow-right-long"></i>
+            </div>
+          </div>
+        <% }); %>
       </div>
     </div>
   </section>

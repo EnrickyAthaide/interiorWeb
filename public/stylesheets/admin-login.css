@@ -1,0 +1,349 @@
+/* Admin Login Styles */
+:root {
+  --primary-color: #1a1a1a;
+  --secondary-color: #e0c9a6;
+  --text-color: #333;
+  --light-text: #fff;
+  --error-color: #d9534f;
+  --success-color: #5cb85c;
+  --input-bg: #FFF8E7;
+  --panel-bg: #F8F4E3;
+  --body-bg: #F2ECD9;
+  --box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+  --transition: all 0.3s ease;
+  --border-radius: 4px;
+  --font-playfair: 'Playfair Display', serif;
+  --font-raleway: 'Raleway', sans-serif;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: var(--font-raleway);
+  color: var(--text-color);
+  background-color: var(--body-bg);
+  background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23d4b483' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+  line-height: 1.6;
+  overflow-x: hidden;
+  height: 100vh;
+}
+
+/* Custom Cursor */
+.cursor {
+  position: fixed;
+  width: 12px;
+  height: 12px;
+  background: #D4B483;
+  border-radius: 50%;
+  z-index: 9999;
+  pointer-events: none;
+  transform: translate(-50%, -50%);
+  transition: transform 0.1s ease;
+}
+
+.cursor-follower {
+  position: fixed;
+  width: 40px;
+  height: 40px;
+  border: 1px solid #D4B483;
+  border-radius: 50%;
+  z-index: 9998;
+  pointer-events: none;
+  opacity: 0.5;
+  transform: translate(-50%, -50%);
+  transition: transform 0.15s ease, width 0.3s ease, height 0.3s ease;
+}
+
+/* Login Container */
+.login-container {
+  display: flex;
+  height: 100vh;
+  width: 100%;
+}
+
+/* Login Panel */
+.login-panel {
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 60px;
+  position: relative;
+  z-index: 1;
+  background-color: var(--panel-bg);
+  box-shadow: var(--box-shadow);
+}
+
+/* Brand Section */
+.login-brand {
+  margin-bottom: 60px;
+  text-align: center;
+}
+
+.brand-link {
+  display: inline-block;
+  margin-bottom: 20px;
+}
+
+.logo-img {
+  height: 60px;
+  width: auto;
+}
+
+.login-brand h1 {
+  font-family: var(--font-playfair);
+  font-size: 16px;
+  font-weight: 500;
+  letter-spacing: 2px;
+  color: #9D7E5C;
+  margin: 0;
+}
+
+/* Login Form */
+.login-form-container {
+  max-width: 400px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.login-form-container h2 {
+  font-family: var(--font-playfair);
+  font-size: 32px;
+  margin-bottom: 30px;
+  color: #9D7E5C;
+  font-weight: 600;
+  text-align: center;
+  letter-spacing: 1px;
+}
+
+.form-group {
+  margin-bottom: 25px;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 8px;
+  font-size: 14px;
+  color: #9D7E5C;
+  font-weight: 500;
+  letter-spacing: 0.5px;
+}
+
+.input-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.input-wrapper i {
+  position: absolute;
+  left: 15px;
+  color: #C9A66B;
+}
+
+.input-wrapper input {
+  width: 100%;
+  padding: 15px 15px 15px 45px;
+  border: 1px solid rgba(224, 201, 166, 0.3);
+  border-radius: var(--border-radius);
+  font-size: 16px;
+  font-family: var(--font-raleway);
+  background-color: var(--input-bg);
+  transition: var(--transition);
+}
+
+.input-wrapper input:focus {
+  outline: none;
+  border-color: var(--secondary-color);
+  box-shadow: 0 0 0 3px rgba(224, 201, 166, 0.2);
+}
+
+.password-toggle {
+  background: none;
+  border: none;
+  position: absolute;
+  right: 15px;
+  color: #9D7E5C;
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.password-toggle:hover {
+  color: #B38D56;
+}
+
+.login-button {
+  width: 100%;
+  padding: 15px;
+  background-color: transparent;
+  color: #C9A66B;
+  border: 1px solid #C9A66B;
+  border-radius: var(--border-radius);
+  font-size: 16px;
+  font-family: var(--font-raleway);
+  font-weight: 500;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  transition: var(--transition);
+  margin-top: 40px;
+  position: relative;
+  overflow: hidden;
+  z-index: 1;
+}
+
+.login-button::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 0%;
+  height: 100%;
+  background-color: #C9A66B;
+  transition: all 0.5s ease;
+  z-index: -1;
+}
+
+.login-button:hover {
+  color: var(--light-text);
+  transform: translateY(-2px);
+  box-shadow: var(--box-shadow);
+}
+
+.login-button:hover::before {
+  width: 100%;
+}
+
+.login-button span {
+  margin-right: 10px;
+}
+
+.login-footer {
+  margin-top: 30px;
+  text-align: center;
+}
+
+.back-link {
+  display: inline-flex;
+  align-items: center;
+  color: #9D7E5C;
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 500;
+  transition: var(--transition);
+}
+
+.back-link i {
+  margin-right: 8px;
+  font-size: 12px;
+}
+
+.back-link:hover {
+  color: #B38D56;
+}
+
+/* Login Image */
+.login-image {
+  width: 50%;
+  position: relative;
+  overflow: hidden;
+}
+
+.parallax-image {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url('https://images.unsplash.com/photo-1618219908412-a29a1bb7b86e?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80');
+  background-size: cover;
+  background-position: center;
+  transform: scale(1.1);
+}
+
+.image-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(rgba(210, 180, 140, 0.2), rgba(160, 120, 80, 0.5));
+}
+
+/* Media Queries */
+@media screen and (max-width: 992px) {
+  .login-container {
+    flex-direction: column;
+  }
+  
+  .login-panel, .login-image {
+    width: 100%;
+  }
+  
+  .login-panel {
+    padding: 50px 30px;
+    order: 2;
+    min-height: 70vh;
+  }
+  
+  .login-image {
+    order: 1;
+    height: 30vh;
+  }
+  
+  .login-brand {
+    margin-bottom: 40px;
+  }
+  
+  .login-form-container h2 {
+    font-size: 28px;
+  }
+}
+
+@media screen and (max-width: 576px) {
+  .login-panel {
+    padding: 40px 20px;
+  }
+  
+  .login-brand h1 {
+    font-size: 14px;
+  }
+  
+  .login-form-container h2 {
+    font-size: 24px;
+  }
+}
+
+/* Animation Classes */
+.fade-in {
+  animation: fadeIn 0.6s ease forwards;
+}
+
+.slide-up {
+  animation: slideUp 0.8s ease forwards;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideUp {
+  from {
+    transform: translateY(20px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+} 

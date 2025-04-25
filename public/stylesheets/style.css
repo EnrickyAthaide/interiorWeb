@@ -1424,209 +1424,263 @@ img {
   }
 }
 
-/* Process Section - Timeline Design */
+/* Redesigned Process Section */
 .process-section {
   background-color: var(--background-light);
   position: relative;
-  padding: 120px 0;
   overflow: hidden;
 }
 
-.timeline-wrapper {
-  position: relative;
-  padding: 40px 0;
-  margin: 60px 0;
+.process-section::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 350px;
+  height: 350px;
+  background: radial-gradient(circle, rgba(186, 161, 112, 0.1) 0%, transparent 70%);
+  z-index: 0;
 }
 
-.timeline-line {
-  position: absolute;
-  top: 50%;
-  left: 0;
-  width: 100%;
-  height: 2px;
-  background: linear-gradient(to right, var(--primary-light), var(--primary-color), var(--primary-dark));
-  transform: translateY(-50%);
+.process-intro {
+  max-width: 700px;
+  margin: 0 auto 60px;
+  text-align: center;
+}
+
+.process-intro p {
+  font-size: 1.2rem;
+  color: var(--text-light);
+  line-height: 1.8;
+}
+
+.process-steps {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 30px;
+  position: relative;
   z-index: 1;
 }
 
-.timeline-container {
-  display: flex;
-  justify-content: space-between;
-  position: relative;
-  z-index: 2;
-}
-
-.timeline-item {
-  flex: 1;
-  position: relative;
-  max-width: 280px;
-}
-
-.timeline-dot {
+.process-steps::before {
+  content: '';
   position: absolute;
-  top: 50%;
-  left: 50%;
-  width: 20px;
-  height: 20px;
-  background-color: var(--primary-color);
-  border-radius: 50%;
-  transform: translate(-50%, -50%);
-  z-index: 3;
-  box-shadow: 0 0 0 5px rgba(186, 161, 112, 0.2);
-  transition: all 0.3s ease;
+  top: 80px;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: linear-gradient(to right, var(--primary-color), var(--primary-light), var(--primary-color));
+  z-index: -1;
 }
 
-.timeline-item:hover .timeline-dot {
-  background-color: var(--primary-dark);
-  box-shadow: 0 0 0 8px rgba(186, 161, 112, 0.3), 0 0 25px rgba(186, 161, 112, 0.5);
-}
-
-.timeline-content {
+.process-step {
   position: relative;
   background-color: var(--background-lighter);
   border-radius: 8px;
-  padding: 30px;
+  padding: 40px 30px;
+  transition: all 0.4s ease;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
   box-shadow: var(--box-shadow);
-  transition: all 0.3s ease;
-  margin: 0 15px;
+  overflow: hidden;
+  z-index: 2;
 }
 
-.timeline-content.top {
-  margin-bottom: 80px;
-}
-
-.timeline-content.bottom {
-  margin-top: 80px;
-}
-
-.timeline-content::after {
+.process-step::before {
   content: '';
   position: absolute;
-  width: 20px;
-  height: 20px;
-  background-color: var(--background-lighter);
-  transform: rotate(45deg);
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 3px;
+  background: linear-gradient(to right, var(--primary-color), var(--primary-light));
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.4s ease;
 }
 
-.timeline-content.top::after {
-  bottom: -10px;
-  left: 50%;
-  transform: translateX(-50%) rotate(45deg);
+.process-step:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.12);
 }
 
-.timeline-content.bottom::after {
-  top: -10px;
-  left: 50%;
-  transform: translateX(-50%) rotate(45deg);
+.process-step:hover::before {
+  transform: scaleX(1);
 }
 
-.timeline-content:hover {
-  transform: translateY(-10px);
-  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
-}
-
-.timeline-content.bottom:hover {
-  transform: translateY(10px);
-}
-
-.timeline-icon {
-  width: 60px;
-  height: 60px;
-  background-color: rgba(186, 161, 112, 0.1);
-  border-radius: 50%;
+.process-icon {
+  width: 80px;
+  height: 80px;
   display: flex;
   align-items: center;
   justify-content: center;
-  margin: 0 auto 15px;
+  background-color: rgba(186, 161, 112, 0.1);
+  border-radius: 50%;
+  margin-bottom: 25px;
   transition: all 0.3s ease;
+  position: relative;
+  z-index: 1;
 }
 
-.timeline-icon i {
-  font-size: 1.5rem;
+.process-step:hover .process-icon {
+  background-color: var(--primary-color);
+}
+
+.process-icon i {
+  font-size: 28px;
   color: var(--primary-color);
   transition: all 0.3s ease;
 }
 
-.timeline-item:hover .timeline-icon {
-  background-color: rgba(186, 161, 112, 0.2);
-  transform: scale(1.1);
+.process-step:hover .process-icon i {
+  color: white;
 }
 
-.timeline-item:hover .timeline-icon i {
-  color: var(--primary-dark);
-}
-
-.timeline-number {
+.process-arrow {
   position: absolute;
-  top: -15px;
-  right: 15px;
-  font-size: 3rem;
+  top: 50%;
+  right: -15px;
+  color: var(--primary-color);
+  font-size: 22px;
+  opacity: 0;
+  transform: translateY(-50%);
+  transition: all 0.3s ease;
+  z-index: 3;
+}
+
+.process-step:hover .process-arrow {
+  opacity: 1;
+  right: -25px;
+}
+
+.process-step:last-child .process-arrow {
+  display: none;
+}
+
+.process-number {
+  position: absolute;
+  top: 10px;
+  right: 20px;
   font-family: var(--font-primary);
-  font-weight: 300;
-  color: rgba(186, 161, 112, 0.2);
+  font-size: 3.5rem;
+  font-weight: 600;
+  color: rgba(186, 161, 112, 0.15);
   line-height: 1;
+  z-index: 0;
   transition: all 0.3s ease;
 }
 
-.timeline-item:hover .timeline-number {
-  color: rgba(186, 161, 112, 0.4);
+.process-step:hover .process-number {
+  color: rgba(186, 161, 112, 0.25);
+  transform: scale(1.1);
 }
 
-.timeline-content h3 {
-  font-size: 1.3rem;
+.process-step h3 {
+  font-size: 1.6rem;
   margin-bottom: 15px;
-  text-align: center;
-  color: var(--primary-dark);
+  color: var(--secondary-color);
+  transition: all 0.3s ease;
+  position: relative;
 }
 
-.timeline-content p {
-  font-size: 0.95rem;
+.process-step:hover h3 {
+  color: var(--primary-color);
+}
+
+.process-step p {
   color: var(--text-light);
-  margin-bottom: 0;
+  font-size: 1rem;
   line-height: 1.6;
-  text-align: center;
+  margin-bottom: 0;
 }
 
-/* Responsive styles for timeline */
+/* Dark theme adjustments for process section */
+.dark-theme .process-section {
+  background-color: var(--dark-background-light);
+}
+
+.dark-theme .process-intro p {
+  color: var(--dark-text-light);
+}
+
+.dark-theme .process-step {
+  background-color: var(--background-dark);
+  box-shadow: var(--dark-box-shadow);
+}
+
+.dark-theme .process-step p {
+  color: var(--dark-text-light);
+}
+
+.dark-theme .process-number {
+  color: rgba(186, 161, 112, 0.1);
+}
+
+.dark-theme .process-icon {
+  background-color: rgba(186, 161, 112, 0.05);
+}
+
+.dark-theme .process-step:hover .process-icon {
+  background-color: var(--primary-color);
+}
+
+/* Media queries adjustments for process section */
 @media (max-width: 1200px) {
-  .timeline-container {
-    flex-wrap: wrap;
-    justify-content: center;
+  .process-steps {
+    grid-template-columns: repeat(2, 1fr);
   }
   
-  .timeline-line {
+  .process-steps::before {
     display: none;
   }
   
-  .timeline-item {
-    width: calc(50% - 30px);
-    margin-bottom: 40px;
-    flex: 0 0 auto;
-  }
-  
-  .timeline-content.top,
-  .timeline-content.bottom {
-    margin: 0 15px 30px;
-  }
-  
-  .timeline-content::after {
-    display: none;
-  }
-  
-  .timeline-content:hover,
-  .timeline-content.bottom:hover {
-    transform: translateY(-10px);
-  }
-  
-  .timeline-dot {
+  .process-arrow {
     display: none;
   }
 }
 
-@media (max-width: 767px) {
-  .timeline-item {
-    width: 100%;
-    margin-bottom: 30px;
-    max-width: 350px;
+@media (max-width: 768px) {
+  .process-intro p {
+    font-size: 1.1rem;
+  }
+  
+  .process-steps {
+    grid-template-columns: 1fr;
+    gap: 30px;
+  }
+
+  .process-step {
+    padding: 30px 20px;
+  }
+  
+  .process-icon {
+    width: 70px;
+    height: 70px;
+  }
+  
+  .process-number {
+    font-size: 3rem;
+  }
+}
+
+@media (max-width: 576px) {
+  .process-intro p {
+    font-size: 1rem;
+  }
+  
+  .process-icon {
+    width: 60px;
+    height: 60px;
+    margin-bottom: 20px;
+  }
+  
+  .process-icon i {
+    font-size: 22px;
+  }
+  
+  .process-step h3 {
+    font-size: 1.4rem;
   }
 }

@@ -38,73 +38,26 @@
 
     <!-- Blog Grid -->
     <section class="blog-grid">
-        <!-- Blog Item 1 -->
-        <article class="blog-item">
-            <a href="/blog/1" class="blog-card">
-                <div class="blog-image">
-                    <img src="/images/blogs/hero/hero-1.jpg" alt="Modern Interior Design Trends">
-                </div>
-                <div class="blog-content">
-                    <h3>Modern Interior Design Trends for 2023</h3>
-                    <p>Discover the latest trends shaping the world of interior design this year, from sustainable materials to bold color choices.</p>
-                    <div class="blog-meta">
-                        <span class="blog-date">May 15, 2023</span>
-                        <span class="blog-author">By Alexandra Chen</span>
-                    </div>
-                </div>
-            </a>
-        </article>
-
-        <!-- Blog Item 2 -->
-        <article class="blog-item">
-            <a href="/blog/2" class="blog-card">
-                <div class="blog-image">
-                    <img src="/images/blogs/hero/hero-2.jpg" alt="Luxury Kitchen Design">
-                </div>
-                <div class="blog-content">
-                    <h3>The Art of Luxury Kitchen Design</h3>
-                    <p>Explore how high-end materials, custom cabinetry, and thoughtful space planning come together to create kitchens that are both functional and impressive.</p>
-                    <div class="blog-meta">
-                        <span class="blog-date">April 22, 2023</span>
-                        <span class="blog-author">By Marcus Reed</span>
-                    </div>
-                </div>
-            </a>
-        </article>
-
-        <!-- Blog Item 3 -->
-        <article class="blog-item">
-            <a href="/blog/3" class="blog-card">
-                <div class="blog-image">
-                    <img src="/images/blogs/hero/hero-3.jpg" alt="Architectural Harmony">
-                </div>
-                <div class="blog-content">
-                    <h3>Creating Architectural Harmony in Interior Spaces</h3>
-                    <p>Learn how interior designers work with architectural elements to create cohesive, harmonious spaces that honor a building's character.</p>
-                    <div class="blog-meta">
-                        <span class="blog-date">March 10, 2023</span>
-                        <span class="blog-author">By Alexandra Chen</span>
-                    </div>
-                </div>
-            </a>
-        </article>
-
-        <!-- Blog Item 4 -->
-        <article class="blog-item">
-            <a href="/blog/4" class="blog-card">
-                <div class="blog-image">
-                    <img src="/images/blogs/hero/hero-4.jpg" alt="Sustainable Luxury">
-                </div>
-                <div class="blog-content">
-                    <h3>Sustainable Luxury: Eco-Conscious Design Without Compromise</h3>
-                    <p>How today's most innovative designers are creating environmentally responsible spaces that maintain the highest standards of luxury.</p>
-                    <div class="blog-meta">
-                        <span class="blog-date">September 5, 2023</span>
-                        <span class="blog-author">By Marcus Reed</span>
-                    </div>
-                </div>
-            </a>
-        </article>
+        <% if (blogs && blogs.length > 0) { %>
+            <% blogs.forEach(function(blog) { %>
+                <!-- Blog Item -->
+                <article class="blog-item">
+                    <a href="/blogs/<%= blog.slug %>" class="blog-link">
+                        <div class="blog-image">
+                            <img src="<%= blog.heroImage %>" alt="<%= blog.title %>">
+                        </div>
+                        <div class="blog-content">
+                            <div class="blog-date"><%= blog.date %></div>
+                            <h2 class="blog-title"><%= blog.title %></h2>
+                            <p class="blog-excerpt"><%= blog.subtitle %></p>
+                            <div class="read-more">READ ARTICLE</div>
+                        </div>
+                    </a>
+                </article>
+            <% }); %>
+        <% } else { %>
+            <p class="no-blogs">No blog posts available at the moment.</p>
+        <% } %>
     </section>
 
     <!-- Scripts at bottom -->

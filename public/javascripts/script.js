@@ -532,79 +532,90 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
   
-  // Timeline Process Animation
-  const timelineItems = document.querySelectorAll('.timeline-item');
+  // Process Section Animation
+  gsap.from('.process-step', {
+    opacity: 0,
+    y: 50,
+    stagger: 0.2,
+    duration: 1,
+    ease: 'power2.out',
+    scrollTrigger: {
+      trigger: '.process-steps',
+      start: 'top 70%',
+      toggleActions: 'play none none none'
+    }
+  });
   
-  if (timelineItems.length > 0) {
-    // Initial animation for the timeline line
-    gsap.from('.timeline-line', {
-      width: 0,
-      duration: 1.5,
-      ease: 'power2.out',
-      scrollTrigger: {
-        trigger: '.timeline-wrapper',
-        start: 'top 70%',
-        toggleActions: 'play none none none'
-      }
-    });
-    
-    // Animate timeline dots
-    gsap.from('.timeline-dot', {
-      scale: 0,
+  // Process intro animation
+  gsap.from('.process-intro', {
+    opacity: 0,
+    y: 30,
+    duration: 1,
+    ease: 'power2.out',
+    scrollTrigger: {
+      trigger: '.process-section',
+      start: 'top 80%',
+      toggleActions: 'play none none none'
+    }
+  });
+  
+  // Animated line for process steps
+  gsap.from('.process-steps::before', {
+    scaleX: 0,
+    transformOrigin: 'left center',
+    duration: 1.5,
+    ease: 'power3.inOut',
+    scrollTrigger: {
+      trigger: '.process-steps',
+      start: 'top 70%',
+      toggleActions: 'play none none none'
+    }
+  });
+  
+  // Process Icon Animation
+  document.querySelectorAll('.process-step').forEach((step, index) => {
+    // Add staggered entrance for process numbers
+    gsap.from(step.querySelector('.process-number'), {
       opacity: 0,
-      stagger: 0.2,
-      duration: 0.5,
-      delay: 0.5,
+      scale: 0.5,
+      duration: 0.6,
+      delay: 0.3 + (index * 0.1),
       ease: 'back.out(1.7)',
       scrollTrigger: {
-        trigger: '.timeline-wrapper',
+        trigger: '.process-steps',
         start: 'top 70%',
         toggleActions: 'play none none none'
       }
     });
     
-    // Animate timeline content
-    timelineItems.forEach((item, index) => {
-      const content = item.querySelector('.timeline-content');
-      const isTop = content.classList.contains('top');
-      
-      gsap.from(content, {
-        y: isTop ? -50 : 50,
-        opacity: 0,
-        duration: 0.8,
-        delay: 0.3 + (index * 0.2),
-        ease: 'power2.out',
-        scrollTrigger: {
-          trigger: item,
-          start: 'top 80%',
-          toggleActions: 'play none none none'
-        }
+    // Mouse hover animations
+    step.addEventListener('mouseenter', () => {
+      gsap.to(step.querySelector('.process-icon i'), {
+        rotation: 15,
+        scale: 1.2,
+        duration: 0.3,
+        ease: 'back.out(1.7)'
       });
       
-      gsap.from(item.querySelector('.timeline-icon'), {
-        scale: 0.5,
-        opacity: 0,
-        duration: 0.8,
-        delay: 0.5 + (index * 0.2),
-        ease: 'back.out(1.7)',
-        scrollTrigger: {
-          trigger: item,
-          start: 'top 80%',
-          toggleActions: 'play none none none'
-        }
-      });
-      
-      gsap.from(item.querySelector('.timeline-number'), {
-        opacity: 0,
-        x: -20,
-        duration: 0.8,
-        delay: 0.6 + (index * 0.2),
-        ease: 'power2.out',
-        scrollTrigger: {
-          trigger: item,
-          start: 'top 80%',
-          toggleActions: 'play none none none'
-        }
+      // Animate the arrow on hover
+      const arrow = step.querySelector('.process-arrow i');
+      if (arrow) {
+        gsap.to(arrow, {
+          x: 5,
+          duration: 0.3,
+          repeat: 1,
+          yoyo: true,
+          ease: 'power1.inOut'
+        });
+      }
+    });
+    
+    step.addEventListener('mouseleave', () => {
+      gsap.to(step.querySelector('.process-icon i'), {
+        rotation: 0,
+        scale: 1,
+        duration: 0.3,
+        ease: 'power1.inOut'
       });
     });
   }
