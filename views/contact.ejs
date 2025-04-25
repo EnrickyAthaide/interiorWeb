@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="/stylesheets/contact.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Raleway:wght@300;400;500;600&display=swap">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="/stylesheets/footer.css">
 </head>
 <body class="dark-theme">
     <!-- Cursor Follow Effect - Hidden by default -->
@@ -202,59 +203,7 @@
             </div>
         </div>
     </section>
-
-    <!-- Footer -->
-    <footer class="main-footer">
-        <div class="container">
-            <div class="footer-content">
-                <!-- Brand -->
-                <div class="footer-brand">
-                    <h2>Ultra Interiors</h2>
-                    <p>Transforming spaces into extraordinary experiences since 2005. Our award-winning design team creates bespoke interiors that reflect your unique style and vision.</p>
-                </div>
-                
-                <!-- Quick Links -->
-                <div class="footer-links">
-                    <h3>Quick Links</h3>
-                    <ul>
-                        <li><a href="/">Home</a></li>
-                        <li><a href="/about">About Us</a></li>
-                        <li><a href="/services">Services</a></li>
-                        <li><a href="/portfolio">Portfolio</a></li>
-                        <li><a href="/contact">Contact</a></li>
-                    </ul>
-                </div>
-                
-                <!-- Contact Info -->
-                <div class="footer-contact">
-                    <h3>Contact Us</h3>
-                    <p><i class="fas fa-map-marker-alt"></i> 123 Fifth Avenue, New York, NY 10010</p>
-                    <p><i class="fas fa-phone"></i> +1 (212) 555-1234</p>
-                    <p><i class="fas fa-envelope"></i> info@ultrainteriors.com</p>
-                </div>
-                
-                <!-- Newsletter -->
-                <div class="footer-newsletter">
-                    <h3>Subscribe to Our Newsletter</h3>
-                    <p>Stay updated with our latest projects and design insights.</p>
-                    <form class="newsletter-form">
-                        <input type="email" placeholder="Your email address" required>
-                        <button type="submit"><i class="fas fa-paper-plane"></i></button>
-                    </form>
-                </div>
-            </div>
-            
-            <div class="footer-bottom">
-                <p>&copy; 2023 Ultra Interiors. All Rights Reserved.</p>
-                <div class="legal-links">
-                    <a href="/privacy-policy">Privacy Policy</a>
-                    <a href="/terms-of-service">Terms of Service</a>
-                </div>
-            </div>
-        </div>
-    </footer>
-
-    <!-- Back to Top Button -->
+<!-- Back to Top Button -->
     <a href="#" class="back-to-top" aria-label="Back to top"><i class="fas fa-chevron-up"></i></a>
 
     <!-- Scripts -->
@@ -328,5 +277,55 @@
             setInterval(removeUnwantedElements, 1000);
         });
     </script>
+
+    <!-- Add this script at the end of the file, before the closing body tag -->
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const contactForm = document.getElementById('contact-form');
+        const successMessage = document.querySelector('.success-message');
+        
+        contactForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Get form data
+            const formData = {
+                name: document.getElementById('name').value,
+                email: document.getElementById('email').value,
+                phone: document.getElementById('phone').value,
+                service: document.getElementById('service').value,
+                message: document.getElementById('message').value
+            };
+            
+            // Send data via AJAX
+            fetch('/contact', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(formData)
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    // Show success message
+                    contactForm.style.display = 'none';
+                    successMessage.style.display = 'block';
+                } else {
+                    // Handle error
+                    alert(data.message || 'An error occurred. Please try again.');
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('An error occurred. Please try again.');
+            });
+        });
+    });
+    </script>
+
+  <!-- Include Footer -->
+  <%- include('partials/footer') %>
+
+  <script src="/javascripts/footer.js"></script>
 </body>
 </html> 
