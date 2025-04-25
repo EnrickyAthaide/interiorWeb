@@ -38,65 +38,26 @@
 
     <!-- Blog Grid -->
     <section class="blog-grid">
-        <!-- Blog Item 1 -->
-        <article class="blog-item">
-            <a href="/blogs/timeless-spaces" class="blog-link">
-                <div class="blog-image">
-                    <img src="https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?q=80&w=1000" alt="Modern Interior Design Trends">
-                </div>
-                <div class="blog-content">
-                    <div class="blog-date">MARCH 15, 2024</div>
-                    <h2 class="blog-title">The Art of Creating Timeless Spaces</h2>
-                    <p class="blog-excerpt">Explore the delicate balance between contemporary design and enduring elegance in modern interior spaces.</p>
-                    <div class="read-more">READ ARTICLE</div>
-                </div>
-            </a>
-        </article>
-
-        <!-- Blog Item 2 -->
-        <article class="blog-item">
-            <a href="/blogs/luxury-kitchen-design" class="blog-link">
-                <div class="blog-image">
-                    <img src="https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?q=80&w=1000" alt="Luxury Kitchen Design">
-                </div>
-                <div class="blog-content">
-                    <div class="blog-date">NOVEMBER 28, 2023</div>
-                    <h2 class="blog-title">Timeless Elegance: Designing the Perfect Luxury Kitchen</h2>
-                    <p class="blog-excerpt">From bespoke cabinetry to statement lighting, discover the essential elements that define sophisticated kitchen spaces.</p>
-                    <div class="read-more">READ ARTICLE</div>
-                </div>
-            </a>
-        </article>
-
-        <!-- Blog Item 3 -->
-        <article class="blog-item">
-            <a href="/blogs/architectural-harmony" class="blog-link">
-                <div class="blog-image">
-                    <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=1000" alt="Architectural Harmony">
-                </div>
-                <div class="blog-content">
-                    <div class="blog-date">OCTOBER 17, 2023</div>
-                    <h2 class="blog-title">Architectural Harmony: Balancing Form and Function</h2>
-                    <p class="blog-excerpt">The delicate relationship between aesthetic beauty and practical livability in modern residential architecture.</p>
-                    <div class="read-more">READ ARTICLE</div>
-                </div>
-            </a>
-        </article>
-
-        <!-- Blog Item 4 -->
-        <article class="blog-item">
-            <a href="/blogs/sustainable-luxury" class="blog-link">
-                <div class="blog-image">
-                    <img src="https://images.unsplash.com/photo-1598928506311-c55ded91a20c?q=80&w=1000" alt="Sustainable Luxury">
-                </div>
-                <div class="blog-content">
-                    <div class="blog-date">SEPTEMBER 5, 2023</div>
-                    <h2 class="blog-title">Sustainable Luxury: Eco-Conscious Design Without Compromise</h2>
-                    <p class="blog-excerpt">How today's most innovative designers are creating environmentally responsible spaces that maintain the highest standards of luxury.</p>
-                    <div class="read-more">READ ARTICLE</div>
-                </div>
-            </a>
-        </article>
+        <% if (blogs && blogs.length > 0) { %>
+            <% blogs.forEach(function(blog) { %>
+                <!-- Blog Item -->
+                <article class="blog-item">
+                    <a href="/blogs/<%= blog.slug %>" class="blog-link">
+                        <div class="blog-image">
+                            <img src="<%= blog.heroImage %>" alt="<%= blog.title %>">
+                        </div>
+                        <div class="blog-content">
+                            <div class="blog-date"><%= blog.date %></div>
+                            <h2 class="blog-title"><%= blog.title %></h2>
+                            <p class="blog-excerpt"><%= blog.subtitle %></p>
+                            <div class="read-more">READ ARTICLE</div>
+                        </div>
+                    </a>
+                </article>
+            <% }); %>
+        <% } else { %>
+            <p class="no-blogs">No blog posts available at the moment.</p>
+        <% } %>
     </section>
 
     <!-- Scripts at bottom -->

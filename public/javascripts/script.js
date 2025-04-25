@@ -546,8 +546,49 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
   
+  // Process intro animation
+  gsap.from('.process-intro', {
+    opacity: 0,
+    y: 30,
+    duration: 1,
+    ease: 'power2.out',
+    scrollTrigger: {
+      trigger: '.process-section',
+      start: 'top 80%',
+      toggleActions: 'play none none none'
+    }
+  });
+  
+  // Animated line for process steps
+  gsap.from('.process-steps::before', {
+    scaleX: 0,
+    transformOrigin: 'left center',
+    duration: 1.5,
+    ease: 'power3.inOut',
+    scrollTrigger: {
+      trigger: '.process-steps',
+      start: 'top 70%',
+      toggleActions: 'play none none none'
+    }
+  });
+  
   // Process Icon Animation
-  document.querySelectorAll('.process-step').forEach(step => {
+  document.querySelectorAll('.process-step').forEach((step, index) => {
+    // Add staggered entrance for process numbers
+    gsap.from(step.querySelector('.process-number'), {
+      opacity: 0,
+      scale: 0.5,
+      duration: 0.6,
+      delay: 0.3 + (index * 0.1),
+      ease: 'back.out(1.7)',
+      scrollTrigger: {
+        trigger: '.process-steps',
+        start: 'top 70%',
+        toggleActions: 'play none none none'
+      }
+    });
+    
+    // Mouse hover animations
     step.addEventListener('mouseenter', () => {
       gsap.to(step.querySelector('.process-icon i'), {
         rotation: 15,
@@ -555,6 +596,18 @@ document.addEventListener('DOMContentLoaded', () => {
         duration: 0.3,
         ease: 'back.out(1.7)'
       });
+      
+      // Animate the arrow on hover
+      const arrow = step.querySelector('.process-arrow i');
+      if (arrow) {
+        gsap.to(arrow, {
+          x: 5,
+          duration: 0.3,
+          repeat: 1,
+          yoyo: true,
+          ease: 'power1.inOut'
+        });
+      }
     });
     
     step.addEventListener('mouseleave', () => {
