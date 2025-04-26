@@ -20,23 +20,44 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
     
-    // Newsletter form submission (placeholder)
+    // Admin access keyboard shortcut (Ctrl+Alt+A)
+    document.addEventListener('keydown', function(e) {
+        // Check for Ctrl+Alt+A combination
+        if (e.ctrlKey && e.altKey && e.key.toLowerCase() === 'a') {
+            e.preventDefault(); // Prevent default browser action
+            window.location.href = '/admin'; // Redirect to admin page
+        }
+    });
+    
+    // Newsletter form submission
     const newsletterForm = document.querySelector('.newsletter-form');
     if (newsletterForm) {
         newsletterForm.addEventListener('submit', function(e) {
             e.preventDefault();
-            const emailInput = this.querySelector('input[type="email"]');
             
-            // Simple validation
-            if (emailInput.value.trim() !== '') {
-                // Here you would typically send this to your backend
-                console.log('Newsletter subscription:', emailInput.value);
-                
-                // Show success message (you can customize this)
-                alert('Thank you for subscribing to our newsletter!');
-                
-                // Clear the input
+            // Get the email input
+            const emailInput = this.querySelector('input[type="email"]');
+            const email = emailInput.value.trim();
+            
+            if (email) {
+                // Here you would typically send this to your server
+                // For now, just show a simple success message
                 emailInput.value = '';
+                
+                // Create success message
+                const successMessage = document.createElement('div');
+                successMessage.className = 'newsletter-success';
+                successMessage.textContent = 'Thank you for subscribing!';
+                successMessage.style.color = '#e0c9a6';
+                successMessage.style.marginTop = '10px';
+                
+                // Add success message after the form
+                this.parentNode.appendChild(successMessage);
+                
+                // Remove success message after 3 seconds
+                setTimeout(() => {
+                    successMessage.remove();
+                }, 3000);
             }
         });
     }

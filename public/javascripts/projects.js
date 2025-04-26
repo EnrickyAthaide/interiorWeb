@@ -1,4 +1,62 @@
 document.addEventListener('DOMContentLoaded', function () {
+    // Custom cursor functionality
+    const cursor = document.querySelector('.cursor');
+    const cursorFollower = document.querySelector('.cursor-follower');
+    
+    if (cursor && cursorFollower) {
+        document.addEventListener('mousemove', function(e) {
+            gsap.to(cursor, {
+                x: e.clientX,
+                y: e.clientY,
+                duration: 0.1,
+                ease: 'power1.out'
+            });
+            
+            gsap.to(cursorFollower, {
+                x: e.clientX,
+                y: e.clientY,
+                duration: 0.3,
+                ease: 'power1.out'
+            });
+        });
+        
+        // Show cursor when mouse enters the window
+        document.addEventListener('mouseenter', function() {
+            gsap.to(cursor, { opacity: 1 });
+            gsap.to(cursorFollower, { opacity: 0.5 });
+        });
+        
+        // Hide cursor when mouse leaves the window
+        document.addEventListener('mouseleave', function() {
+            gsap.to(cursor, { opacity: 0 });
+            gsap.to(cursorFollower, { opacity: 0 });
+        });
+        
+        // Scale cursor on clickable elements
+        const clickables = document.querySelectorAll('a, button, .title, .project-image');
+        clickables.forEach(link => {
+            link.addEventListener('mouseenter', () => {
+                gsap.to(cursorFollower, { width: 60, height: 60, opacity: 0.2 });
+                gsap.to(cursor, { opacity: 0.3 });
+            });
+            
+            link.addEventListener('mouseleave', () => {
+                gsap.to(cursorFollower, { width: 40, height: 40, opacity: 0.5 });
+                gsap.to(cursor, { opacity: 1 });
+            });
+        });
+    }
+    
+    // Scroll progress indicator
+    const scrollProgress = document.querySelector('.scroll-progress');
+    if (scrollProgress) {
+        window.addEventListener('scroll', () => {
+            const scrollPercentage = (window.scrollY / (document.documentElement.scrollHeight - window.innerHeight)) * 100;
+            scrollProgress.style.width = `${scrollPercentage}%`;
+        });
+    }
+
+    // Existing project page functionality
     const titles = document.querySelectorAll('.title');
     const images = document.querySelectorAll('.project-image');
     const titlesSlider = document.querySelector('.titles-slider');

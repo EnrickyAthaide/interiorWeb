@@ -151,139 +151,88 @@ app.get("/about" , (req , res)=>{
       ]
     })
 })
-app.get("/projects", (req, res) => {
-  res.render("projects", {
-    projects : [
-      { name: "Clarendon House", image: "/images/projects/complex.jpg" },
-      { name: "Lancaster", image: "/images/projects/hotel.jpg" },
-      { name: "High View", image: "/images/projects/landscape.jpg" },
-      { name: "Park Wood", image: "/images/projects/office.jpg" },
-      { name: "Portlands", image: "/images/projects/villa.jpg" },
-      { name: "Mulberry", image: "/images/projects/hotel.jpg" }
-  ],
-  });
+app.get("/projects", async (req, res) => {
+  try {
+    // Fetch all projects from the database
+    const projectsData = await Project.find()
+      .select('slug projectName projectImages')
+      .lean();
+    
+    // Format the data for the template
+    const projects = projectsData.map(project => ({
+      name: project.projectName,
+      image: project.projectImages[0], // Use first image as thumbnail
+      slug: project.slug
+    }));
+    
+    res.render("projects", {
+      projects: projects
+    });
+  } catch (err) {
+    console.error('Error fetching projects:', err);
+    res.render("projects", {
+      projects: []
+    });
+  }
 });
 
 // Dynamic project detail routes
-app.get("/projects/:slug", (req, res) => {
-  const slug = req.params.slug;
-  
-  // Project data store (in a real app, this would come from a database)
-  const projects = {
-    'terry': {
-      projectName: "TERRY",
-      projectSubtitle: "A Minimalist Urban Masterpiece",
-      projectDescription: "This stunning urban residence exemplifies minimalist design principles with clean lines and thoughtful spatial arrangements. Completed in spring 2023, the Terry project blends industrial elements with warm, natural materials.",
-      projectImages: [
-        "/images/projects/landscape.jpg",
-        "/images/projects/complex.jpg",
-        "/images/projects/hotel.jpg",
-        "/images/projects/office.jpg",
-        "/images/projects/villa.jpg"
-      ],
-      nextProject: {
-        name: "Clarendon House",
-        description: "A unique and impressive family home",
-        link: "/projects/clarendon-house"
+app.get("/projects/:slug", async (req, res) => {
+  try {
+    const slug = req.params.slug;
+    
+    // Find the project in the database using the slug
+    const project = await Project.findOne({ slug: slug }).lean();
+    
+    // If project doesn't exist, redirect to projects page
+    if (!project) {
+      return res.redirect('/projects');
+    }
+    
+    // Find the next project - we can use the existing nextProject data that's stored in the database
+    // If no nextProject is defined, we'll find another project
+    let nextProjectData = project.nextProject;
+    let nextProjectHeroImage;
+    
+    if (!nextProjectData) {
+      const nextProject = await Project.findOne({ _id: { $ne: project._id } })
+        .select('slug projectName projectDescription projectImages')
+        .lean();
+      
+      if (nextProject) {
+        nextProjectData = {
+          name: nextProject.projectName,
+          description: nextProject.projectDescription,
+          link: `/projects/${nextProject.slug}`
+        };
+        
+        // Get the hero image (first image) of the next project
+        if (nextProject.projectImages && nextProject.projectImages.length > 0) {
+          nextProjectHeroImage = nextProject.projectImages[0];
+        }
       }
-    },
-    'clarendon-house': {
-      projectName: "CLARENDON HOUSE",
-      projectSubtitle: "A Unique and Impressive Family Home",
-      projectDescription: "This distinctive and utterly captivating new-build family home was completed in the late summer of 2022. A stunning compilation of classic, contemporary detailing has formed the bones of our clients forever home.",
-      projectImages: [
-        "/images/projects/complex.jpg",
-        "/images/projects/hotel.jpg",
-        "/images/projects/landscape.jpg",
-        "/images/projects/office.jpg",
-        "/images/projects/villa.jpg"
-      ],
-      nextProject: {
-        name: "Lane",
-        description: "Modern architectural marvel",
-        link: "/projects/lane"
-      }
-    },
-    'lane': {
-      projectName: "LANE",
-      projectSubtitle: "Modern Architectural Marvel",
-      projectDescription: "A breathtaking example of contemporary architecture and interior design, the Lane project showcases innovative structural elements and luxurious finishes. Completed in winter 2022, this property redefines modern living.",
-      projectImages: [
-        "/images/projects/villa.jpg",
-        "/images/projects/complex.jpg",
-        "/images/projects/hotel.jpg",
-        "/images/projects/landscape.jpg",
-        "/images/projects/office.jpg"
-      ],
-      nextProject: {
-        name: "Project Four",
-        description: "Luxurious countryside retreat",
-        link: "/projects/project-four"
-      }
-    },
-    'project-four': {
-      projectName: "PROJECT FOUR",
-      projectSubtitle: "Luxurious Countryside Retreat",
-      projectDescription: "Nestled in the scenic countryside, this expansive property combines rustic charm with contemporary luxury. The harmonious integration with its natural surroundings makes this 2021 project a standout in our portfolio.",
-      projectImages: [
-        "/images/projects/office.jpg",
-        "/images/projects/villa.jpg",
-        "/images/projects/complex.jpg",
-        "/images/projects/hotel.jpg",
-        "/images/projects/landscape.jpg"
-      ],
-      nextProject: {
-        name: "Project Five",
-        description: "Coastal contemporary living",
-        link: "/projects/project-five"
-      }
-    },
-    'project-five': {
-      projectName: "PROJECT FIVE",
-      projectSubtitle: "Coastal Contemporary Living",
-      projectDescription: "This waterfront property embraces its coastal setting with panoramic views and materials that echo the natural surroundings. The light-filled spaces and fluid indoor-outdoor transitions make this 2022 project truly special.",
-      projectImages: [
-        "/images/projects/hotel.jpg",
-        "/images/projects/office.jpg",
-        "/images/projects/villa.jpg",
-        "/images/projects/complex.jpg",
-        "/images/projects/landscape.jpg"
-      ],
-      nextProject: {
-        name: "Project Six",
-        description: "Industrial loft conversion",
-        link: "/projects/project-six"
-      }
-    },
-    'project-six': {
-      projectName: "PROJECT SIX",
-      projectSubtitle: "Industrial Loft Conversion",
-      projectDescription: "A remarkable transformation of a historic warehouse into a sophisticated urban dwelling. The preservation of original architectural elements alongside sleek, modern interventions creates a unique living experience in this 2020 project.",
-      projectImages: [
-        "/images/projects/landscape.jpg",
-        "/images/projects/hotel.jpg",
-        "/images/projects/office.jpg",
-        "/images/projects/villa.jpg",
-        "/images/projects/complex.jpg"
-      ],
-      nextProject: {
-        name: "Terry",
-        description: "A minimalist urban masterpiece",
-        link: "/projects/terry"
+    } else {
+      // If we already have nextProject data, find that project to get its hero image
+      const nextProjectSlug = nextProjectData.link.split('/').pop();
+      const nextProjectDetails = await Project.findOne({ slug: nextProjectSlug })
+        .select('projectImages')
+        .lean();
+        
+      if (nextProjectDetails && nextProjectDetails.projectImages && nextProjectDetails.projectImages.length > 0) {
+        nextProjectHeroImage = nextProjectDetails.projectImages[0];
       }
     }
-  };
-
-  // Get the project data for the requested slug
-  const project = projects[slug];
-  
-  // If project doesn't exist, redirect to projects page
-  if (!project) {
-    return res.redirect('/projects');
+    
+    // Add the next project hero image to the project data
+    project.nextProjectHeroImage = nextProjectHeroImage;
+    
+    // Pass the project data directly to the template
+    // The model structure already matches the template expectations
+    res.render("projects/building", project);
+  } catch (err) {
+    console.error('Error fetching project:', err);
+    res.redirect('/projects');
   }
-  
-  // Render the project detail page with the project data
-  res.render("projects/building", project);
 });
 
 // Blogs page route
@@ -417,25 +366,98 @@ app.get('/admin/dashboard', isAuthenticated, async (req, res) => {
 
 app.get('/admin/dashboard/contacts', isAuthenticated, async (req, res) => {
   try {
-    const contacts = await Contact.find().sort({ createdAt: -1 }).lean();
-    const newCount = await Contact.countDocuments({ status: 'new' });
-    const respondedCount = await Contact.countDocuments({ status: 'responded' });
-    const readCount = await Contact.countDocuments({ status: 'read' });
+    // Get query parameters
+    const dateFilter = req.query.date || 'week';
+    const statusFilter = req.query.status || 'all';
+    const page = parseInt(req.query.page) || 1;
+    const limit = 10; // Number of items per page
+    const skip = (page - 1) * limit;
     
-    res.render('admin-dashboard', { 
+    // Define date filter
+    let dateQuery = {};
+    const now = new Date();
+    
+    if (dateFilter === 'today') {
+      const today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+      dateQuery = { createdAt: { $gte: today } };
+    } else if (dateFilter === 'week') {
+      const lastWeek = new Date(now.getFullYear(), now.getMonth(), now.getDate() - 7);
+      dateQuery = { createdAt: { $gte: lastWeek } };
+    } else if (dateFilter === 'month') {
+      const lastMonth = new Date(now.getFullYear(), now.getMonth() - 1, now.getDate());
+      dateQuery = { createdAt: { $gte: lastMonth } };
+    }
+    
+    // Define status filter
+    let statusQuery = {};
+    if (statusFilter !== 'all') {
+      statusQuery = { status: statusFilter };
+    }
+    
+    // Combine filters
+    const query = { ...dateQuery, ...statusQuery };
+    
+    // Get total count for pagination
+    const totalContacts = await Contact.countDocuments(query);
+    const totalPages = Math.ceil(totalContacts / limit);
+    
+    // Fetch contacts with pagination
+    const contacts = await Contact.find(query)
+      .sort({ createdAt: -1 })
+      .skip(skip)
+      .limit(limit);
+    
+    // Count contacts by status
+    const counts = {
+      new: await Contact.countDocuments({ status: 'new' }),
+      pending: await Contact.countDocuments({ status: 'read' }),
+      responded: await Contact.countDocuments({ status: 'responded' })
+    };
+    
+    // Generate pagination data
+    const pagination = {
+      page,
+      totalPages,
+      hasNextPage: page < totalPages,
+      hasPrevPage: page > 1,
+      totalContacts
+    };
+    
+    res.render('admin-dashboard', {
       page: 'contacts',
-      contacts,
-      counts: {
-        new: newCount,
-        responded: respondedCount,
-        pending: readCount
+      contacts: contacts,
+      counts: counts,
+      pagination: pagination,
+      query: {
+        date: dateFilter,
+        status: statusFilter
       }
     });
   } catch (err) {
     console.error('Error fetching contacts:', err);
-    req.flash('error', 'Failed to load contacts');
-    res.render('admin-dashboard', { page: 'contacts', contacts: [] });
+    res.status(500).send('Server Error');
   }
+});
+
+// Admin Projects Page - Under Construction
+app.get('/admin/dashboard/projects', isAuthenticated, (req, res) => {
+  res.render('admin-under-construction', {
+    page: 'projects'
+  });
+});
+
+// Admin Blogs Page - Under Construction
+app.get('/admin/dashboard/blogs', isAuthenticated, (req, res) => {
+  res.render('admin-under-construction', {
+    page: 'blogs'
+  });
+});
+
+// Admin Settings Page - Under Construction
+app.get('/admin/dashboard/settings', isAuthenticated, (req, res) => {
+  res.render('admin-under-construction', {
+    page: 'settings'
+  });
 });
 
 // Contact page route

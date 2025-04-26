@@ -30,6 +30,31 @@
       from { opacity: 0; transform: translateY(-10px); }
       to { opacity: 1; transform: translateY(0); }
     }
+    
+    /* Site navigation link */
+    .site-nav {
+      position: absolute;
+      top: 20px;
+      left: 20px;
+      z-index: 10;
+    }
+    
+    .site-nav a {
+      display: flex;
+      align-items: center;
+      color: #9D7E5C;
+      text-decoration: none;
+      font-size: 14px;
+      transition: color 0.3s ease;
+    }
+    
+    .site-nav a:hover {
+      color: #B38D56;
+    }
+    
+    .site-nav i {
+      margin-right: 8px;
+    }
   </style>
   
 </head>
@@ -37,12 +62,17 @@
   <!-- Custom Cursor -->
   <div class="cursor"></div>
   <div class="cursor-follower"></div>
+  
+  <!-- Site Navigation -->
+  <div class="site-nav">
+    <a href="/"><i class="fas fa-arrow-left"></i> Return to Website</a>
+  </div>
 
   <div class="login-container">
     <div class="login-panel">
       <div class="login-brand">
         <a href="/" class="brand-link">
-          <img src="/images/logo.png" alt="Studio Logo" class="logo-img">
+          <img src="/images/background_transparent_logo.png" alt="Studio Logo" class="logo-img">
         </a>
         <h1>INTERIOR DESIGN & ARCHITECTURE STUDIO</h1>
       </div>

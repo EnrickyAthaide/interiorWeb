@@ -159,7 +159,15 @@ document.addEventListener('DOMContentLoaded', function() {
   if (modalMarkBtn) {
     modalMarkBtn.addEventListener('click', function() {
       const contactId = document.getElementById('modal-contact-id').value;
-      updateContactStatus(contactId, 'read');
+      const currentText = this.querySelector('span').textContent;
+      
+      // Determine the target status based on the button text
+      let targetStatus = 'read';
+      if (currentText.includes('Responded')) {
+        targetStatus = 'responded';
+      }
+      
+      updateContactStatus(contactId, targetStatus);
     });
   }
   
@@ -175,14 +183,29 @@ document.addEventListener('DOMContentLoaded', function() {
   
   // Filter Actions
   const filterAction = document.querySelector('.filter-action');
-  if (filterAction) {
+  const dateFilter = document.getElementById('date-filter');
+  const statusFilter = document.getElementById('status-filter');
+  
+  if (filterAction && dateFilter && statusFilter) {
+    // Apply filters when button is clicked
     filterAction.addEventListener('click', function() {
-      // Get filter values
-      const dateFilter = document.getElementById('date-filter').value;
-      const statusFilter = document.getElementById('status-filter').value;
-      
-      // Apply filters to table
-      applyFilters(dateFilter, statusFilter);
+      applyFilters(dateFilter.value, statusFilter.value);
+    });
+    
+    // Apply filters on dropdown change without needing the button (for better UX)
+    dateFilter.addEventListener('change', function() {
+      applyFilters(dateFilter.value, statusFilter.value);
+    });
+    
+    statusFilter.addEventListener('change', function() {
+      applyFilters(dateFilter.value, statusFilter.value);
+    });
+    
+    // Handle Enter key in the filter section
+    document.querySelector('.content-filters').addEventListener('keydown', function(e) {
+      if (e.key === 'Enter') {
+        applyFilters(dateFilter.value, statusFilter.value);
+      }
     });
   }
   
@@ -293,22 +316,58 @@ document.addEventListener('DOMContentLoaded', function() {
         
         // Update modal button
         const markBtn = document.getElementById('modal-mark-btn');
-        if (status === 'read') {
-          markBtn.querySelector('span').textContent = 'Mark as Responded';
-        } else if (status === 'responded') {
-          markBtn.style.display = 'none';
+        if (markBtn) {
+          if (status === 'read') {
+            markBtn.querySelector('span').textContent = 'Mark as Responded';
+          } else if (status === 'responded') {
+            markBtn.style.display = 'none';
+          }
         }
         
         // Update counters
         updateCounters();
+        
+        // Show confirmation message
+        const message = status === 'read' ? 'Marked as read' : 'Marked as responded';
+        showStatusMessage(message, 'success');
       } else {
-        alert(data.message || 'Failed to update status');
+        showStatusMessage(data.message || 'Failed to update status', 'error');
       }
     })
     .catch(error => {
       console.error('Error:', error);
-      alert('An error occurred. Please try again.');
+      showStatusMessage('An error occurred. Please try again.', 'error');
     });
+  }
+  
+  // Show status message
+  function showStatusMessage(message, type) {
+    // Create message element
+    const messageEl = document.createElement('div');
+    messageEl.className = `status-message ${type}`;
+    messageEl.innerHTML = `
+      <i class="fas fa-${type === 'success' ? 'check-circle' : 'exclamation-circle'}"></i>
+      <span>${message}</span>
+    `;
+    
+    // Add to document
+    document.body.appendChild(messageEl);
+    
+    // Animation
+    gsap.fromTo(messageEl, 
+      { opacity: 0, y: -20 }, 
+      { opacity: 1, y: 0, duration: 0.3 }
+    );
+    
+    // Auto remove
+    setTimeout(() => {
+      gsap.to(messageEl, {
+        opacity: 0,
+        y: -20,
+        duration: 0.3,
+        onComplete: () => messageEl.remove()
+      });
+    }, 3000);
   }
   
   // Update dashboard counters
@@ -316,9 +375,21 @@ document.addEventListener('DOMContentLoaded', function() {
     fetch('/admin/dashboard/counts')
       .then(response => response.json())
       .then(data => {
-        document.querySelector('.card:nth-child(1) h3').textContent = data.new;
-        document.querySelector('.card:nth-child(2) h3').textContent = data.pending;
-        document.querySelector('.card:nth-child(3) h3').textContent = data.responded;
+        // Update counter values in the stat cards
+        const statCards = document.querySelectorAll('.stat-card');
+        if (statCards.length === 3) {
+          // Update new messages count
+          const newMessagesValue = statCards[0].querySelector('.stat-card-value');
+          if (newMessagesValue) newMessagesValue.textContent = data.new;
+          
+          // Update pending responses count
+          const pendingValue = statCards[1].querySelector('.stat-card-value');
+          if (pendingValue) pendingValue.textContent = data.pending;
+          
+          // Update resolved inquiries count
+          const respondedValue = statCards[2].querySelector('.stat-card-value');
+          if (respondedValue) respondedValue.textContent = data.responded;
+        }
       })
       .catch(error => {
         console.error('Error updating counters:', error);
@@ -327,7 +398,17 @@ document.addEventListener('DOMContentLoaded', function() {
   
   // Apply filters to table
   function applyFilters(dateFilter, statusFilter) {
-    window.location.href = `/admin/dashboard/contacts?date=${dateFilter}&status=${statusFilter}`;
+    // Show loading state
+    document.body.classList.add('filters-loading');
+    
+    // Build and navigate to the filtered URL
+    const url = new URL(window.location.origin + '/admin/dashboard/contacts');
+    url.searchParams.set('date', dateFilter);
+    url.searchParams.set('status', statusFilter);
+    url.searchParams.set('page', 1); // Reset to page 1 when filters change
+    
+    // Navigate to the new URL
+    window.location.href = url.toString();
   }
   
   // Card animations

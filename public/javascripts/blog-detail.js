@@ -6,9 +6,42 @@ let lenis;
 
 // Wait for DOM to be fully loaded
 document.addEventListener('DOMContentLoaded', () => {
+    initializeNavigationBar();
     initializeSmoothScrolling();
     initializeAnimations();
 });
+
+// Navigation Bar Behavior
+function initializeNavigationBar() {
+    const header = document.querySelector('.site-header');
+    if (header) {
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 100) {
+                header.style.backgroundColor = 'rgba(10, 10, 10, 0.95)';
+                header.style.boxShadow = '0 2px 10px rgba(0, 0, 0, 0.2)';
+            } else {
+                header.style.backgroundColor = 'transparent';
+                header.style.boxShadow = 'none';
+            }
+        });
+    }
+    
+    // Highlight active navigation link
+    const currentPath = window.location.pathname;
+    const navLinks = document.querySelectorAll('.right-header nav ul li a');
+    
+    navLinks.forEach(link => {
+        const linkPath = link.getAttribute('href');
+        if (currentPath.includes('/blogs')) {
+            const blogsLink = document.querySelector('.right-header nav ul li a[href="/blogs"]');
+            if (blogsLink) blogsLink.parentElement.classList.add('active');
+        } else if (currentPath === linkPath) {
+            link.parentElement.classList.add('active');
+        } else {
+            link.parentElement.classList.remove('active');
+        }
+    });
+}
 
 function initializeSmoothScrolling() {
     // Initialize Lenis for smooth scrolling
@@ -137,7 +170,6 @@ function initializeAnimations() {
                 trigger: image,
                 start: 'top 75%',
                 toggleActions: "play reverse play reverse",
-                markers:true
             }
         });
     });

@@ -130,6 +130,16 @@
     color: #e0c9a6;
 }
 
+/* Admin Link Styling */
+.admin-link {
+    opacity: 0.6;
+    font-size: 0.9em;
+}
+
+.admin-link:hover {
+    opacity: 1;
+}
+
 /* Back to Top Button */
 .back-to-top {
     position: fixed;

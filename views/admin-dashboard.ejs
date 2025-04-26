@@ -19,7 +19,7 @@
     <aside class="sidebar">
       <div class="sidebar-header">
         <a href="/" class="brand-link">
-          <img src="/images/logo.png" alt="Studio Logo" class="logo-img">
+          <img src="/images/background_transparent_logo.png" alt="Studio Logo" class="logo-img">
         </a>
         <h1>ADMIN</h1>
       </div>
@@ -190,22 +190,30 @@
                   <h3>Quick Actions</h3>
                 </div>
                 
-                <div class="quick-actions">
-                  <a href="/admin/dashboard/contacts" class="quick-action">
-                    <i class="fas fa-envelope-open"></i>
-                    <span>Manage Contact Requests</span>
+                <div class="dashboard-quick-actions">
+                  <a href="/admin/dashboard/contacts" class="dashboard-quick-action">
+                    <div class="quick-action-icon">
+                      <i class="fas fa-envelope-open"></i>
+                    </div>
+                    <div class="quick-action-text">Manage Contact Requests</div>
                   </a>
-                  <a href="/admin/dashboard/projects/new" class="quick-action">
-                    <i class="fas fa-plus-circle"></i>
-                    <span>Add New Project</span>
+                  <a href="/admin/dashboard/projects/new" class="dashboard-quick-action">
+                    <div class="quick-action-icon">
+                      <i class="fas fa-plus-circle"></i>
+                    </div>
+                    <div class="quick-action-text">Add New Project</div>
                   </a>
-                  <a href="/admin/dashboard/blogs/new" class="quick-action">
-                    <i class="fas fa-edit"></i>
-                    <span>Create Blog Post</span>
+                  <a href="/admin/dashboard/blogs/new" class="dashboard-quick-action">
+                    <div class="quick-action-icon">
+                      <i class="fas fa-edit"></i>
+                    </div>
+                    <div class="quick-action-text">Create Blog Post</div>
                   </a>
-                  <a href="/admin/dashboard/settings" class="quick-action">
-                    <i class="fas fa-cog"></i>
-                    <span>Update Settings</span>
+                  <a href="/admin/dashboard/settings" class="dashboard-quick-action">
+                    <div class="quick-action-icon">
+                      <i class="fas fa-cog"></i>
+                    </div>
+                    <div class="quick-action-text">Update Settings</div>
                   </a>
                 </div>
               </div>
@@ -213,34 +221,34 @@
           </div>
         <% } else { %>
           <!-- CONTACTS VIEW -->
-          <div class="dashboard-cards">
-            <div class="card">
-              <div class="card-icon">
+          <div class="contact-stats-section">
+            <div class="stat-card">
+              <div class="stat-card-icon">
                 <i class="fas fa-envelope-open"></i>
               </div>
-              <div class="card-info">
-                <h3><%= typeof counts !== 'undefined' ? counts.new : 0 %></h3>
-                <p>New Messages</p>
+              <div class="stat-card-content">
+                <h3 class="stat-card-value"><%= typeof counts !== 'undefined' ? counts.new : 0 %></h3>
+                <p class="stat-card-label">New Messages</p>
               </div>
             </div>
             
-            <div class="card">
-              <div class="card-icon">
+            <div class="stat-card">
+              <div class="stat-card-icon">
                 <i class="fas fa-clock"></i>
               </div>
-              <div class="card-info">
-                <h3><%= typeof counts !== 'undefined' ? counts.pending : 0 %></h3>
-                <p>Pending Responses</p>
+              <div class="stat-card-content">
+                <h3 class="stat-card-value"><%= typeof counts !== 'undefined' ? counts.pending : 0 %></h3>
+                <p class="stat-card-label">Pending Responses</p>
               </div>
             </div>
             
-            <div class="card">
-              <div class="card-icon">
+            <div class="stat-card">
+              <div class="stat-card-icon">
                 <i class="fas fa-check-circle"></i>
               </div>
-              <div class="card-info">
-                <h3><%= typeof counts !== 'undefined' ? counts.responded : 0 %></h3>
-                <p>Resolved Inquiries</p>
+              <div class="stat-card-content">
+                <h3 class="stat-card-value"><%= typeof counts !== 'undefined' ? counts.responded : 0 %></h3>
+                <p class="stat-card-label">Resolved Inquiries</p>
               </div>
             </div>
           </div>
@@ -249,20 +257,20 @@
             <div class="filter-group">
               <label for="date-filter">Date Range:</label>
               <select id="date-filter">
-                <option value="today">Today</option>
-                <option value="week" selected>This Week</option>
-                <option value="month">This Month</option>
-                <option value="all">All Time</option>
+                <option value="today" <%= typeof query !== 'undefined' && query.date === 'today' ? 'selected' : '' %>>Today</option>
+                <option value="week" <%= typeof query === 'undefined' || query.date === 'week' ? 'selected' : '' %>>This Week</option>
+                <option value="month" <%= typeof query !== 'undefined' && query.date === 'month' ? 'selected' : '' %>>This Month</option>
+                <option value="all" <%= typeof query !== 'undefined' && query.date === 'all' ? 'selected' : '' %>>All Time</option>
               </select>
             </div>
             
             <div class="filter-group">
               <label for="status-filter">Status:</label>
               <select id="status-filter">
-                <option value="all" selected>All Status</option>
-                <option value="new">New</option>
-                <option value="read">Read</option>
-                <option value="responded">Responded</option>
+                <option value="all" <%= typeof query === 'undefined' || query.status === 'all' ? 'selected' : '' %>>All Status</option>
+                <option value="new" <%= typeof query !== 'undefined' && query.status === 'new' ? 'selected' : '' %>>New</option>
+                <option value="read" <%= typeof query !== 'undefined' && query.status === 'read' ? 'selected' : '' %>>Read</option>
+                <option value="responded" <%= typeof query !== 'undefined' && query.status === 'responded' ? 'selected' : '' %>>Responded</option>
               </select>
             </div>
             
@@ -322,19 +330,57 @@
           </div>
           
           <div class="pagination">
-            <button class="page-btn prev">
-              <i class="fas fa-chevron-left"></i>
-            </button>
-            <div class="page-numbers">
-              <button class="page-number active">1</button>
-              <button class="page-number">2</button>
-              <button class="page-number">3</button>
-              <span class="page-ellipsis">...</span>
-              <button class="page-number">8</button>
-            </div>
-            <button class="page-btn next">
-              <i class="fas fa-chevron-right"></i>
-            </button>
+            <% if (typeof pagination !== 'undefined') { %>
+              <a href="<%= pagination.hasPrevPage ? `/admin/dashboard/contacts?page=${pagination.page - 1}&date=${query.date}&status=${query.status}` : '#' %>" 
+                class="page-btn prev <%= !pagination.hasPrevPage ? 'disabled' : '' %>">
+                <i class="fas fa-chevron-left"></i>
+              </a>
+              <div class="page-numbers">
+                <% 
+                  let startPage = Math.max(1, pagination.page - 2);
+                  let endPage = Math.min(pagination.totalPages, startPage + 4);
+                  
+                  if (endPage - startPage < 4 && pagination.totalPages > 5) {
+                    startPage = Math.max(1, endPage - 4);
+                  }
+                %>
+                
+                <% if (startPage > 1) { %>
+                  <a href="/admin/dashboard/contacts?page=1&date=<%= query.date %>&status=<%= query.status %>" 
+                    class="page-number <%= pagination.page === 1 ? 'active' : '' %>">1</a>
+                  <% if (startPage > 2) { %>
+                    <span class="page-ellipsis">...</span>
+                  <% } %>
+                <% } %>
+                
+                <% for (let i = startPage; i <= endPage; i++) { %>
+                  <a href="/admin/dashboard/contacts?page=<%= i %>&date=<%= query.date %>&status=<%= query.status %>" 
+                    class="page-number <%= pagination.page === i ? 'active' : '' %>"><%= i %></a>
+                <% } %>
+                
+                <% if (endPage < pagination.totalPages) { %>
+                  <% if (endPage < pagination.totalPages - 1) { %>
+                    <span class="page-ellipsis">...</span>
+                  <% } %>
+                  <a href="/admin/dashboard/contacts?page=<%= pagination.totalPages %>&date=<%= query.date %>&status=<%= query.status %>" 
+                    class="page-number <%= pagination.page === pagination.totalPages ? 'active' : '' %>"><%= pagination.totalPages %></a>
+                <% } %>
+              </div>
+              <a href="<%= pagination.hasNextPage ? `/admin/dashboard/contacts?page=${pagination.page + 1}&date=${query.date}&status=${query.status}` : '#' %>" 
+                class="page-btn next <%= !pagination.hasNextPage ? 'disabled' : '' %>">
+                <i class="fas fa-chevron-right"></i>
+              </a>
+            <% } else { %>
+              <button class="page-btn prev disabled">
+                <i class="fas fa-chevron-left"></i>
+              </button>
+              <div class="page-numbers">
+                <button class="page-number active">1</button>
+              </div>
+              <button class="page-btn next disabled">
+                <i class="fas fa-chevron-right"></i>
+              </button>
+            <% } %>
           </div>
         <% } %>
       </div>

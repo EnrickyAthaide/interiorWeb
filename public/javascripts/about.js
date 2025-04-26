@@ -1,4 +1,7 @@
 document.addEventListener('DOMContentLoaded', function() {
+    // Initialize navigation bar behavior
+    initNavigationBar();
+    
     // Initialize cursor follow effect
     const cursor = document.querySelector('.cursor-follow');
     if (cursor) {
@@ -442,4 +445,39 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     `;
     document.head.appendChild(style);
-}); 
+});
+
+// Navigation Bar Behavior
+function initNavigationBar() {
+    const header = document.querySelector('.site-header');
+    if (header) {
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 100) {
+                header.style.backgroundColor = 'rgba(10, 10, 10, 0.95)';
+                header.style.boxShadow = '0 2px 10px rgba(0, 0, 0, 0.2)';
+            } else {
+                header.style.backgroundColor = 'transparent';
+                header.style.boxShadow = 'none';
+            }
+        });
+    }
+    
+    // Highlight active navigation link
+    const currentPath = window.location.pathname;
+    const navLinks = document.querySelectorAll('.right-header nav ul li a');
+    
+    navLinks.forEach(link => {
+        const linkPath = link.getAttribute('href');
+        if (currentPath === linkPath) {
+            link.parentElement.classList.add('active');
+        } else {
+            link.parentElement.classList.remove('active');
+        }
+    });
+    
+    // Special case for about page
+    if (currentPath === '/about') {
+        const aboutLink = document.querySelector('.right-header nav ul li a[href="/about"]');
+        if (aboutLink) aboutLink.parentElement.classList.add('active');
+    }
+} 

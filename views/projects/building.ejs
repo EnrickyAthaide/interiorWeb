@@ -14,11 +14,11 @@
     <!-- Header -->
     <header class="site-header">
         <div class="left-header">
-            <a href="/" class="header-text">INTERIOR DESIGN &<br>ARCHITECTURE STUDIO</a>
+            <a href="/" class="header-text">DEZSPACE<br>INTERIOR DESIGN & ARCHITECTURE STUDIO</a>
         </div>
         <div class="center-header">
             <a href="/" class="logo">
-                <img src="/images/logo.png" alt="Studio Logo" class="logo-img">
+                <img src="/background_transparent_logo.png" alt="Dezspace Logo" class="logo-img">
             </a>
         </div>
         <div class="right-header">
@@ -27,8 +27,8 @@
                     <li><a href="/">HOME</a></li>
                     <li><a href="/about">ABOUT</a></li>
                     <li class="active"><a href="/projects">PROJECTS</a></li>
+                    <li><a href="/blogs">BLOGS</a></li>
                     <li><a href="/contact">CONTACT</a></li>
-                    <li><a href="/press">PRESS</a></li>
                 </ul>
             </nav>
         </div>
@@ -92,30 +92,37 @@
     </section>
     
     <section class="gallery-section">
-        <div class="gallery-image"><img src="<%= projectImages[3] %>" alt="<%= projectName %> gallery image"></div>
+        <div class="gallery-image">
+            <% 
+            // Check if there's a high-quality gallery image available (image at index 3)
+            const galleryImage = projectImages.length > 3 ? projectImages[3] : 
+                (projectImages.length > 0 ? projectImages[0] : "/images/projects/high-quality/gallery-1.jpg"); 
+            %>
+            <img src="<%= galleryImage %>" alt="<%= projectName %> gallery image">
+        </div>
     </section>
     
     <!-- Second Overview Section -->
-    <section style="background-color: #FAF9F6;" class="project-overview" id="textAni2">
-        <div class="project-overview-content" style="color: black;" id="content2">
-            <div class="large-title" id="headAni2">
+    <section style="background-color: #BAA170;" class="project-overview" id="textAni2">
+        <div class="project-overview-content" style="color: #000;" id="content2">
+            <div class="large-title" style="color: #000;" id="headAni2">
                 <% 
                 // Reuse the subtitle words for the second section
                 words.forEach(word => { %>
-                   <h2><%= word.toUpperCase() %></h2>
+                   <h2 style="color: #000;"><%= word.toUpperCase() %></h2>
                 <% }); %>
             </div>
-            <div class="project-description2" id="parAni2">
+            <div class="project-description2" style="color: #000;" id="parAni2">
                 <% 
                 // Reuse the description lines for the second section
                 lines.forEach(line => { %>
-                    <p><%= line %></p>
+                    <p style="color: #000;"><%= line %></p>
                 <% }); %>
             </div>
         </div>
     </section>
 
-    <section style="background-color: #FAF9F6; height:200vh;" class="dual-image-section" id="ani2">
+    <section style="background-color: #BAA170; height:200vh;" class="dual-image-section" id="ani2">
         <div class="image-container left" id="left2">
             <img src="<%= projectImages[4] || projectImages[0] %>" alt="<%= projectName %> additional view">
         </div>
@@ -126,6 +133,10 @@
 
     <!-- Next Project Section -->
     <section class="next-project-section">
+        <div class="next-project-image">
+            <% // Get the next project's hero image, defaulting to current project's first image if not available %>
+            <img src="<%= nextProjectHeroImage || projectImages[0] %>" alt="<%= nextProject.name %>">
+        </div>
         <div class="next-project-content">
             <span class="next-label">NEXT PROJECT</span>
             <h2><%= nextProject.name %></h2>

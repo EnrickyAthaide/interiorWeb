@@ -2,6 +2,142 @@
 document.addEventListener('DOMContentLoaded', function() {
   console.log("DOM fully loaded - initializing website functionality");
   
+  // -----------------------------------------
+  // 0. PRELOADER ANIMATION
+  // -----------------------------------------
+  const preloader = document.querySelector('.preloader');
+  
+  if (preloader) {
+    // Ensure preloader is visible initially
+    preloader.style.opacity = '1';
+    preloader.style.visibility = 'visible';
+    
+    // Simulate loading progress (you can adjust timing or make it load based on actual content)
+    let loadedCount = 0;
+    const totalItems = 8; // Representing major page elements to load
+    const preloaderBar = document.querySelector('.preloader-bar');
+    
+    function simulateLoading() {
+      if (loadedCount < totalItems) {
+        loadedCount++;
+        if (preloaderBar) {
+          const progress = (loadedCount / totalItems) * 100;
+          preloaderBar.style.width = `${progress}%`;
+        }
+        
+        setTimeout(simulateLoading, 400); // Simulate loading intervals
+      } else {
+        // When loading is complete, fade out the preloader
+        setTimeout(() => {
+          if (preloader) {
+            preloader.classList.add('fade-out');
+            
+            // After animation completes, set display to none for better performance
+            setTimeout(() => {
+              preloader.style.display = 'none';
+              
+              // HERO SECTION ANIMATION - Moved here to trigger after preloader completes
+              const heroTitle = document.querySelector('.hero-title');
+              const heroSubtitle = document.querySelector('.hero-subtitle');
+              const heroDescription = document.querySelector('.hero-description');
+              const heroCta = document.querySelector('.hero-cta');
+              
+              if (heroTitle) {
+                console.log("Animating hero text elements after preloader");
+                // Make sure elements are initially invisible and positioned for animation
+                gsap.set(heroSubtitle, { opacity: 0, x: -50 });
+                gsap.set(heroDescription, { opacity: 0, x: 50 });
+                gsap.set(heroCta, { opacity: 0, y: 30 });
+                
+                // Staggered animation sequence
+                const heroTl = gsap.timeline({ defaults: { ease: 'power3.out' } });
+                
+                if (typeof SplitText !== 'undefined') {
+                  // Split text animation for the title with enhanced movement
+                  const splitTitle = new SplitText(heroTitle, { type: 'chars' });
+                  
+                  gsap.set(splitTitle.chars, { opacity: 0, y: 80, rotationX: 45 });
+                  
+                  heroTl.to(heroTitle, { opacity: 1, duration: 0.1 })
+                        .to(splitTitle.chars, {
+                          opacity: 1,
+                          y: 0,
+                          rotationX: 0,
+                          stagger: 0.03,
+                          duration: 0.8,
+                          ease: 'back.out(1.7)'
+                        });
+                } else {
+                  // Fallback if SplitText isn't available
+                  gsap.set(heroTitle, { opacity: 0, y: -50 });
+                  heroTl.to(heroTitle, { 
+                    opacity: 1, 
+                    y: 0, 
+                    duration: 1,
+                    ease: 'back.out(1.2)'
+                  });
+                }
+                
+                // Animate subtitle with left-to-right motion
+                if (heroSubtitle) {
+                  heroTl.to(heroSubtitle, { 
+                    opacity: 1, 
+                    x: 0, 
+                    duration: 0.8,
+                    ease: 'power2.out'
+                  }, "-=0.5");
+                }
+                
+                // Animate description with right-to-left motion
+                if (heroDescription) {
+                  heroTl.to(heroDescription, { 
+                    opacity: 1, 
+                    x: 0, 
+                    duration: 0.8,
+                    ease: 'power2.out'
+                  }, "-=0.6");
+                }
+                
+                // Animate CTA with bottom-to-top motion and bounce
+                if (heroCta) {
+                  heroTl.to(heroCta, { 
+                    opacity: 1, 
+                    y: 0, 
+                    duration: 0.8,
+                    ease: 'back.out(1.7)',
+                    onComplete: () => {
+                      // Add a subtle floating animation to the CTA button
+                      gsap.to(heroCta, {
+                        y: '-5px',
+                        duration: 1.5,
+                        repeat: -1,
+                        yoyo: true,
+                        ease: 'sine.inOut'
+                      });
+                    }
+                  }, "-=0.5");
+                }
+                
+                // Add a subtle parallax effect to the video background
+                const heroBackground = document.querySelector('.hero-background');
+                if (heroBackground) {
+                  gsap.from(heroBackground, {
+                    scale: 1.1,
+                    duration: 1.5,
+                    ease: 'power1.out'
+                  });
+                }
+              }
+            }, 600); // Match with the CSS transition duration
+          }
+        }, 500); // Small delay after the progress reaches 100%
+      }
+    }
+    
+    // Start the loading simulation
+    setTimeout(simulateLoading, 500);
+  }
+  
   // Register GSAP plugins first
   if (typeof gsap !== 'undefined') {
     console.log("GSAP detected - registering plugins");
@@ -26,7 +162,23 @@ document.addEventListener('DOMContentLoaded', function() {
   localStorage.setItem('theme', 'dark');
   
   // -----------------------------------------
-  // 2. CUSTOM CURSOR
+  // 2. NAVIGATION BAR BEHAVIOR
+  // -----------------------------------------
+  const header = document.querySelector('.site-header');
+  if (header) {
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 100) {
+        header.style.backgroundColor = 'rgba(10, 10, 10, 0.95)';
+        header.style.boxShadow = '0 2px 10px rgba(0, 0, 0, 0.2)';
+      } else {
+        header.style.backgroundColor = 'transparent';
+        header.style.boxShadow = 'none';
+      }
+    });
+  }
+  
+  // -----------------------------------------
+  // 3. CUSTOM CURSOR
   // -----------------------------------------
   const cursor = document.querySelector('.cursor');
   const cursorFollower = document.querySelector('.cursor-follower');
@@ -72,7 +224,7 @@ document.addEventListener('DOMContentLoaded', function() {
   }
   
   // -----------------------------------------
-  // 3. SCROLL PROGRESS INDICATOR
+  // 4. SCROLL PROGRESS INDICATOR
   // -----------------------------------------
   const scrollProgress = document.querySelector('.scroll-progress');
   if (scrollProgress) {
@@ -86,7 +238,7 @@ document.addEventListener('DOMContentLoaded', function() {
   }
   
   // -----------------------------------------
-  // 4. SMOOTH SCROLL FOR ANCHOR LINKS
+  // 5. SMOOTH SCROLL FOR ANCHOR LINKS
   // -----------------------------------------
   document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', function(e) {
@@ -104,11 +256,11 @@ document.addEventListener('DOMContentLoaded', function() {
   });
   
   // -----------------------------------------
-  // 5. YOUTUBE VIDEO BACKGROUND
+  // 6. YOUTUBE VIDEO BACKGROUND
   // -----------------------------------------
   const youtubeContainer = document.getElementById('youtube-container');
   if (youtubeContainer) {
-    const videoId = 'sYC5BfJy2nw'; // YouTube video ID
+    const videoId = 'kHrEA7dN95o'; // Updated YouTube video ID
     
     // Create player div
     const playerDiv = document.createElement('div');
@@ -153,7 +305,9 @@ document.addEventListener('DOMContentLoaded', function() {
           playsinline: 1,
           enablejsapi: 1,
           playlist: videoId,
-          vq: 'hd1080'
+          vq: 'hd1080',
+          origin: window.location.origin,
+          start: 12  // Start 12 seconds in to avoid initial black screen
         },
         events: {
           onReady: function(event) {
@@ -161,6 +315,9 @@ document.addEventListener('DOMContentLoaded', function() {
             event.target.mute();
             event.target.playVideo();
             resizeYoutubePlayer();
+            
+            // Handle any initial sizing issues
+            setTimeout(resizeYoutubePlayer, 1000);
           },
           onStateChange: function(event) {
             if (event.data === YT.PlayerState.ENDED) {
@@ -176,51 +333,13 @@ document.addEventListener('DOMContentLoaded', function() {
   }
   
   // -----------------------------------------
-  // 6. HERO SECTION TEXT ANIMATIONS
+  // 7. HERO SECTION TEXT ANIMATIONS
   // -----------------------------------------
-  const heroTitle = document.querySelector('.hero-title');
-  const heroSubtitle = document.querySelector('.hero-subtitle');
-  const heroDescription = document.querySelector('.hero-description');
-  const heroCta = document.querySelector('.hero-cta');
-  
-  if (heroTitle) {
-    console.log("Animating hero text elements");
-    // Make sure elements are visible
-    heroTitle.style.opacity = 1;
-    
-    if (typeof SplitText !== 'undefined') {
-      // Split text animation
-      const splitTitle = new SplitText(heroTitle, { type: 'chars' });
-      
-      gsap.from(splitTitle.chars, {
-        opacity: 0,
-        y: 50,
-        stagger: 0.03,
-        duration: 1,
-        ease: 'power2.out',
-        delay: 0.5
-      });
-    }
-    
-    // Animate other hero elements
-    if (heroSubtitle) {
-      heroSubtitle.style.opacity = 0;
-      gsap.to(heroSubtitle, { opacity: 1, duration: 1, delay: 0.3 });
-    }
-    
-    if (heroDescription) {
-      heroDescription.style.opacity = 0;
-      gsap.to(heroDescription, { opacity: 1, duration: 1, delay: 1.2 });
-    }
-    
-    if (heroCta) {
-      heroCta.style.opacity = 0;
-      gsap.to(heroCta, { opacity: 1, duration: 1, delay: 1.5 });
-    }
-  }
+  // Original hero animations moved to preloader completion
+  // This section left intentionally empty as animations now trigger after preloader
   
   // -----------------------------------------
-  // 7. SECTION ANIMATIONS
+  // 8. SECTION ANIMATIONS
   // -----------------------------------------
   console.log("Setting up section animations");
   
@@ -249,42 +368,42 @@ document.addEventListener('DOMContentLoaded', function() {
     
     if (heading) {
       gsap.from(heading, {
-        opacity: 0,
-        y: 30,
-        duration: 1,
-        scrollTrigger: {
-          trigger: header,
-          start: 'top 80%',
-          toggleActions: 'play none none none'
-        }
-      });
+      opacity: 0,
+      y: 30,
+      duration: 1,
+      scrollTrigger: {
+        trigger: header,
+        start: 'top 80%',
+        toggleActions: 'play none none none'
+      }
+    });
     }
     
     if (line) {
       gsap.from(line, {
-        width: 0,
-        duration: 1,
-        delay: 0.3,
-        scrollTrigger: {
-          trigger: header,
-          start: 'top 80%',
-          toggleActions: 'play none none none'
-        }
-      });
+      width: 0,
+      duration: 1,
+      delay: 0.3,
+      scrollTrigger: {
+        trigger: header,
+        start: 'top 80%',
+        toggleActions: 'play none none none'
+      }
+    });
     }
     
     if (number) {
       gsap.from(number, {
-        opacity: 0,
-        scale: 0.5,
-        duration: 1,
-        delay: 0.2,
-        scrollTrigger: {
-          trigger: header,
-          start: 'top 80%',
-          toggleActions: 'play none none none'
-        }
-      });
+      opacity: 0,
+      scale: 0.5,
+      duration: 1,
+      delay: 0.2,
+      scrollTrigger: {
+        trigger: header,
+        start: 'top 80%',
+        toggleActions: 'play none none none'
+      }
+    });
     }
   });
   
@@ -296,33 +415,33 @@ document.addEventListener('DOMContentLoaded', function() {
     
     if (aboutText) {
       gsap.from(aboutText, {
-        opacity: 0,
-        x: -50,
-        duration: 1,
-        scrollTrigger: {
+      opacity: 0,
+      x: -50,
+      duration: 1,
+      scrollTrigger: {
           trigger: aboutContent,
-          start: 'top 70%',
-          toggleActions: 'play none none none'
-        }
-      });
+        start: 'top 70%',
+        toggleActions: 'play none none none'
+      }
+    });
     }
     
     if (aboutImage) {
       gsap.from(aboutImage, {
-        opacity: 0,
-        x: 50,
-        duration: 1,
-        scrollTrigger: {
+      opacity: 0,
+      x: 50,
+      duration: 1,
+      scrollTrigger: {
           trigger: aboutContent,
-          start: 'top 70%',
-          toggleActions: 'play none none none'
-        }
-      });
-    }
+        start: 'top 70%',
+        toggleActions: 'play none none none'
+      }
+    });
+  }
   }
   
   // -----------------------------------------
-  // 8. ANIMATED STAT COUNTING
+  // 9. ANIMATED STAT COUNTING
   // -----------------------------------------
   console.log("Setting up stat number animation");
   
@@ -361,7 +480,7 @@ document.addEventListener('DOMContentLoaded', function() {
   });
   
   // -----------------------------------------
-  // 9. BEFORE-AFTER TRANSFORMATION
+  // 10. BEFORE-AFTER TRANSFORMATION
   // -----------------------------------------
   console.log("Setting up before-after transformation");
   
@@ -375,8 +494,8 @@ document.addEventListener('DOMContentLoaded', function() {
     let divider = transformationCard.querySelector('.transformation-divider');
     if (!divider) {
       divider = document.createElement('div');
-      divider.className = 'transformation-divider';
-      transformationCard.appendChild(divider);
+    divider.className = 'transformation-divider';
+    transformationCard.appendChild(divider);
       console.log("Created transformation divider element");
     }
     
@@ -397,21 +516,21 @@ document.addEventListener('DOMContentLoaded', function() {
       
       // Handle controls
       const controlButtons = transformationControls.querySelectorAll('.control-btn');
-      controlButtons.forEach(button => {
-        button.addEventListener('click', () => {
+    controlButtons.forEach(button => {
+      button.addEventListener('click', () => {
           // Update active button
-          controlButtons.forEach(btn => btn.classList.remove('active'));
-          button.classList.add('active');
-          
-          // Get view type
-          const viewType = button.getAttribute('data-view');
+        controlButtons.forEach(btn => btn.classList.remove('active'));
+        button.classList.add('active');
+        
+        // Get view type
+        const viewType = button.getAttribute('data-view');
           console.log(`Changing transformation view to: ${viewType}`);
-          
-          // Remove all view classes
-          transformationCard.classList.remove('view-before', 'view-after', 'view-hover', 'view-split');
-          
+        
+        // Remove all view classes
+        transformationCard.classList.remove('view-before', 'view-after', 'view-hover', 'view-split');
+        
           // Apply selected view
-          transformationCard.classList.add(`view-${viewType}`);
+        transformationCard.classList.add(`view-${viewType}`);
           
           // Handle transformations based on view type
           switch(viewType) {
@@ -426,12 +545,12 @@ document.addEventListener('DOMContentLoaded', function() {
               break;
               
             case 'after':
-              divider.style.opacity = '0';
+          divider.style.opacity = '0';
               afterSide.style.clipPath = 'polygon(0 0, 100% 0, 100% 100%, 0 100%)';
               break;
               
             case 'hover':
-              divider.style.opacity = '0';
+          divider.style.opacity = '0';
               afterSide.style.clipPath = 'polygon(0 0, 0 0, 0 100%, 0 100%)';
               
               // Add hover effect
@@ -447,55 +566,55 @@ document.addEventListener('DOMContentLoaded', function() {
                 }
               });
               break;
-          }
-        });
-      });
-      
-      // Draggable split functionality
-      let isDragging = false;
-      
-      transformationCard.addEventListener('mousedown', (e) => {
-        if (transformationCard.classList.contains('view-split')) {
-          isDragging = true;
-          document.body.style.cursor = 'ew-resize';
-          updateSplitPosition(e.clientX);
         }
       });
-      
-      window.addEventListener('mouseup', () => {
+    });
+    
+      // Draggable split functionality
+    let isDragging = false;
+    
+    transformationCard.addEventListener('mousedown', (e) => {
+      if (transformationCard.classList.contains('view-split')) {
+        isDragging = true;
+        document.body.style.cursor = 'ew-resize';
+        updateSplitPosition(e.clientX);
+      }
+    });
+    
+    window.addEventListener('mouseup', () => {
         isDragging = false;
         document.body.style.cursor = 'default';
-      });
-      
-      window.addEventListener('mousemove', (e) => {
-        if (isDragging) {
-          updateSplitPosition(e.clientX);
-        }
-      });
-      
+    });
+    
+    window.addEventListener('mousemove', (e) => {
+      if (isDragging) {
+        updateSplitPosition(e.clientX);
+      }
+    });
+    
       // Touch support
-      transformationCard.addEventListener('touchstart', (e) => {
-        if (transformationCard.classList.contains('view-split')) {
-          isDragging = true;
-          updateSplitPosition(e.touches[0].clientX);
+    transformationCard.addEventListener('touchstart', (e) => {
+      if (transformationCard.classList.contains('view-split')) {
+        isDragging = true;
+        updateSplitPosition(e.touches[0].clientX);
           e.preventDefault();
-        }
-      });
-      
-      window.addEventListener('touchend', () => {
-        isDragging = false;
-      });
-      
-      window.addEventListener('touchmove', (e) => {
-        if (isDragging) {
-          updateSplitPosition(e.touches[0].clientX);
-          e.preventDefault();
-        }
-      });
-      
-      // Function to update split position
-      function updateSplitPosition(x) {
-        const cardRect = transformationCard.getBoundingClientRect();
+      }
+    });
+    
+    window.addEventListener('touchend', () => {
+      isDragging = false;
+    });
+    
+    window.addEventListener('touchmove', (e) => {
+      if (isDragging) {
+        updateSplitPosition(e.touches[0].clientX);
+        e.preventDefault();
+      }
+    });
+    
+    // Function to update split position
+    function updateSplitPosition(x) {
+      const cardRect = transformationCard.getBoundingClientRect();
         const percentage = Math.max(10, Math.min(90, ((x - cardRect.left) / cardRect.width) * 100));
         
         afterSide.style.clipPath = `polygon(${percentage}% 0, 100% 0, 100% 100%, ${percentage}% 100%)`;
@@ -604,18 +723,18 @@ document.addEventListener('DOMContentLoaded', function() {
           });
         }
         
-        if (arrow) {
-          gsap.to(arrow, {
-            x: 5,
+      if (arrow) {
+        gsap.to(arrow, {
+          x: 5,
             opacity: 1,
-            duration: 0.3,
-            repeat: 1,
+          duration: 0.3,
+          repeat: 1,
             yoyo: true
-          });
-        }
-      });
-      
-      step.addEventListener('mouseleave', () => {
+        });
+      }
+    });
+    
+    step.addEventListener('mouseleave', () => {
         // Scale back
         gsap.to(step, {
           y: 0,
@@ -634,8 +753,8 @@ document.addEventListener('DOMContentLoaded', function() {
           
           gsap.to(icon, {
             color: 'var(--primary-color)',
-            rotation: 0,
-            scale: 1,
+        rotation: 0,
+        scale: 1,
             duration: 0.3
           });
         }
@@ -738,43 +857,43 @@ document.addEventListener('DOMContentLoaded', function() {
     
     if (heading) {
       gsap.from(heading, {
-        opacity: 0,
-        y: -30,
-        duration: 1,
-        scrollTrigger: {
+    opacity: 0,
+    y: -30,
+    duration: 1,
+    scrollTrigger: {
           trigger: ctaSection,
-          start: 'top 70%',
-          toggleActions: 'play none none none'
-        }
-      });
+      start: 'top 70%',
+      toggleActions: 'play none none none'
     }
-    
+  });
+    }
+  
     if (paragraph) {
       gsap.from(paragraph, {
-        opacity: 0,
-        y: 30,
-        duration: 1,
-        delay: 0.2,
-        scrollTrigger: {
+    opacity: 0,
+    y: 30,
+    duration: 1,
+    delay: 0.2,
+    scrollTrigger: {
           trigger: ctaSection,
-          start: 'top 70%',
-          toggleActions: 'play none none none'
-        }
-      });
+      start: 'top 70%',
+      toggleActions: 'play none none none'
     }
-    
+  });
+    }
+  
     if (button) {
       gsap.from(button, {
-        opacity: 0,
-        scale: 0.8,
-        duration: 1,
-        delay: 0.4,
-        scrollTrigger: {
+    opacity: 0,
+    scale: 0.8,
+    duration: 1,
+    delay: 0.4,
+    scrollTrigger: {
           trigger: ctaSection,
-          start: 'top 70%',
-          toggleActions: 'play none none none'
-        }
-      });
+      start: 'top 70%',
+      toggleActions: 'play none none none'
+    }
+  });
     }
   }
   
