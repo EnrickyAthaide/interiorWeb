@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Upload Blog | Admin Dashboard</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Raleway:wght@300;400;500;600&display=swap">
+  <link rel="stylesheet" href="/stylesheets/admin-dashboard.css">
+</head>
+<body>
+  <!-- Custom Cursor -->
+  <div class="cursor"></div>
+  <div class="cursor-follower"></div>
+  
+  <div class="dashboard-container">
+    <!-- Sidebar -->
+    <aside class="sidebar">
+      <div class="sidebar-header">
+        <a href="/" class="brand-link">
+          <img src="/images/background_transparent_logo.png" alt="Studio Logo" class="logo-img">
+        </a>
+        <h1>ADMIN</h1>
+      </div>
+      
+      <nav class="sidebar-nav">
+        <ul>
+          <li class="nav-item">
+            <a href="/admin/dashboard">
+              <i class="fas fa-home"></i>
+              <span>Dashboard</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="/admin/dashboard/contacts">
+              <i class="fas fa-envelope"></i>
+              <span>Contact Responses</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="/admin/dashboard/projects">
+              <i class="fas fa-briefcase"></i>
+              <span>Projects</span>
+            </a>
+          </li>
+          <li class="nav-item active">
+            <a href="/admin/dashboard/blogs">
+              <i class="fas fa-pen-fancy"></i>
+              <span>Blog Posts</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="/admin/dashboard/settings">
+              <i class="fas fa-cog"></i>
+              <span>Settings</span>
+            </a>
+          </li>
+        </ul>
+      </nav>
+      
+      <div class="sidebar-footer">
+        <a href="/admin/logout" class="logout-btn">
+          <i class="fas fa-sign-out-alt"></i>
+          <span>Log Out</span>
+        </a>
+      </div>
+    </aside>
+    
+    <!-- Main Content Area -->
+    <main class="main-content">
+      <header class="content-header">
+        <div class="header-left">
+          <button class="toggle-sidebar">
+            <i class="fas fa-bars"></i>
+          </button>
+          <h2>Create New Blog Post</h2>
+        </div>
+        
+        <div class="header-right">
+          <div class="admin-profile">
+            <span class="admin-name">Admin User</span>
+            <div class="admin-avatar">
+              <img src="/images/avatar-placeholder.jpg" alt="Admin">
+            </div>
+          </div>
+        </div>
+      </header>
+      
+      <div class="content-body">
+        <div class="upload-form-container">
+          <form id="blogUploadForm" action="/admin/dashboard/blogs/upload" method="POST" enctype="multipart/form-data">
+            <div class="form-section">
+              <h3>Blog Details</h3>
+              <div class="form-grid">
+                <div class="form-group">
+                  <label for="title">Title</label>
+                  <input type="text" id="title" name="title" required>
+                </div>
+                <div class="form-group">
+                  <label for="slug">URL Slug</label>
+                  <input type="text" id="slug" name="slug" required placeholder="e.g., the-art-of-creating-timeless-spaces">
+                </div>
+                <div class="form-group">
+                  <label for="subtitle">Subtitle</label>
+                  <input type="text" id="subtitle" name="subtitle" required>
+                </div>
+                <div class="form-group">
+                  <label for="category">Category</label>
+                  <input type="text" id="category" name="category" required placeholder="e.g., INTERIOR DESIGN">
+                </div>
+                 <div class="form-group">
+                  <label for="date">Date</label>
+                  <input type="date" id="date" name="date" required>
+                </div>
+              </div>
+            </div>
+
+            <div class="form-section">
+              <h3>Author Information</h3>
+              <div class="form-grid">
+                <div class="form-group">
+                  <label for="authorName">Author Name</label>
+                  <input type="text" id="authorName" name="authorName" required>
+                </div>
+                <div class="form-group">
+                  <label for="authorRole">Author Role</label>
+                  <input type="text" id="authorRole" name="authorRole" required>
+                </div>
+                <div class="form-group full-width">
+                  <label for="authorImage">Author Image</label>
+                  <input type="file" id="authorImage" name="authorImage" accept="image/*" required>
+                </div>
+              </div>
+            </div>
+
+            <div class="form-section">
+              <h3>Blog Images</h3>
+              <div class="form-group">
+                <label for="heroImage">Hero Image</label>
+                <div class="drag-drop-container" id="heroImageDrop">
+                  <input type="file" id="heroImage" name="heroImage" accept="image/*" required class="file-input">
+                  <div class="drag-drop-area">
+                    <i class="fas fa-cloud-upload-alt"></i>
+                    <p>Drag & drop hero image here or click to browse</p>
+                    <span class="file-name"></span>
+                  </div>
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="contentImages">Content Images (exactly 11 images required)</label>
+                <div class="drag-drop-container" id="contentImagesDrop">
+                  <input type="file" id="contentImages" name="contentImages" multiple accept="image/*" class="file-input">
+                  <div class="drag-drop-area">
+                    <i class="fas fa-cloud-upload-alt"></i>
+                    <p>Drag & drop content images here or click to browse</p>
+                    <p class="image-count">0/11 images selected</p>
+                  </div>
+                </div>
+                <div id="contentImagesPreview" class="images-preview"></div>
+                <small class="form-text">Please select exactly 11 images for the blog content.</small>
+              </div>
+            </div>
+
+            <div class="form-section">
+              <h3>Blog Content</h3>
+              <div class="form-group full-width">
+                <label for="content">Content</label>
+                <textarea id="content" name="content" rows="12" required></textarea>
+              </div>
+            </div>
+
+            <div class="form-note">
+              <i class="fas fa-info-circle"></i>
+              <p>The 'Next Article' and 'Related Posts' will be automatically assigned from existing blog posts in the database.</p>
+            </div>
+
+            <div class="form-actions">
+              <button type="submit" class="btn-submit">
+                <i class="fas fa-upload"></i> Upload Blog
+              </button>
+              <a href="/admin/dashboard/blogs" class="btn-cancel">
+                <i class="fas fa-times"></i> Cancel
+              </a>
+            </div>
+          </form>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <style>
+    .drag-drop-container {
+      position: relative;
+      width: 100%;
+      margin-bottom: 1rem;
+    }
+
+    .drag-drop-area {
+      border: 2px dashed #BAA170;
+      border-radius: 8px;
+      padding: 2rem;
+      text-align: center;
+      background: rgba(186, 161, 112, 0.05);
+      transition: all 0.3s ease;
+      cursor: pointer;
+    }
+
+    .drag-drop-area:hover {
+      background: rgba(186, 161, 112, 0.1);
+    }
+
+    .drag-drop-area.dragover {
+      background: rgba(186, 161, 112, 0.2);
+      border-color: #BAA170;
+    }
+
+    .drag-drop-area i {
+      font-size: 2rem;
+      color: #BAA170;
+      margin-bottom: 1rem;
+    }
+
+    .drag-drop-area p {
+      margin: 0.5rem 0;
+      color: #666;
+    }
+
+    .file-name {
+      display: block;
+      margin-top: 0.5rem;
+      color: #BAA170;
+      font-size: 0.9rem;
+    }
+
+    .file-input {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      top: 0;
+      left: 0;
+      opacity: 0;
+      cursor: pointer;
+    }
+
+    .images-preview {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+      gap: 1rem;
+      margin-top: 1rem;
+    }
+
+    .preview-item {
+      position: relative;
+      aspect-ratio: 1;
+      border-radius: 4px;
+      overflow: hidden;
+    }
+
+    .preview-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .preview-item .remove-image {
+      position: absolute;
+      top: 4px;
+      right: 4px;
+      background: rgba(0, 0, 0, 0.5);
+      color: white;
+      border: none;
+      border-radius: 50%;
+      width: 24px;
+      height: 24px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.8rem;
+    }
+
+    .image-count {
+      color: #BAA170;
+      font-weight: 500;
+    }
+  </style>
+
+  <script>
+    // Drag and drop functionality
+    function setupDragAndDrop(dropZoneId, inputId, isMultiple = false) {
+      const dropZone = document.getElementById(dropZoneId);
+      const input = document.getElementById(inputId);
+      const previewContainer = isMultiple ? document.getElementById('contentImagesPreview') : null;
+      const imageCount = isMultiple ? dropZone.querySelector('.image-count') : null;
+
+      // Prevent default drag behaviors
+      ['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
+        dropZone.addEventListener(eventName, preventDefaults, false);
+        document.body.addEventListener(eventName, preventDefaults, false);
+      });
+
+      // Highlight drop zone when item is dragged over it
+      ['dragenter', 'dragover'].forEach(eventName => {
+        dropZone.addEventListener(eventName, highlight, false);
+      });
+
+      ['dragleave', 'drop'].forEach(eventName => {
+        dropZone.addEventListener(eventName, unhighlight, false);
+      });
+
+      // Handle dropped files
+      dropZone.addEventListener('drop', handleDrop, false);
+
+      function preventDefaults(e) {
+        e.preventDefault();
+        e.stopPropagation();
+      }
+
+      function highlight(e) {
+        dropZone.classList.add('dragover');
+      }
+
+      function unhighlight(e) {
+        dropZone.classList.remove('dragover');
+      }
+
+      function handleDrop(e) {
+        const dt = e.dataTransfer;
+        const files = dt.files;
+        handleFiles(files);
+      }
+
+      function handleFiles(files) {
+        if (isMultiple) {
+          // For content images
+          const currentFiles = Array.from(input.files || []);
+          const newFiles = Array.from(files);
+          const totalFiles = [...currentFiles, ...newFiles];
+
+          if (totalFiles.length > 11) {
+            alert('You can only upload 11 content images in total.');
+            return;
+          }
+
+          // Create a new FileList-like object
+          const dataTransfer = new DataTransfer();
+          totalFiles.forEach(file => dataTransfer.items.add(file));
+          input.files = dataTransfer.files;
+
+          updateContentImagesPreview();
+        } else {
+          // For hero image
+          input.files = files;
+          const fileName = files[0].name;
+          dropZone.querySelector('.file-name').textContent = fileName;
+        }
+      }
+
+      function updateContentImagesPreview() {
+        if (!previewContainer) return;
+
+        previewContainer.innerHTML = '';
+        const files = Array.from(input.files);
+
+        files.forEach((file, index) => {
+          const reader = new FileReader();
+          reader.onload = function(e) {
+            const previewItem = document.createElement('div');
+            previewItem.className = 'preview-item';
+            previewItem.innerHTML = `
+              <img src="${e.target.result}" alt="Preview">
+              <button type="button" class="remove-image" data-index="${index}">
+                <i class="fas fa-times"></i>
+              </button>
+            `;
+            previewContainer.appendChild(previewItem);
+
+            // Add remove functionality
+            previewItem.querySelector('.remove-image').addEventListener('click', function() {
+              const dt = new DataTransfer();
+              const files = Array.from(input.files);
+              files.splice(index, 1);
+              files.forEach(file => dt.items.add(file));
+              input.files = dt.files;
+              updateContentImagesPreview();
+            });
+          };
+          reader.readAsDataURL(file);
+        });
+
+        if (imageCount) {
+          imageCount.textContent = `${files.length}/11 images selected`;
+        }
+      }
+
+      // Handle file input change
+      input.addEventListener('change', function() {
+        if (isMultiple) {
+          const files = Array.from(this.files);
+          if (files.length > 11) {
+            alert('You can only upload 11 content images.');
+            this.value = '';
+            return;
+          }
+          updateContentImagesPreview();
+        } else {
+          const fileName = this.files[0]?.name || '';
+          dropZone.querySelector('.file-name').textContent = fileName;
+        }
+      });
+    }
+
+    // Initialize drag and drop for both image inputs
+    setupDragAndDrop('heroImageDrop', 'heroImage');
+    setupDragAndDrop('contentImagesDrop', 'contentImages', true);
+
+    // Form validation
+    document.getElementById('blogUploadForm').addEventListener('submit', function(e) {
+      const contentImages = document.getElementById('contentImages').files;
+      if (contentImages.length !== 11) {
+        e.preventDefault();
+        alert('Please select exactly 11 content images.');
+      }
+    });
+  </script>
+</body>
+</html> 

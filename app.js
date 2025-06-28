@@ -11,6 +11,9 @@ const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
 const session = require('express-session');
 const flash = require('connect-flash');
+const multer = require('multer');
+const adminRoutes = require('./routes/admin');
+const fs = require('fs');
 
 app.set("view engine" ,"ejs")
 
@@ -62,6 +65,34 @@ const isAuthenticated = (req, res, next) => {
     return res.redirect('/admin');
   }
 };
+
+// Multer configuration for project image uploads
+const storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, 'public/images/projects')
+  },
+  filename: function (req, file, cb) {
+    const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9)
+    cb(null, file.fieldname + '-' + uniqueSuffix + path.extname(file.originalname))
+  }
+});
+
+// File filter to only allow images
+const fileFilter = (req, file, cb) => {
+  if (file.mimetype.startsWith('image/')) {
+    cb(null, true);
+  } else {
+    cb(new Error('Not an image! Please upload only images.'), false);
+  }
+};
+
+const upload = multer({ 
+  storage: storage,
+  fileFilter: fileFilter,
+  limits: {
+    fileSize: 5 * 1024 * 1024 // 5MB limit per file
+  }
+});
 
 app.get("/" ,(req,res)=>{
     res.render('index', {
@@ -176,6 +207,68 @@ app.get("/projects", async (req, res) => {
   }
 });
 
+// New test projects page route
+app.get('/projects-test', async (req, res) => {
+    try {
+        console.log('Fetching projects...');
+        let projects = await Project.find()
+            .select('slug projectName projectSubtitle projectCategory projectYear projectImages')
+            .sort({ projectYear: -1 })
+            .lean();
+        
+        console.log('Projects found:', projects.length);
+        
+        // If no projects exist, create a test project
+        if (projects.length === 0) {
+            console.log('No projects found, creating test project...');
+            const testProject = new Project({
+                slug: 'test-project',
+                projectName: 'Test Project',
+                projectSubtitle: 'A beautiful test project',
+                projectDescription: 'This is a test project to demonstrate the projects page functionality.',
+                projectCategory: 'residential',
+                projectLocation: 'New York',
+                projectYear: 2024,
+                projectImages: [
+                    '/images/home/project-1.jpg',
+                    '/images/home/project-2.jpg',
+                    '/images/home/project-3.jpg',
+                    '/images/home/about.jpg',
+                    '/images/home/before.jpg',
+                    '/images/home/after.jpg',
+                    '/images/blogs/authors/author-1.jpg',
+                    '/images/blogs/authors/author-2.jpg',
+                    '/images/blogs/authors/author-3.jpg',
+                    '/images/blogs/authors/author-4.jpg'
+                ],
+                features: ['Modern Design', 'Sustainable Materials', 'Smart Home']
+            });
+            
+            await testProject.save();
+            console.log('Test project created');
+            projects = await Project.find()
+                .select('slug projectName projectSubtitle projectCategory projectYear projectImages')
+                .sort({ projectYear: -1 })
+                .lean();
+        }
+        
+        // Log the first project's details including image paths
+        if (projects.length > 0) {
+            console.log('First project details:');
+            console.log('Name:', projects[0].projectName);
+            console.log('First image:', projects[0].projectImages[0]);
+        }
+        
+        res.render('projects/all-projects', { 
+            projects,
+            title: "Our Projects | Luxury Interior Design"
+        });
+    } catch (error) {
+        console.error('Error fetching projects:', error);
+        res.status(500).send('Error loading projects');
+    }
+});
+
 // Dynamic project detail routes
 app.get("/projects/:slug", async (req, res) => {
   try {
@@ -196,13 +289,13 @@ app.get("/projects/:slug", async (req, res) => {
     
     if (!nextProjectData) {
       const nextProject = await Project.findOne({ _id: { $ne: project._id } })
-        .select('slug projectName projectDescription projectImages')
+        .select('slug projectName projectSubtitle projectImages')
         .lean();
       
       if (nextProject) {
         nextProjectData = {
           name: nextProject.projectName,
-          description: nextProject.projectDescription,
+          description: nextProject.projectSubtitle,
           link: `/projects/${nextProject.slug}`
         };
         
@@ -210,6 +303,14 @@ app.get("/projects/:slug", async (req, res) => {
         if (nextProject.projectImages && nextProject.projectImages.length > 0) {
           nextProjectHeroImage = nextProject.projectImages[0];
         }
+      } else {
+        // If no other projects exist, use the current project's data
+        nextProjectData = {
+          name: project.projectName,
+          description: project.projectSubtitle,
+          link: `/projects/${project.slug}`
+        };
+        nextProjectHeroImage = project.projectImages[0];
       }
     } else {
       // If we already have nextProject data, find that project to get its hero image
@@ -220,18 +321,25 @@ app.get("/projects/:slug", async (req, res) => {
         
       if (nextProjectDetails && nextProjectDetails.projectImages && nextProjectDetails.projectImages.length > 0) {
         nextProjectHeroImage = nextProjectDetails.projectImages[0];
+      } else {
+        // Fallback to current project's first image if next project's image is not found
+        nextProjectHeroImage = project.projectImages[0];
       }
     }
     
-    // Add the next project hero image to the project data
+    // Add the next project data to the project object
+    project.nextProject = nextProjectData;
     project.nextProjectHeroImage = nextProjectHeroImage;
     
-    // Pass the project data directly to the template
-    // The model structure already matches the template expectations
+    // Pass the project data to the template
     res.render("projects/building", project);
-  } catch (err) {
-    console.error('Error fetching project:', err);
-    res.redirect('/projects');
+
+  } catch (error) {
+    console.error('Error loading project:', error);
+    res.status(500).render('error', { 
+      message: 'Error loading project',
+      error: process.env.NODE_ENV === 'development' ? error : {}
+    });
   }
 });
 
@@ -439,17 +547,11 @@ app.get('/admin/dashboard/contacts', isAuthenticated, async (req, res) => {
   }
 });
 
-// Admin Projects Page - Under Construction
-app.get('/admin/dashboard/projects', isAuthenticated, (req, res) => {
-  res.render('admin-under-construction', {
-    page: 'projects'
-  });
-});
-
-// Admin Blogs Page - Under Construction
+// Admin Blogs Page
 app.get('/admin/dashboard/blogs', isAuthenticated, (req, res) => {
-  res.render('admin-under-construction', {
-    page: 'blogs'
+  res.render('admin-blog-upload', {
+    title: "Blogs | Admin Dashboard",
+    page: "blogs"
   });
 });
 
@@ -458,6 +560,164 @@ app.get('/admin/dashboard/settings', isAuthenticated, (req, res) => {
   res.render('admin-under-construction', {
     page: 'settings'
   });
+});
+
+// Admin Project Upload Route
+app.post('/admin/dashboard/projects/upload', isAuthenticated, upload.array('projectImages', 50), async (req, res) => {
+  try {
+    // Validate required fields
+    const { projectName, slug, projectSubtitle, projectDescription, projectCategory, projectLocation, projectYear } = req.body;
+    
+    if (!projectName || !slug || !projectSubtitle || !projectDescription || !projectCategory || !projectLocation || !projectYear) {
+      return res.status(400).json({ error: 'All fields are required' });
+    }
+
+    // Validate minimum number of images
+    if (!req.files || req.files.length < 10) {
+      return res.status(400).json({ error: 'Please upload at least 10 images for the project' });
+    }
+
+    // Create image paths array
+    const projectImages = req.files.map(file => `/images/projects/${file.filename}`);
+
+    // Create new project
+    const project = new Project({
+      slug,
+      projectName,
+      projectSubtitle,
+      projectDescription,
+      projectCategory,
+      projectLocation,
+      projectYear,
+      projectImages
+    });
+
+    await project.save();
+
+    res.status(201).json({ 
+      success: true, 
+      message: 'Project uploaded successfully',
+      project: project
+    });
+
+  } catch (error) {
+    console.error('Error uploading project:', error);
+    res.status(500).json({ 
+      error: 'Failed to upload project',
+      details: error.message 
+    });
+  }
+});
+
+// Create uploads directory if it doesn't exist
+const uploadsDir = path.join(__dirname, 'public', 'uploads', 'blogs');
+if (!fs.existsSync(uploadsDir)) {
+  fs.mkdirSync(uploadsDir, { recursive: true });
+}
+
+// Update multer storage configuration for blog uploads
+const blogStorage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, uploadsDir);
+  },
+  filename: function (req, file, cb) {
+    const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9);
+    cb(null, file.fieldname + '-' + uniqueSuffix + path.extname(file.originalname));
+  }
+});
+
+const blogUpload = multer({ 
+  storage: blogStorage,
+  fileFilter: fileFilter,
+  limits: {
+    fileSize: 5 * 1024 * 1024 // 5MB limit per file
+  }
+});
+
+// Blog upload route
+app.post('/admin/dashboard/blogs/upload', isAuthenticated, blogUpload.fields([
+  { name: 'heroImage', maxCount: 1 },
+  { name: 'contentImages', maxCount: 11 },
+  { name: 'authorImage', maxCount: 1 }
+]), async (req, res) => {
+  try {
+    // Validate required fields
+    const requiredFields = ['title', 'slug', 'subtitle', 'category', 'date', 'content', 'authorName', 'authorRole'];
+    for (const field of requiredFields) {
+      if (!req.body[field]) {
+        req.flash('error', `Missing required field: ${field}`);
+        return res.redirect('/admin/dashboard/blogs/upload');
+      }
+    }
+
+    // Validate files
+    if (!req.files.heroImage || !req.files.contentImages || !req.files.authorImage) {
+      req.flash('error', 'Missing required images');
+      return res.redirect('/admin/dashboard/blogs/upload');
+    }
+
+    if (req.files.contentImages.length !== 11) {
+      req.flash('error', 'Exactly 11 content images are required');
+      return res.redirect('/admin/dashboard/blogs/upload');
+    }
+
+    // Process and save images
+    const heroImage = req.files.heroImage[0];
+    const contentImages = req.files.contentImages;
+    const authorImage = req.files.authorImage[0];
+
+    // Create image paths
+    const heroImagePath = `/uploads/blogs/${heroImage.filename}`;
+    const authorImagePath = `/uploads/blogs/${authorImage.filename}`;
+    const contentImagePaths = contentImages.map(img => `/uploads/blogs/${img.filename}`);
+
+    // Get random blog for next article
+    const randomBlog = await Blog.aggregate([
+      { $sample: { size: 1 } }
+    ]);
+
+    // Get 3 random blogs for related posts (excluding the next article blog)
+    const relatedBlogs = await Blog.aggregate([
+      { $match: { _id: { $ne: randomBlog[0]?._id } } },
+      { $sample: { size: 3 } }
+    ]);
+
+    // Create new blog post
+    const newBlog = new Blog({
+      slug: req.body.slug,
+      title: req.body.title,
+      subtitle: req.body.subtitle,
+      category: req.body.category,
+      date: req.body.date,
+      heroImage: heroImagePath,
+      contentImages: contentImagePaths,
+      author: {
+        name: req.body.authorName,
+        role: req.body.authorRole,
+        image: authorImagePath
+      },
+      nextArticle: randomBlog[0] ? {
+        title: randomBlog[0].title,
+        link: `/blogs/${randomBlog[0].slug}`,
+        image: randomBlog[0].heroImage
+      } : null,
+      relatedPosts: relatedBlogs.map(blog => ({
+        title: blog.title,
+        link: `/blogs/${blog.slug}`
+      }))
+    });
+
+    await newBlog.save();
+
+    // Redirect to blogs dashboard with success message
+    req.flash('success', 'Blog post created successfully');
+    res.redirect('/admin/dashboard/blogs');
+
+  } catch (error) {
+    console.error('Error creating blog post:', error);
+    req.flash('error', 'Error creating blog post: ' + error.message);
+    res.redirect('/admin/dashboard/blogs/upload');
+  }
 });
 
 // Contact page route
@@ -561,6 +821,9 @@ app.get('/admin/dashboard/counts', isAuthenticated, async (req, res) => {
     res.status(500).json({ success: false, message: 'Server error' });
   }
 });
+
+// Admin routes
+app.use('/admin', adminRoutes);
 
 // 404 route - this needs to be after all other routes
 app.use((req, res, next) => {
