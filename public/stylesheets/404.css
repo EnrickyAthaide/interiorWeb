@@ -93,14 +93,16 @@ body {
 }
 
 .error-content {
-  padding: 2rem;
+  padding: 3rem;
+  position: relative;
+  min-height: 500px;
 }
 
 .error-code {
   font-size: 8rem;
   font-weight: 900;
   line-height: 1;
-  margin-bottom: 1rem;
+  margin-bottom: 2rem;
   color: var(--accent-color);
   position: relative;
   display: inline-block;
@@ -109,13 +111,13 @@ body {
 
 .error-title {
   font-size: 2rem;
-  margin-bottom: 1.5rem;
+  margin-bottom: 2rem;
   font-weight: 700;
 }
 
 .error-message {
   font-size: 1.2rem;
-  margin-bottom: 2rem;
+  margin-bottom: 3rem;
   line-height: 1.6;
   color: rgba(240, 240, 240, 0.8);
 }
@@ -192,7 +194,7 @@ body {
   width: 100px;
   height: 1px;
   background-color: var(--accent-color-light);
-  margin: 1rem auto;
+  margin: 1.5rem auto;
 }
 
 .error-brand {
@@ -219,16 +221,20 @@ body {
 }
 
 /* Footer */
-.footer-quote {
+.error-footer {
   position: absolute;
   bottom: 2rem;
   left: 0;
   width: 100%;
+  padding: 0 2rem;
+}
+
+.footer-quote {
   text-align: center;
   font-style: italic;
   color: rgba(240, 240, 240, 0.6);
   font-size: 0.9rem;
-  padding: 0 2rem;
+  margin-top: 1rem;
 }
 
 /* Interactive elements cursor styling */

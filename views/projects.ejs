@@ -50,7 +50,9 @@
                     <div class="title" data-link="/projects/lane">LANE</div>
                     <div class="title" data-link="/projects/project-four">PROJECT FOUR</div>
                     <div class="title" data-link="/projects/project-five">PROJECT FIVE</div>
-                    <div class="title" data-link="/projects/project-six">PROJECT SIX</div>
+                    <% if (projects.length > 5) { %>
+                        <div class="title" data-link="/projects-test">VIEW ALL PROJECTS</div>
+                    <% } %>
                 </div>
             </div>
 
@@ -65,8 +67,12 @@
                     class="project-image" id="image4">
                 <img src="https://www.datocms-assets.com/53023/1667208114-65468701-2-1.jpg" alt="Project 5"
                     class="project-image" id="image5">
-                <img src="https://www.datocms-assets.com/53023/1667208127-65468709-3.jpg" alt="Project 6"
-                    class="project-image" id="image6">
+                <% if (projects.length > 5) { %>
+                    <a href="/projects-test" class="project-image" id="image6" style="background: #1a1a1a; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; color: #BAA170; font-family: 'Raleway', sans-serif; text-transform: uppercase; letter-spacing: 1px; font-size: 1.2rem; text-decoration: none;">
+                        <i class="fas fa-arrow-right" style="font-size: 2rem; margin-bottom: 1rem;"></i>
+                        VIEW ALL PROJECTS
+                    </a>
+                <% } %>
             </div>
 
             <div class="project-info">
@@ -75,7 +81,9 @@
                 <div class="project-description" id="desc3">Minimalist urban design</div>
                 <div class="project-description" id="desc4">Luxurious countryside retreat</div>
                 <div class="project-description" id="desc5">Coastal contemporary living</div>
-                <div class="project-description" id="desc6">Industrial loft conversion</div>
+                <% if (projects.length > 5) { %>
+                     <a href="/projects-test" class="project-description" id="desc6" style="text-decoration: none; color: #aaa;">Explore our complete portfolio</a>
+                <% } %>
                 <div class="slide-counter">1 / 6</div>
             </div>
         </div>

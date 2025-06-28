@@ -3,13 +3,25 @@
     background-color: #1a1a1a;
     color: #fff;
     padding: 80px 0 30px;
+    height: auto;
+    min-height: auto;
+    box-sizing: border-box;
+}
+
+.main-footer .container {
+    max-width: 1400px; /* Match the max width of the projects grid */
+    margin: 0 auto;
+    padding: 0 20px; /* Add some horizontal padding */
+    height: auto;
+    min-height: auto;
 }
 
 .footer-content {
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); /* Use auto-fit and minmax for better responsiveness */
     gap: 30px;
     margin-bottom: 50px;
+    align-items: start;
 }
 
 .footer-brand h2 {

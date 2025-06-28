@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Our Projects | Luxury Interior Design</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Raleway:wght@300;400;500;600&display=swap">
+    <link rel="stylesheet" href="/stylesheets/projects.css">
+    <link rel="stylesheet" href="/stylesheets/projects-test.css">
+    <link rel="stylesheet" href="/stylesheets/footer.css">
+    <style>
+        .projects-grid {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 4rem;
+            margin-bottom: 6rem;
+        }
+
+        .project-card {
+            margin-bottom: 4rem;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            background-color: #1a1a1a;
+        }
+
+        .project-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .project-link {
+            display: block;
+            color: inherit;
+            text-decoration: none;
+        }
+
+        .project-image {
+            width: 100%;
+            height: 350px;
+            overflow: hidden;
+            border: 2px solid red; /* Debug border */
+            background: #222;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .project-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            background: #222;
+        }
+
+        .project-card:hover .project-image img {
+            transform: scale(1.05);
+        }
+
+        .project-content {
+            padding: 2rem;
+            background-color: #1a1a1a;
+            color: #fff;
+        }
+
+        .project-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            font-weight: 300;
+            margin-bottom: 1rem;
+            line-height: 1.2;
+            color: #fff;
+        }
+
+        .project-category {
+            color: #BAA170;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-size: 0.9rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .project-year {
+            color: #cbcbcb;
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+        }
+
+        .view-project {
+            color: #BAA170;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-size: 0.9rem;
+            transition: color 0.3s ease;
+        }
+
+        .project-card:hover .view-project {
+            color: #fff;
+        }
+
+        @media (max-width: 992px) {
+            .projects-grid {
+                grid-template-columns: 1fr;
+                gap: 3rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .project-image {
+                height: 300px;
+            }
+        }
+
+        .page-header {
+            text-align: center;
+            padding: 4rem 2rem;
+            background: #1a1a1a;
+            color: #fff;
+        }
+
+        .page-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .page-subtitle {
+            font-family: 'Raleway', sans-serif;
+            font-size: 1.1rem;
+            color: #BAA170;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .category-filter {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin: 2rem 0;
+            flex-wrap: wrap;
+        }
+
+        .filter-button {
+            background: none;
+            border: 1px solid #BAA170;
+            color: #BAA170;
+            padding: 0.5rem 1.5rem;
+            font-family: 'Raleway', sans-serif;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .filter-button:hover,
+        .filter-button.active {
+            background: #BAA170;
+            color: #fff;
+        }
+
+        @media (max-width: 768px) {
+            .page-title {
+                font-size: 2rem;
+            }
+
+            .category-filter {
+                padding: 0 1rem;
+            }
+        }
+
+        .no-projects {
+            grid-column: 1 / -1;
+            text-align: center;
+            padding: 4rem;
+            background: #1a1a1a;
+            border-radius: 8px;
+            border: 1px solid #333;
+        }
+
+        .no-projects h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem;
+            color: #fff;
+            margin-bottom: 1rem;
+        }
+
+        .no-projects p {
+            font-family: 'Raleway', sans-serif;
+            color: #BAA170;
+            font-size: 1.1rem;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="site-header">
+        <div class="left-header">
+            <a href="/" class="header-text">DEZSPACE<br>INTERIOR DESIGN & ARCHITECTURE STUDIO</a>
+        </div>
+        <div class="center-header">
+            <a href="/" class="logo">
+                <img src="/background_transparent_logo.png" alt="Dezspace Logo" class="logo-img">
+            </a>
+        </div>
+        <div class="right-header">
+            <nav>
+                <ul>
+                    <li><a href="/">HOME</a></li>
+                    <li><a href="/about">ABOUT</a></li>
+                    <li class="active"><a href="/projects">PROJECTS</a></li>
+                    <li><a href="/blogs">BLOGS</a></li>
+                    <li><a href="/contact">CONTACT</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Page Header -->
+    <section class="page-header">
+        <h1 class="page-title">Our Projects</h1>
+        <p class="page-subtitle">Explore our portfolio of luxury interior design projects, each crafted with precision and passion.</p>
+    </section>
+
+    <!-- Category Filter -->
+    <div class="category-filter">
+        <button class="filter-button active" data-category="all">All Projects</button>
+        <button class="filter-button" data-category="residential">Residential</button>
+        <button class="filter-button" data-category="commercial">Commercial</button>
+        <button class="filter-button" data-category="hospitality">Hospitality</button>
+        <button class="filter-button" data-category="retail">Retail</button>
+    </div>
+
+    <!-- Projects Grid -->
+    <div class="projects-test-grid">
+        <% if (projects && projects.length > 0) { %>
+            <% projects.forEach(function(project) { %>
+                <div class="project-test-card">
+                    <a href="/projects/<%= project.slug %>" style="text-decoration:none; color:inherit;">
+                        <img class="project-test-image" src="<%= project.projectImages && project.projectImages.length > 0 ? project.projectImages[0] : '/images/placeholder.jpg' %>" alt="<%= project.projectName %>">
+                        <div class="project-test-content">
+                            <div class="project-test-title"><%= project.projectName %></div>
+                            <% if (project.projectCategory) { %>
+                                <div class="project-test-category"><%= project.projectCategory %></div>
+                            <% } %>
+                            <% if (project.projectYear) { %>
+                                <div class="project-test-year"><%= project.projectYear %></div>
+                            <% } %>
+                            <% if (project.projectSubtitle) { %>
+                                <div class="project-test-subtitle"><%= project.projectSubtitle %></div>
+                            <% } %>
+                            <div class="project-test-link">View Project</div>
+                        </div>
+                    </a>
+                </div>
+            <% }); %>
+        <% } else { %>
+            <div class="no-projects">
+                <h3>No Projects Found</h3>
+                <p>We're currently working on adding new projects. Please check back soon!</p>
+            </div>
+        <% } %>
+    </div>
+    <link rel="stylesheet" href="/stylesheets/projects-test.css">
+
+    <!-- Include Footer -->
+    <%- include('../partials/footer') %>
+
+    <script>
+        // Category filter functionality
+        document.querySelectorAll('.filter-button').forEach(button => {
+            button.addEventListener('click', () => {
+                // Update active button
+                document.querySelector('.filter-button.active').classList.remove('active');
+                button.classList.add('active');
+
+                const category = button.dataset.category;
+                const projects = document.querySelectorAll('.project-card');
+
+                projects.forEach(project => {
+                    if (category === 'all' || project.dataset.category === category) {
+                        project.style.display = 'block';
+                    } else {
+                        project.style.display = 'none';
+                    }
+                });
+            });
+        });
+
+        // Enhanced debugging for image loading
+        document.addEventListener('DOMContentLoaded', function() {
+            const images = document.querySelectorAll('.project-image img');
+            console.log('Found', images.length, 'project images to load');
+            images.forEach((img, index) => {
+                console.log(`Image ${index + 1} source:`, img.src);
+                img.addEventListener('load', () => {
+                    console.log(`Image ${index + 1} loaded successfully:`, img.src);
+                    console.log('Image dimensions:', img.naturalWidth, 'x', img.naturalHeight);
+                });
+                img.addEventListener('error', () => {
+                    console.error(`Image ${index + 1} failed to load:`, img.src);
+                    img.style.border = '2px solid orange';
+                });
+            });
+        });
+    </script>
+</body>
+</html> 
