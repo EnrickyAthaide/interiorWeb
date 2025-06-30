@@ -5,7 +5,13 @@
   "main": "app.js",
   "scripts": {
     "start": "node app.js",
-    "dev": "nodemon app.js"
+    "dev": "nodemon app.js",
+    "test-db": "node test-connection.js",
+    "debug-db": "node debug-database.js",
+    "seed-projects": "node seed/seedProject.js",
+    "seed-blogs": "node seed/seedBlog.js",
+    "seed-admin": "node seed/seedAdmin.js",
+    "seed-all": "npm run seed-admin && npm run seed-projects && npm run seed-blogs"
   },
   "author": "",
   "license": "ISC",
@@ -14,7 +20,7 @@
     "bcrypt": "^5.1.1",
     "connect-flash": "^0.1.1",
     "cookie-parser": "^1.4.6",
-    "dotenv": "^16.4.7",
+    "dotenv": "^16.6.1",
     "ejs": "^3.1.9",
     "express": "^4.18.2",
     "express-session": "^1.18.1",

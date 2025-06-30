@@ -2,7 +2,7 @@ const express = require("express")
 const app = express()
 const path = require("path")
 const cookieParser = require("cookie-parser")
-require('dotenv').config()
+require('dotenv').config(); // Loads .env into process.env
 const Project = require('./models/project');
 const Blog = require('./models/blogs');
 const Admin = require('./models/admin');
@@ -14,6 +14,12 @@ const flash = require('connect-flash');
 const multer = require('multer');
 const adminRoutes = require('./routes/admin');
 const fs = require('fs');
+
+// Database connection
+const connectDB = require('./config/database');
+
+// Connect to MongoDB Atlas
+connectDB();
 
 app.set("view engine" ,"ejs")
 
@@ -39,13 +45,6 @@ app.use((req, res, next) => {
   res.locals.error = req.flash('error');
   next();
 });
-
-// app.js
-const mongoose = require('mongoose');
-
-mongoose.connect('mongodb://localhost:27017/portfolio')
-.then(()=>console.log('MongoDB connected ✅'))
-.catch(err=>console.error('MongoDB error', err));
 
 // JWT Secret key - in production this should be in an environment variable
 const JWT_SECRET = 'gugugaga';
@@ -184,10 +183,14 @@ app.get("/about" , (req , res)=>{
 })
 app.get("/projects", async (req, res) => {
   try {
+    console.log('🔍 Projects route accessed - fetching projects from database...');
+    
     // Fetch all projects from the database
     const projectsData = await Project.find()
       .select('slug projectName projectImages')
       .lean();
+    
+    console.log(`📊 Found ${projectsData.length} projects in database`);
     
     // Format the data for the template
     const projects = projectsData.map(project => ({
@@ -196,11 +199,13 @@ app.get("/projects", async (req, res) => {
       slug: project.slug
     }));
     
+    console.log('✅ Projects formatted successfully, rendering template...');
+    
     res.render("projects", {
       projects: projects
     });
   } catch (err) {
-    console.error('Error fetching projects:', err);
+    console.error('❌ Error fetching projects:', err);
     res.render("projects", {
       projects: []
     });
@@ -273,14 +278,17 @@ app.get('/projects-test', async (req, res) => {
 app.get("/projects/:slug", async (req, res) => {
   try {
     const slug = req.params.slug;
+    console.log(`🔍 Project detail route accessed - looking for slug: ${slug}`);
     
     // Find the project in the database using the slug
     const project = await Project.findOne({ slug: slug }).lean();
     
-    // If project doesn't exist, redirect to projects page
     if (!project) {
+      console.log(`❌ Project with slug "${slug}" not found, redirecting to projects page`);
       return res.redirect('/projects');
     }
+    
+    console.log(`✅ Project found: ${project.projectName}`);
     
     // Find the next project - we can use the existing nextProject data that's stored in the database
     // If no nextProject is defined, we'll find another project
@@ -331,11 +339,13 @@ app.get("/projects/:slug", async (req, res) => {
     project.nextProject = nextProjectData;
     project.nextProjectHeroImage = nextProjectHeroImage;
     
+    console.log('✅ Project data prepared, rendering template...');
+    
     // Pass the project data to the template
     res.render("projects/building", project);
 
   } catch (error) {
-    console.error('Error loading project:', error);
+    console.error('❌ Error loading project:', error);
     res.status(500).render('error', { 
       message: 'Error loading project',
       error: process.env.NODE_ENV === 'development' ? error : {}
@@ -346,13 +356,18 @@ app.get("/projects/:slug", async (req, res) => {
 // Blogs page route
 app.get("/blogs", async (req, res) => {
   try {
+    console.log('🔍 Blogs route accessed - fetching blogs from database...');
+    
     const blogs = await Blog.find().lean();
+    
+    console.log(`📊 Found ${blogs.length} blogs in database`);
+    
     res.render("blogs", {
       title: "Design Journal | Interior Design & Architecture Studio",
       blogs: blogs
     });
   } catch(err) {
-    console.error(err);
+    console.error('❌ Error fetching blogs:', err);
     res.status(500).send('Internal Server Error');
   }
 });
@@ -836,7 +851,9 @@ app.use((err, req, res, next) => {
   res.status(500).send('Something broke!');
 });
 
-const PORT = 4000
+const PORT = process.env.PORT || 4000;
 app.listen(PORT, () => {
-  console.log(`Server running on port ${PORT}`)
-})
+  console.log(`🚀 Server running on port ${PORT}`);
+  console.log(`📱 Local: http://localhost:${PORT}`);
+  console.log(`🌐 Environment: ${process.env.NODE_ENV || 'development'}`);
+});

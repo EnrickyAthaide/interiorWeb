@@ -1,9 +1,10 @@
 const mongoose = require('mongoose');
 const Admin = require('../models/admin');
 const adminData = require('./seedAdmin.json');
+require('dotenv').config(); // Load environment variables
 
-mongoose.connect('mongodb://localhost:27017/portfolio')
-  .then(() => console.log('MongoDB connected for admin seeding ✅'))
+mongoose.connect(process.env.myMongo)
+  .then(() => console.log('MongoDB Atlas connected for admin seeding ✅'))
   .catch(err => console.error('MongoDB error', err));
 
 const seedAdmins = async () => {
