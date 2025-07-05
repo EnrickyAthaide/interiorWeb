@@ -17,6 +17,7 @@ document.addEventListener('DOMContentLoaded', function() {
     initBackToTop();
     initContactForm();
     initGoogleMap();
+
     
     // Handle mobile menu toggle
     const menuToggle = document.querySelector('.menu-toggle');

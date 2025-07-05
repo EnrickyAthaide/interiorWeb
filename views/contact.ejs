@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Contact Us | Ultra Interiors</title>
-    <link rel="stylesheet" href="/stylesheets/global.css">
     <link rel="stylesheet" href="/stylesheets/contact.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Raleway:wght@300;400;500;600&display=swap">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -26,11 +25,11 @@
         </div>
         <div class="center-header">
             <a href="/" class="logo">
-                <img src="/images/background_transparent_logo.png" alt="Dezspace Logo" class="logo-img">
+                <img src="/background_transparent_logo.png" alt="Dezspace Logo" class="logo-img">
             </a>
         </div>
         <div class="right-header">
-            <nav class="main-nav">
+            <nav>
                 <ul>
                     <li><a href="/">HOME</a></li>
                     <li><a href="/about">ABOUT</a></li>
@@ -230,7 +229,6 @@
     <a href="#" class="back-to-top" aria-label="Back to top"><i class="fas fa-chevron-up"></i></a>
 
     <!-- Scripts -->
-    <script src="/javascripts/global.js"></script>
     <script src="/javascripts/contact.js"></script>
     
     <!-- Remove any circular elements -->
@@ -254,52 +252,7 @@
         }
     </style>
     
-    <!-- Script to find and remove the brown dot -->
-    <script>
-        // Wait for the page to fully load
-        window.addEventListener('load', function() {
-            // First attempt: Remove any div that's a direct child of body and has position:fixed
-            const removeUnwantedElements = function() {
-                // Get all direct children of body
-                const bodyChildren = document.body.children;
-                
-                // Check each element
-                for (let i = 0; i < bodyChildren.length; i++) {
-                    const element = bodyChildren[i];
-                    
-                    // Skip essential elements
-                    if (element.classList.contains('back-to-top') || 
-                        element.classList.contains('scroll-progress-container') ||
-                        element.classList.contains('cursor-follow') ||
-                        element.tagName === 'SCRIPT' ||
-                        element.tagName === 'STYLE') {
-                        continue;
-                    }
-                    
-                    // Check if it's positioned fixed and in the bottom right
-                    const style = window.getComputedStyle(element);
-                    if (style.position === 'fixed' && 
-                        (style.bottom === '0px' || parseInt(style.bottom) > 0) && 
-                        (style.right === '0px' || parseInt(style.right) > 0)) {
-                        // Remove the element if it's likely the brown dot
-                        element.remove();
-                    }
-                }
-            };
-            
-            // Run immediately
-            removeUnwantedElements();
-            
-            // Also run when scrolling starts
-            window.addEventListener('scroll', function() {
-                // Use requestAnimationFrame to avoid performance issues
-                requestAnimationFrame(removeUnwantedElements);
-            }, { passive: true });
-            
-            // Run every second as a fallback
-            setInterval(removeUnwantedElements, 1000);
-        });
-    </script>
+
 
     <!-- Add this script at the end of the file, before the closing body tag -->
     <script>

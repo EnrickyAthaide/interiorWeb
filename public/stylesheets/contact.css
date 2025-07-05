@@ -79,7 +79,7 @@ body {
     color: var(--dark-accent);
 }
 
-/* Navigation / Header Styles */
+/* Navigation Bar Styles */
 .site-header {
     position: fixed;
     top: 0;
@@ -91,7 +91,7 @@ body {
     padding: 2rem;
     z-index: 100;
     color: #fff;
-    transition: var(--transition);
+    transition: all 0.3s ease;
 }
 
 .left-header {
@@ -152,23 +152,6 @@ body {
 
 .right-header nav ul li a:hover,
 .right-header nav ul li.active a {
-    color: var(--primary-color);
-}
-
-.dark-theme .site-header {
-    background-color: transparent;
-}
-
-.dark-theme .header-text {
-    color: var(--dark-text);
-}
-
-.dark-theme .right-header nav ul li a {
-    color: var(--dark-text);
-}
-
-.dark-theme .right-header nav ul li a:hover,
-.dark-theme .right-header nav ul li.active a {
     color: var(--primary-color);
 }
 
@@ -1490,15 +1473,11 @@ footer:after {
     transform: translateY(-3px);
 }
 
-/* Hide any additional elements that might appear on scroll */
-body > div:not(.scroll-progress-container):not(.cursor-follow):not(.container) {
-    display: none !important;
-}
 
-/* Target specific fixed position elements in bottom right */
+
+/* Target specific fixed position elements in bottom right corner only */
 body > div[style*="position: fixed"][style*="bottom"][style*="right"]:not(.back-to-top),
-body > div[style*="position:fixed"][style*="bottom"][style*="right"]:not(.back-to-top),
-body > div:last-child:not(.back-to-top) {
+body > div[style*="position:fixed"][style*="bottom"][style*="right"]:not(.back-to-top) {
     display: none !important;
     opacity: 0 !important;
     visibility: hidden !important;
